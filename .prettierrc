@@ -1,0 +1,27 @@
+{
+  "arrowParens": "always",
+  "importOrder": [
+    "<BUILTIN_MODULES>",
+    "",
+    "^react$",
+    "^next",
+    "",
+    "<THIRD_PARTY_MODULES>",
+    "",
+    "^@/components/(.*)$",
+    "^@/utils/(.*)$",
+    "",
+    "^[./]"
+  ],
+  "importOrderParserPlugins": ["typescript", "jsx", "tsx", "decorators-legacy"],
+  "plugins": [
+    "@ianvs/prettier-plugin-sort-imports",
+    "prettier-plugin-css-order",
+    "prettier-plugin-packagejson",
+    "prettier-plugin-sort-json"
+  ],
+  "semi": true,
+  "singleQuote": false,
+  "tabWidth": 2,
+  "trailingComma": "all"
+}
