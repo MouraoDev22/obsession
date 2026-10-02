@@ -1,0 +1,59 @@
+:root {
+  /* Primary colors */
+  --color-primary: #ed1c2a;
+  --color-secondary: #a91420;
+  --color-accent: #ff3b3f;
+
+  /* Background colors */
+  --color-background: #0b090b;
+  --color-surface: #1a0b0f;
+  --color-surface-alt: #2a0c12;
+  --color-background-red: #e91e2b;
+
+  /* Typography colors */
+  --color-text-primary: #f7f5f1;
+  --color-text-secondary: #c9c1c1;
+  --color-text-muted: #8c7d80;
+  --color-text-dark: #160b0d;
+
+  /* Highlights */
+  --color-highlight-red: #ff353d;
+  --color-highlight-orange: #ff6b24;
+  --color-highlight-yellow: #ffe600;
+  --color-highlight-cyan: #00cfff;
+
+  /* Borders and effects */
+  --color-border: #45151b;
+  --color-border-light: #79232d;
+  --color-glow-red: #ff1e2d;
+  --color-glow-cyan: #00cfff;
+
+  /* Gradients */
+  --gradient-red: linear-gradient(135deg, #ed1c2a, #a91420);
+  --gradient-dark: linear-gradient(180deg, #2a0c12, #0b090b);
+  --gradient-neon: linear-gradient(90deg, #ffe600, #ffffff, #00cfff);
+
+  /* Poster typography */
+  --font-display: "Anton", sans-serif;
+  --font-size-poster: clamp(5rem, 12vw, 10rem);
+  --font-weight-poster: 400;
+  --letter-spacing-poster: -0.125rem;
+  --line-height-poster: 0.9;
+  --text-transform-poster: uppercase;
+
+  /* Poster text colors */
+  --color-text-poster: #fffdf7;
+  --color-shadow-dark: #171016;
+
+  /* Glow opacity */
+  --opacity-glow-yellow: 0.8;
+  --opacity-glow-cyan: 0.65;
+
+  /* Poster text shadow */
+  --poster-shadow:
+    0.125rem 0.125rem 0 var(--color-highlight-yellow),
+    0 0 0.3125rem var(--color-highlight-yellow),
+    0 0 0.125rem var(--color-highlight-cyan),
+    0 0 0.625rem var(--color-highlight-cyan),
+    0 0 1.375rem rgba(0, 207, 255, var(--opacity-glow-cyan));
+}
