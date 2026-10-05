@@ -1,5 +1,3 @@
-export type OstData = {
-  id: string;
-  name: string;
-  link: string;
-}[];
+import type { OstSong } from "../interfaces/OstSong";
+
+export type OstData = OstSong[];
