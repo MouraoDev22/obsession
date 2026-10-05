@@ -13,4 +13,9 @@ body::before {
   background-size: cover;
   background-repeat: no-repeat;
   content: "";
+  transition: filter 30s ease;
+}
+
+body:hover::before {
+  filter: grayscale(0);
 }
