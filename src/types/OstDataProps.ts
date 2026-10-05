@@ -1,5 +1,5 @@
 import type { OstData } from "./OstData";
 
-export type OstProps = {
+export type OstDataProps = {
   data: OstData;
 };
