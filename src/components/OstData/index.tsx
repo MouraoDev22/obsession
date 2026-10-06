@@ -1,15 +1,17 @@
-import type { ReactNode } from "react";
-
 import type { OstDataProps } from "../../types/OstDataProps";
+import { OstPlayButton } from "../OstPlayButton";
+import { OstSongTitle } from "../OstSongTitle";
 import styles from "./OstData.module.css";
 
 export function OstData({ data }: OstDataProps): React.JSX.Element {
   return (
     <ul className={styles._1}>
-      <li className={styles._2}>
-        <button></button>
-        <h3>{data as ReactNode}</h3>
-      </li>
+      {data.map((song): React.JSX.Element => (
+        <li className={styles._2} key={song.id}>
+          <OstPlayButton link={song.link} />
+          <OstSongTitle title={song.name} />
+        </li>
+      ))}
     </ul>
   );
 }
