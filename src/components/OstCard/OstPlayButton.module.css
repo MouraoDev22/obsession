@@ -1,0 +1,5 @@
+:local(.ost_card) {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+}
