@@ -1,0 +1,135 @@
+.player {
+  display: flex;
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  left: 1rem;
+  align-items: center;
+  gap: 1rem;
+  z-index: 1000;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  margin-inline: auto;
+  box-shadow: 0 0.5rem 2rem rgb(0 0 0 / 45%);
+  border: 1px solid var(--color-border-light);
+  border-radius: 0.75rem;
+  background: color-mix(in srgb, var(--color-surface) 92%, transparent);
+  padding: 0.75rem 1rem;
+  max-width: 40rem;
+}
+
+/* Iframe oculto: reproduz apenas o áudio, sem vídeo visível. */
+.player_embed {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.player_meta {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.player_indicator {
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--color-text-muted);
+  width: 0.625rem;
+  height: 0.625rem;
+}
+
+.player_indicator_active {
+  animation: player-pulse 1.5s ease-in-out infinite;
+  box-shadow: 0 0 0.5rem var(--color-glow-red);
+  background: var(--color-highlight-red);
+}
+
+@keyframes player-pulse {
+  50% {
+    opacity: 0.4;
+  }
+}
+
+.player_text {
+  min-width: 0;
+}
+
+.player_title {
+  overflow: hidden;
+  color: var(--color-text-primary);
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.player_status {
+  color: var(--color-text-muted);
+  font-size: 0.75rem;
+}
+
+.player_status_error {
+  color: var(--color-accent);
+  font-size: 0.75rem;
+}
+
+.player_link {
+  flex-shrink: 0;
+  color: var(--color-highlight-cyan);
+  font-size: 0.75rem;
+  text-decoration: none;
+}
+
+.player_link:hover {
+  text-decoration: underline;
+}
+
+.player_controls {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.player_btn {
+  display: grid;
+  place-items: center;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+  cursor: pointer;
+  border: 1px solid var(--color-border-light);
+  border-radius: 50%;
+  background: var(--color-surface-alt);
+  width: 2.25rem;
+  height: 2.25rem;
+  color: var(--color-text-primary);
+}
+
+.player_btn:hover:not(:disabled) {
+  transform: scale(1.05);
+  border-color: var(--color-primary);
+  background: var(--gradient-red);
+}
+
+.player_btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.player_btn svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .player_indicator_active {
+    animation: none;
+  }
+}

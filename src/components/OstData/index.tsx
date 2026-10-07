@@ -3,12 +3,12 @@ import { OstPlayButton } from "../OstPlayButton";
 import { OstSongTitle } from "../OstSongTitle";
 import styles from "./OstData.module.css";
 
-export function OstData({ data }: OstDataProps): React.JSX.Element {
+export function OstData({ data, onPlay }: OstDataProps): React.JSX.Element {
   return (
     <ul className={styles._1}>
       {data.map((song): React.JSX.Element => (
         <li className={styles._2} key={song.id}>
-          <OstPlayButton link={song.link} />
+          <OstPlayButton song={song} onPlay={onPlay} />
           <OstSongTitle title={song.name} />
         </li>
       ))}

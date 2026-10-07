@@ -1,5 +1,6 @@
 import type { OstSong } from "./OstSong";
 
 export interface OstPlayButtonProps {
-  link: OstSong["link"];
+  onPlay: (song: OstSong) => void;
+  song: OstSong;
 }
