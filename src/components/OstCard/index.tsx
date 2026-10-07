@@ -1,5 +1,5 @@
 import type { OstCardProps } from "../../interfaces/OstCardProps";
-import styles from "./OstPlayButton.module.css";
+import styles from "./OstCard.module.css";
 
 export function OstCard({
   children,

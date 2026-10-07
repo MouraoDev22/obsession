@@ -1,0 +1,10 @@
+:local(.ost_song_title) {
+  color: var(--color-text-poster);
+  font-weight: var(--font-weight-poster);
+  font-size: var(--font-size-poster);
+  line-height: var(--line-height-poster);
+  font-family: var(--font-display);
+  letter-spacing: var(--letter-spacing-poster);
+  text-shadow: var(--poster-shadow);
+  text-transform: var(--text-transform-poster);
+}

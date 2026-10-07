@@ -35,7 +35,7 @@
 
   /* Poster typography */
   --font-display: "Anton", sans-serif;
-  --font-size-poster: clamp(5rem, 12vw, 10rem);
+  --font-size-poster: clamp(1rem, 12vw, 2.5rem);
   --font-weight-poster: 400;
   --letter-spacing-poster: -0.125rem;
   --line-height-poster: 0.9;
