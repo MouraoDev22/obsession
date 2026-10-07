@@ -1,4 +1,4 @@
-:local(.ost_song_title) {
+.song_title {
   color: var(--color-text-poster);
   font-weight: var(--font-weight-poster);
   font-size: var(--font-size-poster);

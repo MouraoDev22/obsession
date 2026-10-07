@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import "./App.css";
 
 import { OstAudioPlayer } from "./components/OstAudioPlayer";
-import { OstData } from "./components/OstData";
-import ostData from "./data/ost.json" with { type: "json" };
+import { OstSongList } from "./components/OstSongList";
+import songs from "./data/songs.json" with { type: "json" };
 import type { OstSong } from "./interfaces/OstSong";
 import type { OstPlayRequest } from "./types/OstPlayRequest";
 import type { OstPlayRequestState } from "./types/OstPlayRequestState";
@@ -28,9 +28,9 @@ function App(): React.JSX.Element {
 
   return (
     <main>
-      <OstData data={ostData} onPlay={handlePlay} />
+      <OstSongList songs={songs} onPlay={handlePlay} />
       {playRequest && (
-        <OstAudioPlayer request={playRequest} onClose={handleClose} />
+        <OstAudioPlayer playRequest={playRequest} onClose={handleClose} />
       )}
     </main>
   );

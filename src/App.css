@@ -13,7 +13,11 @@ body::before {
     filter 30s ease,
     transform 0.35s ease;
   inset: 0;
-  background-image: url("./assets/background.png");
+  /* Gradiente da imagem até o preto, de cima para baixo
+     Gradient fading from the image down to black, top to bottom */
+  background-image:
+    linear-gradient(180deg, rgb(0 0 0 / 0%) 0%, #000 100%),
+    url("./assets/background.png");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;

@@ -1,16 +1,16 @@
-:local(.ost_card) {
+.song_card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
   transition: transform 1s ease-in-out;
   cursor: pointer;
   border: 0.15rem solid var(--color-text-poster);
   border-radius: 0.5rem;
   background-color: black;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1.5rem;
 }
 
-:local(.ost_card:hover) {
+.song_card:hover {
   transform: scale(1.01);
 }

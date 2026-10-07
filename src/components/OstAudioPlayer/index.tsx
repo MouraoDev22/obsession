@@ -29,9 +29,19 @@ const CLOSE_ICON = (
   </svg>
 );
 
+/**
+ * Player de áudio fixo no rodapé / Fixed audio player in the page footer.
+ *
+ * PT: cria um iframe oculto do YouTube e controla a reprodução da música
+ * indicada em `playRequest`; alterna tocar/pausar ao receber a mesma música
+ * novamente.
+ *
+ * EN: creates a hidden YouTube iframe and controls playback of the song given
+ * in `playRequest`; toggles play/pause when the same song is requested again.
+ */
 export function OstAudioPlayer({
   onClose,
-  request,
+  playRequest,
 }: OstAudioPlayerProps): React.JSX.Element {
   const embedRef = useRef<HTMLDivElement>(null);
   const playerRef = useRef<YouTubePlayer | null>(null);
@@ -45,7 +55,7 @@ export function OstAudioPlayer({
 
   // 1) Mantém a música-alvo sincronizada: troca a faixa ou alterna tocar/pausar.
   useEffect(() => {
-    const videoId = getYouTubeVideoId(request.song.link);
+    const videoId = getYouTubeVideoId(playRequest.song.youtubeUrl);
 
     if (!videoId) {
       setError("Link do YouTube inválido.");
@@ -67,7 +77,7 @@ export function OstAudioPlayer({
 
     targetVideoIdRef.current = videoId;
     player?.loadVideoById(videoId);
-  }, [request]);
+  }, [playRequest]);
 
   // 2) Cria o iframe oculto uma única vez enquanto o player está montado.
   useEffect(() => {
@@ -181,7 +191,7 @@ export function OstAudioPlayer({
           aria-hidden="true"
         />
         <div className={styles.player_text}>
-          <p className={styles.player_title}>{request.song.name}</p>
+          <p className={styles.player_title}>{playRequest.song.title}</p>
           <p
             className={
               error ? styles.player_status_error : styles.player_status
@@ -195,7 +205,7 @@ export function OstAudioPlayer({
       {error && (
         <a
           className={styles.player_link}
-          href={request.song.link}
+          href={playRequest.song.youtubeUrl}
           target="_blank"
           rel="noreferrer"
         >
