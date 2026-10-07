@@ -4,13 +4,6 @@ import { OstSongCover } from "../OstSongCover";
 import { OstSongTitle } from "../OstSongTitle";
 import styles from "./OstSongList.module.css";
 
-/**
- * Lista de músicas da trilha sonora / Soundtrack song list.
- *
- * Renderiza cada música como um card clicável que pede a reprodução via
- * `onPlay` / Renders each song as a clickable card that requests playback
- * through `onPlay`.
- */
 export function OstSongList({
   songs,
   onPlay,
