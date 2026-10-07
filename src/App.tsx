@@ -7,16 +7,20 @@ import { OstData } from "./components/OstData";
 import ostData from "./data/ost.json" with { type: "json" };
 import type { OstSong } from "./interfaces/OstSong";
 import type { OstPlayRequest } from "./types/OstPlayRequest";
+import type { OstPlayRequestState } from "./types/OstPlayRequestState";
 
 function App(): React.JSX.Element {
-  const [playRequest, setPlayRequest] = useState<OstPlayRequest | null>(null);
+  const [playRequest, setPlayRequest]: OstPlayRequestState =
+    useState<OstPlayRequest | null>(null);
 
   const handlePlay = (song: OstSong): void => {
     setPlayRequest({ song });
+    return;
   };
 
   const handleClose = (): void => {
     setPlayRequest(null);
+    return;
   };
 
   return (

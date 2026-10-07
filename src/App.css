@@ -5,6 +5,7 @@ body {
 
 body::before {
   position: fixed;
+  transform: scale(1.2);
   z-index: -1;
   filter: grayscale(100%);
   transition: filter 30s ease;
