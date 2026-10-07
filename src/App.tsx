@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import "./App.css";
 
@@ -8,10 +8,13 @@ import ostData from "./data/ost.json" with { type: "json" };
 import type { OstSong } from "./interfaces/OstSong";
 import type { OstPlayRequest } from "./types/OstPlayRequest";
 import type { OstPlayRequestState } from "./types/OstPlayRequestState";
+import { initParallax } from "./utils/parallax";
 
 function App(): React.JSX.Element {
   const [playRequest, setPlayRequest]: OstPlayRequestState =
     useState<OstPlayRequest | null>(null);
+
+  useEffect(() => initParallax(), []);
 
   const handlePlay = (song: OstSong): void => {
     setPlayRequest({ song });
