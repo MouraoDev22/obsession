@@ -4,22 +4,28 @@
   justify-content: center;
   align-items: center;
   gap: 1.5rem;
-  filter: grayscale(100%);
+  filter: grayscale(0.9) brightness(0.95);
   transition:
     transform 2.5s ease,
-    filter 2.5s ease;
+    filter 2.5s ease,
+    border-color 2.5s ease,
+    box-shadow 2.5s ease;
   cursor: pointer;
   border: 0.15rem solid var(--color-text-poster);
-  border-radius: 0.5rem;
+  border-radius: var(--radius-card);
   background-color: black;
 }
 
 .song_card:hover {
   transform: scale(1.01);
-  filter: grayscale(0%);
+  filter: grayscale(0%) brightness(1);
+  box-shadow: var(--halation-card);
+  border-color: var(--color-primary);
 }
 
 .song_card:focus {
   transform: scale(1.01);
-  filter: grayscale(0%);
+  filter: grayscale(0%) brightness(1);
+  box-shadow: var(--halation-card);
+  border-color: var(--color-primary);
 }

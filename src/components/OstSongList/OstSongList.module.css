@@ -1,9 +1,49 @@
+.sides {
+  display: flex;
+  flex-direction: column;
+}
+
+.side {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.side_label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  color: var(--color-highlight-red);
+  font-size: var(--font-size-side);
+  font-family: var(--font-mono);
+  letter-spacing: var(--letter-spacing-side);
+  text-shadow: var(--halation-text);
+  text-transform: uppercase;
+}
+
+.side_label span {
+  margin-right: calc(-1 * var(--letter-spacing-side));
+}
+
+.side_label::before,
+.side_label::after {
+  background: linear-gradient(90deg, transparent, var(--color-border-light));
+  width: min(14rem, 30vw);
+  height: 1px;
+  content: "";
+}
+
+.side_label::after {
+  background: linear-gradient(90deg, var(--color-border-light), transparent);
+}
+
 .song_list {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   gap: 5rem;
-  padding: 5rem 2.5rem 5rem 2.5rem;
+  padding: 2.5rem 2.5rem 5rem;
   list-style: none;
 }

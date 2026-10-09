@@ -21,7 +21,7 @@ import type { ParallaxOptions } from "./interfaces/ParallaxOptions";
  *   Function that removes the listeners and restores the initial state.
  */
 export function initParallax(options: ParallaxOptions = {}): () => void {
-  const { maxOffset = 0.5 } = options;
+  const { maxOffset = 0.5 }: ParallaxOptions = options;
 
   // Respeita prefers-reduced-motion: em sistemas com "animações/efeitos
   // visuais" desativados (comum no Windows), o efeito não é aplicado.
@@ -31,17 +31,18 @@ export function initParallax(options: ParallaxOptions = {}): () => void {
     typeof document === "undefined" ||
     window.matchMedia("(prefers-reduced-motion: false)").matches
   ) {
-    return () => undefined;
+    return (): void => undefined;
   }
 
-  const target = document.body;
-  let frameId = 0;
+  const target: HTMLElement = document.body;
+  let frameId: number = 0;
 
   /** Aplica o deslocamento nas variáveis CSS `--parallax-x`/`--parallax-y` /
    * Writes the offset into the `--parallax-x`/`--parallax-y` CSS variables. */
   const applyOffset = (x: number, y: number): void => {
     target.style.setProperty("--parallax-x", `${x.toFixed(2)}%`);
     target.style.setProperty("--parallax-y", `${y.toFixed(2)}%`);
+    return;
   };
 
   /** Cancela o quadro pendente e zera o deslocamento /
@@ -49,6 +50,7 @@ export function initParallax(options: ParallaxOptions = {}): () => void {
   const reset = (): void => {
     cancelAnimationFrame(frameId);
     applyOffset(0, 0);
+    return;
   };
 
   /** Recalcula o deslocamento a partir da posição do cursor /
@@ -56,27 +58,30 @@ export function initParallax(options: ParallaxOptions = {}): () => void {
   const handleMouseMove = (event: MouseEvent): void => {
     cancelAnimationFrame(frameId);
 
-    frameId = requestAnimationFrame(() => {
-      const width = Math.max(window.innerWidth, 1);
-      const height = Math.max(window.innerHeight, 1);
+    frameId = requestAnimationFrame((): void => {
+      const width: number = Math.max(window.innerWidth, 1);
+      const height: number = Math.max(window.innerHeight, 1);
 
       // Normaliza a posição do cursor para o intervalo -1..1.
       // Normalizes the cursor position to the -1..1 range.
-      const normalizedX = (event.clientX / width) * 2 - 1;
-      const normalizedY = (event.clientY / height) * 2 - 1;
+      const normalizedX: number = (event.clientX / width) * 2 - 1;
+      const normalizedY: number = (event.clientY / height) * 2 - 1;
 
       // Sinal invertido: a imagem se move na direção oposta ao mouse.
       // Inverted sign: the image moves opposite to the mouse.
       applyOffset(-normalizedX * maxOffset, -normalizedY * maxOffset);
+      return;
     });
+    return;
   };
 
   target.addEventListener("mousemove", handleMouseMove);
   target.addEventListener("mouseleave", reset);
 
-  return () => {
+  return (): void => {
     target.removeEventListener("mousemove", handleMouseMove);
     target.removeEventListener("mouseleave", reset);
     reset();
+    return;
   };
 }

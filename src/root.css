@@ -1,59 +1,117 @@
 :root {
-  /* Primary colors */
+  /* ==========================================================================
+     1. PALETA / PALETTE
+     ========================================================================== */
+
+  /* Cores principais / Primary colors
+     - OstSongCard: borda do cartão no hover (--color-primary)
+     - OstAudioPlayer: borda/fundo do botão no hover (--color-primary),
+       status de erro (--color-accent)
+     - --gradient-red deriva de primary+secondary (hover dos botões) */
   --color-primary: #ed1c2a;
   --color-secondary: #a91420;
   --color-accent: #ff3b3f;
 
-  /* Background colors */
+  /* Cores de fundo / Background colors
+     - App.css: fundo do <body> (--color-background)
+     - OstAudioPlayer: painel translúcido (--color-surface),
+       fundo dos botões (--color-surface-alt) */
   --color-background: #0b090b;
   --color-surface: #1a0b0f;
   --color-surface-alt: #2a0c12;
-  --color-background-red: #e91e2b;
 
-  /* Typography colors */
+  /* Cores de texto / Text colors
+     - OstAudioPlayer: título (--color-text-primary); status e LED apagado
+       (--color-text-muted)
+     - OstHero: kicker (--color-text-secondary) */
   --color-text-primary: #f7f5f1;
   --color-text-secondary: #c9c1c1;
   --color-text-muted: #8c7d80;
-  --color-text-dark: #160b0d;
 
-  /* Highlights */
+  /* Texto do pôster / Poster text colors
+     - OstSongCard: moldura branca do cartão
+     - OstSongTitle e OstHero: títulos */
+  --color-text-poster: #fffdf7;
+
+  /* Destaques / Highlights
+     - amarelo/ciano: apenas dentro de --poster-shadow (OstSongTitle, OstHero)
+     - --color-highlight-red: OstSongList (divisor Lado A/B),
+       OstSongTitle (A01), OstHero (créditos), OstAudioPlayer (LED ativo)
+     - --color-highlight-cyan: link do OstAudioPlayer */
   --color-highlight-red: #ff353d;
-  --color-highlight-orange: #ff6b24;
   --color-highlight-yellow: #ffe600;
   --color-highlight-cyan: #00cfff;
 
-  /* Borders and effects */
+  /* Bordas / Borders
+     - Main: moldura vertical da página
+     - OstAudioPlayer: moldura dupla do painel e dos botões */
   --color-border: #45151b;
   --color-border-light: #79232d;
+
+  /* Brilho / Glow
+     - OstAudioPlayer: halo interno do LED ativo */
   --color-glow-red: #ff1e2d;
-  --color-glow-cyan: #00cfff;
 
-  /* Gradients */
-  --gradient-red: linear-gradient(135deg, #ed1c2a, #a91420);
-  --gradient-dark: linear-gradient(180deg, #2a0c12, #0b090b);
-  --gradient-neon: linear-gradient(90deg, #ffe600, #ffffff, #00cfff);
+  /* Gradiente / Gradient
+     - OstAudioPlayer: fundo do botão no hover */
+  --gradient-red: linear-gradient(
+    135deg,
+    var(--color-primary),
+    var(--color-secondary)
+  );
 
-  /* Poster typography */
+  /* ==========================================================================
+     2. TIPOGRAFIA DO PÔSTER — Anton / POSTER TYPOGRAPHY
+     Usado por / Used by: OstSongTitle, OstHero, OstAudioPlayer (título)
+     ========================================================================== */
   --font-display: "Anton", sans-serif;
-  --font-size-poster: clamp(1rem, 12vw, 2.5rem);
   --font-weight-poster: 400;
-  --letter-spacing-poster: -0.125rem;
-  --line-height-poster: 0.9;
   --text-transform-poster: uppercase;
+  --line-height-poster: 0.9;
+  --letter-spacing-poster: -0.125rem;
+  --font-size-poster: clamp(1rem, 12vw, 2.5rem); /* OstSongTitle */
+  --font-size-hero: clamp(3.5rem, 16vw, 10rem); /* OstHero título */
+  --letter-spacing-title: 0.04em; /* OstAudioPlayer título */
 
-  /* Poster text colors */
-  --color-text-poster: #fffdf7;
-  --color-shadow-dark: #171016;
-
-  /* Glow opacity */
-  --opacity-glow-yellow: 0.8;
+  /* Sombra cromática amarelo/ciano / Yellow-cyan chromatic shadow
+     Usado por / Used by: OstSongTitle, OstHero */
   --opacity-glow-cyan: 0.65;
-
-  /* Poster text shadow */
   --poster-shadow:
     0.125rem 0.125rem 0 var(--color-highlight-yellow),
     0 0 0.3125rem var(--color-highlight-yellow),
     0 0 0.125rem var(--color-highlight-cyan),
     0 0 0.625rem var(--color-highlight-cyan),
     0 0 1.375rem rgba(0, 207, 255, var(--opacity-glow-cyan));
+
+  /* ==========================================================================
+     3. TIPOGRAFIA MONOESPAÇADA — Space Mono / MONO TYPOGRAPHY
+     Usado por / Used by: OstHero, OstSongList, OstSongTitle e
+     OstAudioPlayer (rótulos do painel)
+     ========================================================================== */
+  --font-mono: "Space Mono", ui-monospace, monospace;
+  --font-size-meta: 0.7rem; /* OstHero kicker/créditos, OstSongTitle (A01), OstAudioPlayer (status/link) */
+  --font-size-side: 0.8rem; /* OstSongList (rótulo "Lado A"/"Lado B") */
+  --letter-spacing-meta: 0.3em; /* OstHero, OstSongTitle (A01) */
+  --letter-spacing-label: 0.15em; /* OstAudioPlayer (status/link) */
+  --letter-spacing-side: 0.45em; /* OstSongList (rótulo de lado) */
+
+  /* ==========================================================================
+     4. RAIOS DE BORDRA / BORDER RADII
+     ========================================================================== */
+  --radius-card: 0.5rem; /* OstSongCard */
+  --radius-rack: 0.25rem; /* OstAudioPlayer (painel e botões) */
+  --radius-led: 0.125rem; /* OstAudioPlayer (LED) */
+
+  /* ==========================================================================
+     5. EFEITOS DE HALATION — brilho vermelho de lente /
+     RED LENS-HALATION EFFECTS
+     ========================================================================== */
+  --halation-text: 0 0 0.75rem rgb(255 30 45 / 0.6); /* OstHero (créditos), OstSongList (divisor), OstSongTitle (A01) */
+  --halation-card:
+    0 0 1.5rem rgb(255 30 45 / 0.35), inset 0 0 1rem rgb(255 30 45 / 0.12); /* OstSongCard hover/focus */
+  --halation-led:
+    0 0 0.5rem var(--color-glow-red), 0 0 1.25rem rgb(255 30 45 / 0.55); /* OstAudioPlayer LED ativo */
+  --shadow-player:
+    0 0 0 1px var(--color-border), inset 0 1px 0 rgb(255 255 255 / 0.07),
+    0 0.5rem 2rem rgb(0 0 0 / 45%), 0 0 1.5rem rgb(255 30 45 / 0.12); /* OstAudioPlayer */
 }

@@ -16,8 +16,8 @@ let apiPromise: Promise<YouTubePlayerConstructor> | null = null;
  */
 export function getYouTubeVideoId(link: string): string | null {
   try {
-    const url = new URL(link);
-    const hostname = url.hostname.replace(/^www\./, "");
+    const url: URL = new URL(link);
+    const hostname: string = url.hostname.replace(/^www\./, "");
 
     if (hostname === "youtu.be") {
       return url.pathname.slice(1).split("/")[0] || null;
@@ -28,7 +28,9 @@ export function getYouTubeVideoId(link: string): string | null {
         return url.searchParams.get("v");
       }
 
-      const match = url.pathname.match(/^\/(?:embed|shorts|live)\/([^/?#]+)/);
+      const match: RegExpMatchArray | null = url.pathname.match(
+        /^\/(?:embed|shorts|live)\/([^/?#]+)/,
+      );
       if (match) {
         return match[1];
       }
@@ -55,32 +57,44 @@ export function loadYouTubeIframeApi(): Promise<YouTubePlayerConstructor> {
     return apiPromise;
   }
 
-  apiPromise = new Promise<YouTubePlayerConstructor>((resolve, reject) => {
-    if (window.YT?.Player) {
-      resolve(window.YT.Player);
-      return;
-    }
-
-    const previousOnReady = window.onYouTubeIframeAPIReady;
-    window.onYouTubeIframeAPIReady = () => {
-      previousOnReady?.();
-
+  apiPromise = new Promise<YouTubePlayerConstructor>(
+    (
+      resolve: (
+        value: YouTubePlayerConstructor | PromiseLike<YouTubePlayerConstructor>,
+      ) => void,
+      reject: (reason?: unknown) => void,
+    ): void => {
       if (window.YT?.Player) {
         resolve(window.YT.Player);
-      } else {
-        reject(
-          new Error("A API do YouTube carregou sem inicializar o player."),
-        );
+        return;
       }
-    };
 
-    const script = document.createElement("script");
-    script.src = "https://www.youtube.com/iframe_api";
-    script.async = true;
-    script.onerror = () =>
-      reject(new Error("Não foi possível carregar a API do YouTube."));
-    document.head.append(script);
-  }).catch((error: unknown) => {
+      const previousOnReady: (() => void) | undefined =
+        window.onYouTubeIframeAPIReady;
+      window.onYouTubeIframeAPIReady = (): void => {
+        previousOnReady?.();
+
+        if (window.YT?.Player) {
+          resolve(window.YT.Player);
+        } else {
+          reject(
+            new Error("A API do YouTube carregou sem inicializar o player."),
+          );
+        }
+        return;
+      };
+
+      const script: HTMLScriptElement = document.createElement("script");
+      script.src = "https://www.youtube.com/iframe_api";
+      script.async = true;
+      script.onerror = (): void => {
+        reject(new Error("Não foi possível carregar a API do YouTube."));
+        return;
+      };
+      document.head.append(script);
+      return;
+    },
+  ).catch((error: unknown): never => {
     apiPromise = null; // permite tentar carregar novamente na próxima reprodução
     throw error;
   });

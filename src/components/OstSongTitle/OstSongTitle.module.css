@@ -9,3 +9,15 @@
   text-shadow: var(--poster-shadow);
   text-transform: var(--text-transform-poster);
 }
+
+.song_track {
+  display: block;
+  margin-bottom: 0.4rem;
+  padding-left: var(--letter-spacing-meta);
+  color: var(--color-highlight-red);
+  font-size: var(--font-size-meta);
+  font-family: var(--font-mono);
+  letter-spacing: var(--letter-spacing-meta);
+  text-align: center;
+  text-shadow: var(--halation-text);
+}

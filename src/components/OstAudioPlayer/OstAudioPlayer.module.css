@@ -10,15 +10,16 @@
   -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
   margin-inline: auto;
-  box-shadow: 0 0.5rem 2rem rgb(0 0 0 / 45%);
+  box-shadow: var(--shadow-player);
   border: 1px solid var(--color-border-light);
-  border-radius: 0.75rem;
-  background: color-mix(in srgb, var(--color-surface) 92%, transparent);
+  border-radius: var(--radius-rack);
+  background:
+    linear-gradient(180deg, rgb(255 255 255 / 0.04), transparent 40%),
+    color-mix(in srgb, var(--color-surface) 92%, transparent);
   padding: 0.75rem 1rem;
   max-width: 40rem;
 }
 
-/* Iframe oculto: reproduz apenas o áudio, sem vídeo visível. */
 .player_embed {
   position: absolute;
   opacity: 0;
@@ -38,15 +39,15 @@
 
 .player_indicator {
   flex-shrink: 0;
-  border-radius: 50%;
+  border-radius: var(--radius-led);
   background: var(--color-text-muted);
-  width: 0.625rem;
-  height: 0.625rem;
+  width: 0.5rem;
+  height: 1rem;
 }
 
 .player_indicator_active {
   animation: player-pulse 1.5s ease-in-out infinite;
-  box-shadow: 0 0 0.5rem var(--color-glow-red);
+  box-shadow: var(--halation-led);
   background: var(--color-highlight-red);
 }
 
@@ -63,26 +64,38 @@
 .player_title {
   overflow: hidden;
   color: var(--color-text-primary);
-  font-weight: 600;
+  font-weight: var(--font-weight-poster);
+  font-family: var(--font-display);
+  letter-spacing: var(--letter-spacing-title);
   text-overflow: ellipsis;
+  text-transform: uppercase;
   white-space: nowrap;
 }
 
 .player_status {
   color: var(--color-text-muted);
-  font-size: 0.75rem;
+  font-size: var(--font-size-meta);
+  font-family: var(--font-mono);
+  letter-spacing: var(--letter-spacing-label);
+  text-transform: uppercase;
 }
 
 .player_status_error {
   color: var(--color-accent);
-  font-size: 0.75rem;
+  font-size: var(--font-size-meta);
+  font-family: var(--font-mono);
+  letter-spacing: var(--letter-spacing-label);
+  text-transform: uppercase;
 }
 
 .player_link {
   flex-shrink: 0;
   color: var(--color-highlight-cyan);
-  font-size: 0.75rem;
+  font-size: var(--font-size-meta);
+  font-family: var(--font-mono);
+  letter-spacing: var(--letter-spacing-label);
   text-decoration: none;
+  text-transform: uppercase;
 }
 
 .player_link:hover {
@@ -105,7 +118,7 @@
     transform 0.2s ease;
   cursor: pointer;
   border: 1px solid var(--color-border-light);
-  border-radius: 50%;
+  border-radius: var(--radius-rack);
   background: var(--color-surface-alt);
   width: 2.25rem;
   height: 2.25rem;

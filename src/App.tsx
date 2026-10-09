@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 
 import { Main } from "./components/Main";
 import { OstAudioPlayer } from "./components/OstAudioPlayer";
+import { OstHero } from "./components/OstHero";
 import { OstSongList } from "./components/OstSongList";
 
 import { initParallax } from "./utils/parallax";
@@ -18,7 +19,7 @@ function App(): React.JSX.Element {
   const [playRequest, setPlayRequest]: OstPlayRequestState =
     useState<OstPlayRequest | null>(null);
 
-  useEffect(() => initParallax(), []);
+  useEffect((): (() => void) => initParallax(), []);
 
   const handlePlay = (song: OstSong): void => {
     setPlayRequest({ song });
@@ -32,6 +33,7 @@ function App(): React.JSX.Element {
 
   return (
     <Main>
+      <OstHero />
       <OstSongList songs={songs} onPlay={handlePlay} />
       {playRequest && (
         <OstAudioPlayer playRequest={playRequest} onClose={handleClose} />
