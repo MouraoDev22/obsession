@@ -1,4 +1,5 @@
 .song_title {
+  margin-bottom: 1rem;
   color: var(--color-text-poster);
   font-weight: var(--font-weight-poster);
   font-size: var(--font-size-poster);

@@ -1,6 +1,7 @@
 body {
   width: 100vw;
   height: 100vh;
+  position: relative;
 }
 
 body::before {
@@ -8,7 +9,7 @@ body::before {
   transform: translate3d(var(--parallax-x, 0%), var(--parallax-y, 0%), 0)
     scale(1.2);
   z-index: -1;
-  filter: grayscale(100%);
+  filter: grayscale(100%) blur(0.25rem);
   transition: transform 0.35s ease;
   inset: 0;
   /* Gradiente da imagem até o preto, de cima para baixo
