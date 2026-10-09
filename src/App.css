@@ -9,9 +9,7 @@ body::before {
     scale(1.2);
   z-index: -1;
   filter: grayscale(100%);
-  transition:
-    filter 30s ease,
-    transform 0.35s ease;
+  transition: transform 0.35s ease;
   inset: 0;
   /* Gradiente da imagem até o preto, de cima para baixo
      Gradient fading from the image down to black, top to bottom */
@@ -22,8 +20,4 @@ body::before {
   background-size: cover;
   background-repeat: no-repeat;
   content: "";
-}
-
-body:hover::before {
-  filter: grayscale(0);
 }
