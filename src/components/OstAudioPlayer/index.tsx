@@ -1,5 +1,5 @@
 import type { OstAudioPlayerProps } from "../../interfaces/OstAudioPlayerProps";
-import type { YouTubePlayer } from "../../utils/youtube";
+import type { YouTubePlayer } from "../../utils/youtube/interfaces/YouTubePlayer";
 
 import { useEffect, useRef, useState } from "react";
 

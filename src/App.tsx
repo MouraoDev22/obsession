@@ -6,6 +6,7 @@ import type { OstPlayRequestState } from "./types/OstPlayRequestState";
 
 import { useEffect, useState } from "react";
 
+import { Main } from "./components/Main";
 import { OstAudioPlayer } from "./components/OstAudioPlayer";
 import { OstSongList } from "./components/OstSongList";
 
@@ -30,12 +31,12 @@ function App(): React.JSX.Element {
   };
 
   return (
-    <main>
+    <Main>
       <OstSongList songs={songs} onPlay={handlePlay} />
       {playRequest && (
         <OstAudioPlayer playRequest={playRequest} onClose={handleClose} />
       )}
-    </main>
+    </Main>
   );
 }
 
