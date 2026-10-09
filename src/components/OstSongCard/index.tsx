@@ -1,4 +1,5 @@
 import type { OstSongCardProps } from "../../interfaces/OstSongCardProps";
+
 import styles from "./OstSongCard.module.css";
 
 export function OstSongCard({

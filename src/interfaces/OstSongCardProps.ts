@@ -1,6 +1,5 @@
-import type { ReactNode } from "react";
-
 import type { OstSong } from "./OstSong";
+import type { ReactNode } from "react";
 
 export interface OstSongCardProps {
   children: ReactNode;

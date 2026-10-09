@@ -1,4 +1,5 @@
 import type { OstSongTitleProps } from "../../interfaces/OstSongTitleProps";
+
 import styles from "./OstSongTitle.module.css";
 
 export function OstSongTitle({ title }: OstSongTitleProps): React.JSX.Element {

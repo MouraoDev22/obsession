@@ -1,11 +1,10 @@
+import type { OstAudioPlayerProps } from "../../interfaces/OstAudioPlayerProps";
+import type { YouTubePlayer } from "../../utils/youtube";
+
 import { useEffect, useRef, useState } from "react";
 
-import type { OstAudioPlayerProps } from "../../interfaces/OstAudioPlayerProps";
-import {
-  getYouTubeVideoId,
-  loadYouTubeIframeApi,
-  type YouTubePlayer,
-} from "../../utils/youtube";
+import { getYouTubeVideoId, loadYouTubeIframeApi } from "../../utils/youtube";
+
 import styles from "./OstAudioPlayer.module.css";
 
 const PLAYER_STATE_PLAYING = 1;

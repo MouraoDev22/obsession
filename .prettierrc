@@ -1,6 +1,10 @@
 {
   "arrowParens": "always",
   "importOrder": [
+    "\\.json$",
+    "",
+    "<TYPES>",
+    "",
     "<BUILTIN_MODULES>",
     "",
     "^react$",
@@ -8,12 +12,16 @@
     "",
     "<THIRD_PARTY_MODULES>",
     "",
-    "^@/components/(.*)$",
-    "^@/utils/(.*)$",
+    "^(?!.*\\.css$).*(?:^|/)components/",
     "",
-    "^[./]"
+    "^(?!.*\\.css$).*(?:^|/)utils/",
+    "",
+    "^(?!.*\\.css$)[./]",
+    "",
+    "\\.css$"
   ],
   "importOrderParserPlugins": ["typescript", "jsx", "tsx", "decorators-legacy"],
+  "importOrderSafeSideEffects": ["^.*\\.css$"],
   "plugins": [
     "@ianvs/prettier-plugin-sort-imports",
     "prettier-plugin-css-order",

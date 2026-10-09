@@ -1,7 +1,9 @@
 import type { OstSongListProps } from "../../interfaces/OstSongListProps";
+
 import { OstSongCard } from "../OstSongCard";
 import { OstSongCover } from "../OstSongCover";
 import { OstSongTitle } from "../OstSongTitle";
+
 import styles from "./OstSongList.module.css";
 
 export function OstSongList({
