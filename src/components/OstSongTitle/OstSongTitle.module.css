@@ -1,5 +1,10 @@
 .song_title {
-  margin-bottom: 1rem;
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 0;
+  overflow: hidden;
   color: var(--color-text-poster);
   font-weight: var(--font-weight-poster);
   font-size: var(--font-size-poster);
@@ -12,6 +17,7 @@
 
 .song_track {
   display: block;
+  flex: none;
   margin-bottom: 0.4rem;
   padding-left: var(--letter-spacing-meta);
   color: var(--color-highlight-red);

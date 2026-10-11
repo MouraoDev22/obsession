@@ -1,7 +1,7 @@
 .song_card {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   gap: 1.5rem;
   filter: grayscale(0.9) brightness(0.95);
@@ -14,6 +14,8 @@
   border: 0.15rem solid var(--color-text-poster);
   border-radius: var(--radius-card);
   background-color: black;
+  width: 20rem;
+  height: 30.5rem;
 }
 
 .song_card:hover {
