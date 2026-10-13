@@ -1,76 +1,165 @@
-# React + TypeScript + Vite
+<div align="center">
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# 🎧 Obsession — Original Soundtrack Player
 
-Currently, two official plugins are available:
+**A cinematic web player for the _Obsession_ original motion picture soundtrack.**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+[English](README.md) · [Português (PT-BR)](README.pt-BR.md)
 
-## React Compiler
+![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-7.0-3178C6?logo=typescript&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white)
+![React Compiler](https://img.shields.io/badge/React%20Compiler-enabled-FF4785?logo=react&logoColor=white)
+![CSS Modules](https://img.shields.io/badge/Styling-CSS%20Modules-36454F)
+![PRs Welcome](https://img.shields.io/badge/PRs-welcome-2EA44F)
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+</div>
 
-Note: This will impact Vite dev & build performances.
-You can also try [the experimental native React Compiler support in plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md#rust-react-compiler) by using `compiler: true` in the plugin options instead of using the Babel plugin.
+---
 
-## Expanding the ESLint configuration
+## 📖 About
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+**Obsession** is a single-page web application that presents the complete _Obsession_ original motion picture soundtrack — **26 tracks by Rock Burwell** — as a beautifully crafted virtual record sleeve. Browse the tracklist split into **Side A** and **Side B**, click any track, and listen through an embedded YouTube player fixed at the bottom of the page, complete with a mouse-following parallax background.
 
-```js
-export default defineConfig([
-  globalIgnores(["dist"]),
-  {
-    files: ["**/*.{ts,tsx}"],
-    extends: [
-      // Other configs...
+The project is a showcase of modern frontend development: **React 19**, the **React Compiler**, strict **TypeScript**, **Vite 8**, and zero UI frameworks — just handcrafted CSS Modules.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## ✨ Features
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
+- 🎵 **Full 26-track soundtrack** — organized in Side A / Side B with cassette-style track labels (`A01`, `B13`…).
+- ▶️ **Fixed audio player** — plays tracks through a hidden YouTube IFrame API embed, with play/pause toggle, live status ("Loading… / Playing / Paused") and close button.
+- 🖼️ **Custom cover art** — every track has its own cover image served from `public/`.
+- 🌀 **Parallax background** — the page background moves opposite to the cursor, driven by CSS variables and throttled with `requestAnimationFrame`.
+- ♿ **Accessible** — semantic markup, `aria-label`s on controls, and full respect for the `prefers-reduced-motion` media query (the parallax effect is disabled when the OS asks for reduced motion).
+- 🧼 **Strict typing** — dedicated `interfaces/` and `types/` folders, explicit return types everywhere, and typed props for every component.
+- ⚡ **React Compiler** — automatic memoization enabled via Babel preset for optimal render performance.
+- 🌐 **Robust YouTube URL parsing** — supports `youtu.be/<id>`, `/watch?v=`, `/embed/`, `/shorts/` and `/live/` formats.
+
+## 🛠️ Tech Stack
+
+| Category             | Tool                                                                                                                    |
+| -------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| Framework            | [React 19](https://react.dev/)                                                                                          |
+| Language             | [TypeScript 7](https://www.typescriptlang.org/)                                                                         |
+| Build tool           | [Vite 8](https://vite.dev/) with [`@vitejs/plugin-react`](https://github.com/vitejs/vite-plugin-react)                  |
+| Compiler             | [React Compiler](https://react.dev/learn/react-compiler) (via `@rolldown/plugin-babel` + `babel-plugin-react-compiler`) |
+| Styling              | CSS Modules + CSS custom properties                                                                                     |
+| Fonts                | Google Fonts — _Anton_ and _Space Mono_                                                                                 |
+| Playback             | [YouTube IFrame Player API](https://developers.google.com/youtube/iframe_api_reference)                                 |
+| Linting / Formatting | ESLint 10 + `typescript-eslint`, Prettier (with CSS order, import sorting and JSON sorting plugins)                     |
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/) **20.19+** or **22.12+** (required by Vite 8)
+- npm (comes with Node.js)
+
+### Installation
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/MouraoDev22/obsession.git
+cd obsession
+
+# 2. Install dependencies
+npm install
+
+# 3. Start the development server
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+The app will be available at the local URL printed in the terminal (usually `http://localhost:5173`).
 
-```js
-// eslint.config.js
-import reactDom from "eslint-plugin-react-dom";
-import reactX from "eslint-plugin-react-x";
+## 📜 Scripts
 
-export default defineConfig([
-  globalIgnores(["dist"]),
-  {
-    files: ["**/*.{ts,tsx}"],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs["recommended-typescript"],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ["./tsconfig.node.json", "./tsconfig.app.json"],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-]);
+| Script            | Description                                                      |
+| ----------------- | ---------------------------------------------------------------- |
+| `npm run dev`     | Starts the Vite development server with HMR                      |
+| `npm run build`   | Type-checks with `tsc -b` and builds for production into `dist/` |
+| `npm run preview` | Serves the production build locally                              |
+| `npm run lint`    | Runs ESLint across the project                                   |
+| `npm run format`  | Formats the codebase with Prettier                               |
+
+## 📂 Project Structure
+
 ```
+obsession/
+├── public/                  # Static assets (song covers, favicon, icons)
+├── src/
+│   ├── assets/              # Images bundled by Vite (background, etc.)
+│   ├── components/          # UI components (CSS Module per component)
+│   │   ├── Main/            # <main> layout wrapper
+│   │   ├── OstHero/         # Soundtrack header/hero
+│   │   ├── OstSongList/     # Side A / Side B tracklist
+│   │   ├── OstSongCard/     # Clickable track card
+│   │   ├── OstSongCover/    # Track cover image
+│   │   ├── OstSongTitle/    # Track title + track label
+│   │   └── OstAudioPlayer/  # Fixed footer player (YouTube embed)
+│   ├── data/
+│   │   └── songs.json       # The soundtrack data (single source of truth)
+│   ├── interfaces/          # Shared prop/state interfaces
+│   ├── types/               # Type aliases (OstPlayRequest, OstSongs, …)
+│   └── utils/
+│       ├── parallax/        # Cursor-following background effect
+│       └── youtube/         # IFrame API loader + video ID parser
+├── index.html               # Entry HTML (fonts, lang, meta)
+├── vite.config.ts           # Vite + React + React Compiler presets
+└── tsconfig*.json           # Strict TypeScript project references
+```
+
+## 🎼 Adding or Editing Songs
+
+The tracklist is entirely data-driven. To add a new track, append an object to [`src/data/songs.json`](src/data/songs.json):
+
+```json
+{
+  "cover": "/my-new-track.png",
+  "id": "27",
+  "title": "My New Track",
+  "youtubeUrl": "https://www.youtube.com/watch?v=XXXXXXXXXXX"
+}
+```
+
+| Field        | Description                                                               |
+| ------------ | ------------------------------------------------------------------------- |
+| `id`         | Unique, stable key used in React lists.                                   |
+| `cover`      | Path to the cover image inside `public/`.                                 |
+| `title`      | Track title shown in the list and the player.                             |
+| `youtubeUrl` | Any common YouTube link format — the video ID is extracted automatically. |
+
+> Tracks are split evenly between Side A and Side B at runtime, so no manual grouping is needed.
+
+## 🧠 Architecture Notes
+
+- **State flow:** `App` owns the current `OstPlayRequest` state. Selecting a track dispatches a request; requesting the _same_ track again toggles play/pause; the close button clears the request and unmounts the player.
+- **YouTube loading:** the IFrame API script is loaded **once** and the resulting promise is cached, so replays never re-fetch the API. On failure, the cache is reset to allow retrying, and the UI falls back to an "Open on YouTube" link.
+- **Parallax via CSS variables:** since `body::before` is unreachable from JavaScript, the offset is written to the `--parallax-x` / `--parallax-y` custom properties and consumed by the `transform` defined in `App.css` — keeping the effect on the compositor.
+- **React Compiler:** enabled through the `reactCompilerPreset` in `vite.config.ts`, removing the need for manual `useMemo`/`useCallback` memoization.
+
+## ♿ Accessibility
+
+- All interactive elements are real `<button>`s with descriptive `aria-label`s.
+- The parallax effect honors the `prefers-reduced-motion` media query.
+- Decorative elements are marked with `aria-hidden="true"`.
+- Color/status is always paired with text (e.g. player status), never conveyed by color alone.
+
+## 🤝 Contributing
+
+Contributions are welcome! Feel free to open an issue or submit a pull request:
+
+1. Fork the repository and create your branch: `git checkout -b feature/my-feature`
+2. Commit your changes: `git commit -m "feat: add my feature"`
+3. Push to the branch: `git push origin feature/my-feature`
+4. Open a Pull Request.
+
+Please run `npm run lint` and `npm run format` before submitting.
+
+## 📄 License
+
+This repository does not currently include a license file. All rights reserved to the soundtrack and its respective owners; this project is a non-commercial fan tribute.
+
+---
+
+<div align="center">
+  <sub>Built with ❤️ using React, TypeScript and Vite.</sub>
+</div>
