@@ -1,13 +1,13 @@
 [
   {
     "id": "01",
-    "cover": "/example.jpg",
+    "cover": "/obsession.png",
     "title": "Obsession",
     "youtubeUrl": "https://www.youtube.com/watch?v=sKKzdIquoeg"
   },
   {
     "id": "02",
-    "cover": "/example.jpg",
+    "cover": "/sandy.png",
     "title": "Sandy",
     "youtubeUrl": "https://www.youtube.com/watch?v=5NqV1Md7snE"
   },
@@ -19,67 +19,67 @@
   },
   {
     "id": "04",
-    "cover": "/example.jpg",
+    "cover": "/one-wish-willow.png",
     "title": "One Wish Willow",
     "youtubeUrl": "https://www.youtube.com/watch?v=eEPlWVi5Jwc"
   },
   {
     "id": "05",
-    "cover": "/example.jpg",
+    "cover": "/make-a-wish.png",
     "title": "Make a Wish",
     "youtubeUrl": "https://www.youtube.com/watch?v=zyflfuElZP4"
   },
   {
     "id": "06",
-    "cover": "/r u ok.png",
+    "cover": "/r-u-ok.png",
     "title": "R U OK",
     "youtubeUrl": "https://www.youtube.com/watch?v=wi9-Vzou8lY"
   },
   {
     "id": "07",
-    "cover": "/example.jpg",
+    "cover": "/can-you-sleep-with-me.png",
     "title": "Can You Sleep With Me?",
     "youtubeUrl": "https://www.youtube.com/watch?v=0MBw-jfRCBI"
   },
   {
     "id": "08",
-    "cover": "/example.jpg",
+    "cover": "/research.png",
     "title": "Research",
     "youtubeUrl": "https://www.youtube.com/watch?v=GoHa0ylrhgU"
   },
   {
     "id": "09",
-    "cover": "/example.jpg",
+    "cover": "/cat's-out-of-the-bag.png",
     "title": "Cat's Out of the Bag",
     "youtubeUrl": "https://www.youtube.com/watch?v=sdqgj99UDJs"
   },
   {
     "id": "10",
-    "cover": "/love is in the air, pt. 1.png",
+    "cover": "/love-is-in-the-air,-pt.-1.png",
     "title": "Love is in the Air, Pt. 1",
     "youtubeUrl": "https://www.youtube.com/watch?v=KzRF5ELw8oU"
   },
   {
     "id": "11",
-    "cover": "/example.jpg",
+    "cover": "/date-night.png",
     "title": "Date Night",
     "youtubeUrl": "https://www.youtube.com/watch?v=OhqRfVt8kHg"
   },
   {
     "id": "12",
-    "cover": "/example.jpg",
+    "cover": "/go-back-to-sleep.png",
     "title": "Go Back to Sleep",
     "youtubeUrl": "https://www.youtube.com/watch?v=XcC4fXBBpK8"
   },
   {
     "id": "13",
-    "cover": "/example.jpg",
+    "cover": "/if-you’re-having-trouble-with-the-door.png",
     "title": "If You’re Having Trouble with the Door",
     "youtubeUrl": "https://www.youtube.com/watch?v=33H10itaYhE"
   },
   {
     "id": "14",
-    "cover": "/example.jpg",
+    "cover": "/what’s-the-verdict.png",
     "title": "What’s the Verdict?",
     "youtubeUrl": "https://www.youtube.com/watch?v=uui7CgwHz28"
   },
@@ -91,55 +91,55 @@
   },
   {
     "id": "16",
-    "cover": "/example.jpg",
+    "cover": "/into-darkness.png",
     "title": "Into Darkness",
     "youtubeUrl": "https://www.youtube.com/watch?v=sWxSXyCq5ik"
   },
   {
     "id": "17",
-    "cover": "/example.jpg",
+    "cover": "/i-can’t-be-nikki.png",
     "title": "I Can’t Be Nikki",
     "youtubeUrl": "https://www.youtube.com/watch?v=b-QUyHmkKh0"
   },
   {
     "id": "18",
-    "cover": "/example.jpg",
+    "cover": "/you-wished-for-this.png",
     "title": "You Wished for This",
     "youtubeUrl": "https://www.youtube.com/watch?v=faXoBwxrnmg"
   },
   {
     "id": "19",
-    "cover": "/example.jpg",
+    "cover": "/the-letter.png",
     "title": "The Letter",
     "youtubeUrl": "https://www.youtube.com/watch?v=QuJHSDrBglo"
   },
   {
     "id": "20",
-    "cover": "/example.jpg",
+    "cover": "/one-wish-willow-revisited.png",
     "title": "One Wish Willow (Revisited)",
     "youtubeUrl": "https://www.youtube.com/watch?v=5l-oCZkRpvA"
   },
   {
     "id": "21",
-    "cover": "/example.jpg",
+    "cover": "/you-only-get-one.png",
     "title": "You Only Get One",
     "youtubeUrl": "https://www.youtube.com/watch?v=b3srr5ukcsI"
   },
   {
     "id": "22",
-    "cover": "/example.jpg",
+    "cover": "/billionaire.png",
     "title": "Billionaire",
     "youtubeUrl": "https://www.youtube.com/watch?v=4gGV9fFPBKY"
   },
   {
     "id": "23",
-    "cover": "/why don't you love me.png",
+    "cover": "/why-don't-you-love-me.png",
     "title": "Why Don't You Love Me",
     "youtubeUrl": "https://www.youtube.com/watch?v=P9hPlZR_iNk"
   },
   {
     "id": "24",
-    "cover": "/example.jpg",
+    "cover": "/mirror-shot.png",
     "title": "Mirror Shot",
     "youtubeUrl": "https://www.youtube.com/watch?v=_QnIuo_FryY"
   },
@@ -151,7 +151,7 @@
   },
   {
     "id": "26",
-    "cover": "/example.jpg",
+    "cover": "/love-is-in-the-air,-pt.-2.png",
     "title": "Love is in the Air, Pt. 2",
     "youtubeUrl": "https://www.youtube.com/watch?v=KaNI9VilRAA"
   }
