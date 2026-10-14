@@ -157,6 +157,7 @@ The data is imported in [`src/App.tsx`](src/App.tsx) and passed down to the `Foo
 - **YouTube loading:** the IFrame API script is loaded **once** and the resulting promise is cached, so replays never re-fetch the API. On failure, the cache is reset to allow retrying, and the UI falls back to an "Open on YouTube" link.
 - **Parallax via CSS variables:** since `body::before` is unreachable from JavaScript, the offset is written to the `--parallax-x` / `--parallax-y` custom properties and consumed by the `transform` defined in `App.css` — keeping the effect on the compositor.
 - **React Compiler:** enabled through the `reactCompilerPreset` in `vite.config.ts`, removing the need for manual `useMemo`/`useCallback` memoization.
+- **TypeScript 7 side-by-side:** `tsc` runs TypeScript 7 through `@typescript/native`, while `typescript` is aliased to `@typescript/typescript6` so `typescript-eslint` can lint with the TS 6 API (TS 7 ships no programmatic API yet). This is the [official side-by-side setup](https://devblogs.microsoft.com/typescript/announcing-typescript-7-0/#running-side-by-side-with-typescript) — keep it until typescript-eslint ships TS 7 support ([typescript-eslint#10940](https://github.com/typescript-eslint/typescript-eslint/issues/10940)).
 
 ## ♿ Accessibility
 

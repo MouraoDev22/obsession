@@ -56,7 +56,13 @@ export function OstAudioPlayer({
 
   const [isReady, setIsReady] = useState<boolean>(false);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
+  const [loadError, setLoadError] = useState<string | null>(null);
+
+  // Erro de URL derivado na renderização (sem setState dentro de efeito) /
+  // URL error derived during render (no setState inside an effect).
+  const videoId: string | null = getYouTubeVideoId(playRequest.song.youtubeUrl);
+  const error: string | null =
+    videoId === null ? "Link do YouTube inválido." : loadError;
 
   // Mantém o callback mais recente à mão para os eventos do iframe, que são
   // registrados uma única vez. / Keeps the latest callback at hand for the
@@ -72,12 +78,9 @@ export function OstAudioPlayer({
     );
 
     if (!videoId) {
-      setError("Link do YouTube inválido.");
       onPlaybackChangeRef.current?.(false);
       return;
     }
-
-    setError(null);
 
     const player: YouTubePlayer | null = isReadyRef.current
       ? playerRef.current
@@ -133,7 +136,7 @@ export function OstAudioPlayer({
               if (!cancelled) {
                 isPlayingRef.current = false;
                 setIsPlaying(false);
-                setError("Não foi possível reproduzir este vídeo.");
+                setLoadError("Não foi possível reproduzir este vídeo.");
                 onPlaybackChangeRef.current?.(false);
               }
               return;
@@ -180,7 +183,7 @@ export function OstAudioPlayer({
       })
       .catch((): void => {
         if (!cancelled) {
-          setError("Não foi possível carregar o player do YouTube.");
+          setLoadError("Não foi possível carregar o player do YouTube.");
           onPlaybackChangeRef.current?.(false);
         }
         return;
