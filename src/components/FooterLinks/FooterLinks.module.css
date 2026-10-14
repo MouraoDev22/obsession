@@ -5,6 +5,8 @@
 }
 
 .title {
+  border-bottom: 1px solid var(--color-border-light);
+  padding-bottom: 0.75rem;
   color: var(--color-highlight-red);
   font-size: var(--font-size-side);
   font-family: var(--font-mono);
@@ -35,14 +37,11 @@
   text-decoration: none;
 }
 
-.link:hover {
+.link:hover,
+.link:focus-visible {
   transform: translateY(-2px);
   border-color: var(--color-primary);
   background: var(--gradient-red);
-}
-
-.link:focus-visible {
-  border-color: var(--color-primary);
 }
 
 .link_label {
@@ -59,4 +58,14 @@
   font-family: var(--font-mono);
   letter-spacing: var(--letter-spacing-label);
   text-transform: uppercase;
+}
+
+.link:hover .link_label,
+.link:focus-visible .link_label {
+  color: var(--color-text-poster);
+}
+
+.link:hover .link_hint,
+.link:focus-visible .link_hint {
+  color: rgb(255 255 255 / 0.8);
 }

@@ -1,3 +1,4 @@
+import type { FooterProps } from "../../interfaces/FooterProps";
 import type { ReactNode } from "react";
 
 import { FooterAbout } from "../FooterAbout";
@@ -7,35 +8,32 @@ import { FooterLinks } from "../FooterLinks";
 
 import styles from "./Footer.module.css";
 
-/**
- * Rodapé da página / Page footer.
- *
- * PT: reúne as informações do projeto dentro da moldura vertical da página —
- * finalidade, autor, ficha técnica do filme, links oficiais de escuta/compra
- * e a linha de direitos autorais.
- *
- * EN: gathers the project information inside the page's vertical frame —
- * purpose, author, movie credits, official streaming/purchase links and the
- * copyright line.
- */
-export function Footer({ children }: React.PropsWithChildren): ReactNode {
+export function Footer({
+  about,
+  author,
+  children,
+  copyright,
+  credits,
+  officialLinks,
+}: React.PropsWithChildren<FooterProps>): ReactNode {
   return (
     <footer className={styles.footer}>
       <div className={styles.grid}>
-        <FooterAbout />
-        <FooterAuthor />
-        <FooterCredits />
-        <FooterLinks />
+        <FooterAbout paragraphs={about} />
+        <FooterAuthor author={author} />
+        <FooterCredits credits={credits} />
+        <FooterLinks links={officialLinks} />
       </div>
 
       {children}
 
       <p className={styles.legal}>
-        <span>Filme © 2025 Obsession Movie Production Inc.</span>
-        <span aria-hidden="true">·</span>
-        <span>Trilha © Back Lot Music</span>
-        <span aria-hidden="true">·</span>
-        <span>Projeto de fã, sem fins lucrativos</span>
+        {copyright.map((line: string, index: number): React.JSX.Element => (
+          <span key={line}>
+            {index > 0 && <span aria-hidden="true">{"· "}</span>}
+            {line}
+          </span>
+        ))}
       </p>
     </footer>
   );

@@ -1,3 +1,6 @@
+import credits from "./data/credits.json" with { type: "json" };
+import links from "./data/links.json" with { type: "json" };
+import project from "./data/project.json" with { type: "json" };
 import songs from "./data/songs.json" with { type: "json" };
 
 import type { OstSong } from "./interfaces/OstSong";
@@ -70,7 +73,13 @@ function App(): React.JSX.Element {
           />
         )}
       </Main>
-      <Footer />
+      <Footer
+        about={project.about}
+        author={project.author}
+        copyright={project.copyright}
+        credits={credits}
+        officialLinks={links}
+      />
     </>
   );
 }

@@ -1,0 +1,22 @@
+{
+  "about": [
+    "Projeto de fã, não oficial e sem fins lucrativos, criado para apresentar a trilha sonora original completa do filme Obsession — 26 faixas de Rock Burwell — como uma capa de disco virtual, com Lado A/B, player integrado e fundo com efeito parallax.",
+    "Também serve como estudo de caso de frontend moderno: React 19 com React Compiler, TypeScript estrito, Vite 8 e CSS Modules feitos à mão, sem frameworks de UI."
+  ],
+  "author": {
+    "links": [
+      { "href": "https://github.com/MouraoDev22", "label": "GitHub" },
+      {
+        "href": "https://github.com/MouraoDev22/obsession",
+        "label": "Repositório"
+      }
+    ],
+    "name": "Mourão",
+    "role": "@MouraoDev22 · Desenvolvimento Full-Stack"
+  },
+  "copyright": [
+    "Filme © 2025 Obsession Movie Production Inc.",
+    "Trilha © Back Lot Music",
+    "Projeto de fã, sem fins lucrativos"
+  ]
+}

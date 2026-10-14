@@ -5,6 +5,8 @@
 }
 
 .title {
+  border-bottom: 1px solid var(--color-border-light);
+  padding-bottom: 0.75rem;
   color: var(--color-highlight-red);
   font-size: var(--font-size-side);
   font-family: var(--font-mono);

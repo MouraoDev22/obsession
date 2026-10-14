@@ -29,6 +29,7 @@ The project is a showcase of modern frontend development: **React 19**, the **Re
 - ▶️ **Fixed audio player** — plays tracks through a hidden YouTube IFrame API embed, with play/pause toggle, live status ("Loading… / Playing / Paused") and close button.
 - 🖼️ **Custom cover art** — every track has its own cover image served from `public/`.
 - 🌀 **Parallax background** — the page background moves opposite to the cursor, driven by CSS variables and throttled with `requestAnimationFrame`.
+- 📎 **Data-driven footer** — project purpose, author, movie credits and official Spotify/purchase links live in JSON files under `src/data/`.
 - ♿ **Accessible** — semantic markup, `aria-label`s on controls, and full respect for the `prefers-reduced-motion` media query (the parallax effect is disabled when the OS asks for reduced motion).
 - 🧼 **Strict typing** — dedicated `interfaces/` and `types/` folders, explicit return types everywhere, and typed props for every component.
 - ⚡ **React Compiler** — automatic memoization enabled via Babel preset for optimal render performance.
@@ -101,7 +102,10 @@ obsession/
 │   │   ├── OstSongTitle/    # Track title + track label
 │   │   └── OstAudioPlayer/  # Fixed footer player (YouTube embed)
 │   ├── data/
-│   │   └── songs.json       # The soundtrack data (single source of truth)
+│   │   ├── credits.json      # Movie credits (director, studios, release)
+│   │   ├── links.json        # Official Spotify / purchase links
+│   │   ├── project.json      # Purpose, author and copyright lines
+│   │   └── songs.json        # The soundtrack data (single source of truth)
 │   ├── interfaces/          # Shared prop/state interfaces
 │   ├── types/               # Type aliases (OstPlayRequest, OstSongs, …)
 │   └── utils/
@@ -134,16 +138,29 @@ The tracklist is entirely data-driven. To add a new track, append an object to [
 
 > Tracks are split evenly between Side A and Side B at runtime, so no manual grouping is needed.
 
+## 🎞️ Editing the Footer
+
+The footer is data-driven too. Its content lives in three JSON files under [`src/data/`](src/data/):
+
+| File                                    | Content                                                                                          |
+| --------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| [`project.json`](src/data/project.json) | Purpose paragraphs, author (name, role and GitHub links) and the copyright lines                 |
+| [`credits.json`](src/data/credits.json) | Movie credits shown in "Ficha técnica" (director, composer, studios, distribution, release date) |
+| [`links.json`](src/data/links.json)     | Official listening/purchase links (`label` + `hint` + `href`) — Spotify, album and movie         |
+
+The data is imported in [`src/App.tsx`](src/App.tsx) and passed down to the `Footer` sections as typed props, mirroring how `songs.json` feeds the tracklist.
+
 ## 🧠 Architecture Notes
 
 - **State flow:** `App` owns the current `OstPlayRequest` state. Selecting a track dispatches a request; requesting the _same_ track again toggles play/pause; the close button clears the request and unmounts the player.
+- **Data-driven content:** songs and footer content (purpose, credits, official links) live in JSON files imported by `App` and passed down as typed props.
 - **YouTube loading:** the IFrame API script is loaded **once** and the resulting promise is cached, so replays never re-fetch the API. On failure, the cache is reset to allow retrying, and the UI falls back to an "Open on YouTube" link.
 - **Parallax via CSS variables:** since `body::before` is unreachable from JavaScript, the offset is written to the `--parallax-x` / `--parallax-y` custom properties and consumed by the `transform` defined in `App.css` — keeping the effect on the compositor.
 - **React Compiler:** enabled through the `reactCompilerPreset` in `vite.config.ts`, removing the need for manual `useMemo`/`useCallback` memoization.
 
 ## ♿ Accessibility
 
-- All interactive elements are real `<button>`s with descriptive `aria-label`s.
+- All interactive elements are real `<button>`s (controls) or `<a>`s (external links) with descriptive accessible names.
 - The parallax effect honors the `prefers-reduced-motion` media query.
 - Decorative elements are marked with `aria-hidden="true"`.
 - Color/status is always paired with text (e.g. player status), never conveyed by color alone.

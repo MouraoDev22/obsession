@@ -6,10 +6,10 @@
   gap: 1.5rem;
   filter: grayscale(0.9) brightness(0.95);
   transition:
-    transform 2.5s ease,
-    filter 2.5s ease,
-    border-color 2.5s ease,
-    box-shadow 2.5s ease;
+    transform 0.6s ease,
+    filter 0.6s ease,
+    border-color 0.6s ease,
+    box-shadow 0.6s ease;
   cursor: pointer;
   border: 0.15rem solid var(--color-text-poster);
   border-radius: var(--radius-card);

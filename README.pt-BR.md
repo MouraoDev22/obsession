@@ -29,6 +29,7 @@ O projeto é uma demonstração de desenvolvimento frontend moderno: **React 19*
 - ▶️ **Player fixo de áudio** — reproduz as faixas através de um embed oculto da YouTube IFrame API, com botão de tocar/pausar, status em tempo real ("Carregando… / Tocando / Pausado") e botão de fechar.
 - 🖼️ **Capas personalizadas** — cada faixa possui sua própria imagem de capa servida de `public/`.
 - 🌀 **Fundo parallax** — o fundo da página se move na direção oposta ao cursor, movido por variáveis CSS e controlado com `requestAnimationFrame`.
+- 📎 **Rodapé orientado a dados** — finalidade do projeto, autor, ficha técnica do filme e links oficiais do Spotify/compra vivem em arquivos JSON em `src/data/`.
 - ♿ **Acessível** — marcação semântica, `aria-label`s nos controles e respeito total à media query `prefers-reduced-motion` (o efeito parallax é desativado quando o sistema pede por movimento reduzido).
 - 🧼 **Tipagem estrita** — pastas dedicadas de `interfaces/` e `types/`, tipos de retorno explícitos em todo o código e props tipadas em todos os componentes.
 - ⚡ **React Compiler** — memoização automática ativada via preset Babel para desempenho ótimo de renderização.
@@ -101,7 +102,10 @@ obsession/
 │   │   ├── OstSongTitle/    # Título da faixa + identificador
 │   │   └── OstAudioPlayer/  # Player fixo no rodapé (embed do YouTube)
 │   ├── data/
-│   │   └── songs.json       # Dados da trilha (fonte única de verdade)
+│   │   ├── credits.json      # Ficha técnica do filme (direção, estúdios…)
+│   │   ├── links.json        # Links oficiais do Spotify/compra
+│   │   ├── project.json      # Finalidade, autor e linhas de direitos
+│   │   └── songs.json        # Dados da trilha (fonte única de verdade)
 │   ├── interfaces/          # Interfaces compartilhadas de props/estado
 │   ├── types/               # Aliases de tipo (OstPlayRequest, OstSongs, …)
 │   └── utils/
@@ -134,16 +138,29 @@ A lista de faixas é totalmente orientada a dados. Para adicionar uma nova faixa
 
 > As faixas são divididas igualmente entre o Lado A e o Lado B em tempo de execução, então não é preciso agrupar manualmente.
 
+## 🎞️ Editando o Rodapé
+
+O rodapé também é totalmente orientado a dados. O conteúdo dele vive em três arquivos JSON em [`src/data/`](src/data/):
+
+| Arquivo                                 | Conteúdo                                                                                         |
+| --------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| [`project.json`](src/data/project.json) | Parágrafos de finalidade, autor (nome, cargo e links do GitHub) e as linhas de direitos autorais |
+| [`credits.json`](src/data/credits.json) | Ficha técnica do filme (direção, compositor, estúdios, distribuição, estreia)                    |
+| [`links.json`](src/data/links.json)     | Links oficiais de escuta/compra (`label` + `hint` + `href`) — Spotify, álbum e filme             |
+
+Os dados são importados em [`src/App.tsx`](src/App.tsx) e repassados às seções do `Footer` como props tipadas, do mesmo jeito que `songs.json` alimenta a lista de faixas.
+
 ## 🧠 Notas de Arquitetura
 
 - **Fluxo de estado:** o `App` mantém o estado atual de `OstPlayRequest`. Selecionar uma faixa dispara uma requisição; pedir a _mesma_ faixa novamente alterna tocar/pausar; o botão de fechar limpa a requisição e desmonta o player.
+- **Conteúdo orientado a dados:** as faixas e o conteúdo do rodapé (finalidade, créditos, links oficiais) ficam em arquivos JSON importados pelo `App` e repassados como props tipadas.
 - **Carregamento do YouTube:** o script da IFrame API é carregado **uma única vez** e a promessa resultante é armazenada em cache, então reproduções posteriores nunca recarregam a API. Em caso de falha, o cache é reiniciado para permitir nova tentativa, e a interface mostra um link "Abrir no YouTube" como alternativa.
 - **Parallax via variáveis CSS:** como `body::before` não é acessível via JavaScript, o deslocamento é gravado nas custom properties `--parallax-x` / `--parallax-y` e consumido pelo `transform` definido em `App.css` — mantendo o efeito no compositor.
 - **React Compiler:** ativado pelo `reactCompilerPreset` em `vite.config.ts`, eliminando a necessidade de memoização manual com `useMemo`/`useCallback`.
 
 ## ♿ Acessibilidade
 
-- Todos os elementos interativos são `<button>`s reais com `aria-label`s descritivos.
+- Todos os elementos interativos são `<button>`s reais (controles) ou `<a>`s (links externos) com nomes acessíveis descritivos.
 - O efeito parallax respeita a media query `prefers-reduced-motion`.
 - Elementos decorativos são marcados com `aria-hidden="true"`.
 - Cor/status sempre é acompanhado de texto (ex.: status do player), nunca comunicado apenas por cor.
