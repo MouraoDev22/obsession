@@ -89,6 +89,11 @@ obsession/
 │   ├── assets/              # Imagens empacotadas pelo Vite (fundo etc.)
 │   ├── components/          # Componentes de UI (um CSS Module por componente)
 │   │   ├── Main/            # Wrapper de layout <main>
+│   │   ├── Footer/          # Wrapper <footer> (sobre · autor · ficha · links)
+│   │   ├── FooterAbout/     # Seção sobre a finalidade do projeto
+│   │   ├── FooterAuthor/    # Seção do autor (links do GitHub)
+│   │   ├── FooterCredits/   # Ficha técnica do filme (direção, trilha…)
+│   │   ├── FooterLinks/     # Links oficiais do Spotify/compra
 │   │   ├── OstHero/         # Cabeçalho/hero da trilha sonora
 │   │   ├── OstSongList/     # Lista de faixas Lado A / Lado B
 │   │   ├── OstSongCard/     # Card clicável da faixa

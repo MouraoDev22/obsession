@@ -89,6 +89,11 @@ obsession/
 │   ├── assets/              # Images bundled by Vite (background, etc.)
 │   ├── components/          # UI components (CSS Module per component)
 │   │   ├── Main/            # <main> layout wrapper
+│   │   ├── Footer/          # <footer> wrapper (purpose · author · credits · links)
+│   │   ├── FooterAbout/     # Project purpose section
+│   │   ├── FooterAuthor/    # Author section (GitHub links)
+│   │   ├── FooterCredits/   # Movie credits (director, composer, studios…)
+│   │   ├── FooterLinks/     # Official Spotify / purchase links
 │   │   ├── OstHero/         # Soundtrack header/hero
 │   │   ├── OstSongList/     # Side A / Side B tracklist
 │   │   ├── OstSongCard/     # Clickable track card

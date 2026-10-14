@@ -15,7 +15,8 @@
   /* Cores de fundo / Background colors
      - App.css: fundo do <body> (--color-background)
      - OstAudioPlayer: painel translúcido (--color-surface),
-       fundo dos botões (--color-surface-alt) */
+       fundo dos botões (--color-surface-alt)
+     - Footer: fundo dos links oficiais (--color-surface-alt) */
   --color-background: #0b090b;
   --color-surface: #1a0b0f;
   --color-surface-alt: #2a0c12;
@@ -23,7 +24,9 @@
   /* Cores de texto / Text colors
      - OstAudioPlayer: título (--color-text-primary); status e LED apagado
        (--color-text-muted)
-     - OstHero: kicker (--color-text-secondary) */
+     - OstHero: kicker (--color-text-secondary)
+     - Footer: textos (--color-text-secondary); termos, dicas e linha de
+       direitos (--color-text-muted) */
   --color-text-primary: #f7f5f1;
   --color-text-secondary: #c9c1c1;
   --color-text-muted: #8c7d80;
@@ -36,15 +39,19 @@
   /* Destaques / Highlights
      - amarelo/ciano: apenas dentro de --poster-shadow (OstSongTitle, OstHero)
      - --color-highlight-red: OstSongList (divisor Lado A/B),
-       OstSongTitle (A01), OstHero (créditos), OstAudioPlayer (LED ativo)
-     - --color-highlight-cyan: link do OstAudioPlayer */
+       OstSongTitle (A01), OstHero (créditos), OstAudioPlayer (LED ativo),
+       Footer (títulos de seção)
+     - --color-highlight-cyan: link do OstAudioPlayer e labels dos links do
+       Footer */
   --color-highlight-red: #ff353d;
   --color-highlight-yellow: #ffe600;
   --color-highlight-cyan: #00cfff;
 
   /* Bordas / Borders
      - Main: moldura vertical da página
-     - OstAudioPlayer: moldura dupla do painel e dos botões */
+     - OstAudioPlayer: moldura dupla do painel e dos botões
+     - Footer: moldura vertical, divisor da linha de direitos e borda dos
+       links */
   --color-border: #45151b;
   --color-border-light: #79232d;
 
@@ -53,7 +60,8 @@
   --color-glow-red: #ff1e2d;
 
   /* Gradiente / Gradient
-     - OstAudioPlayer: fundo do botão no hover */
+     - OstAudioPlayer: fundo do botão no hover
+     - Footer: fundo do link no hover */
   --gradient-red: linear-gradient(
     135deg,
     var(--color-primary),
@@ -62,7 +70,8 @@
 
   /* ==========================================================================
      2. TIPOGRAFIA DO PÔSTER — Anton / POSTER TYPOGRAPHY
-     Usado por / Used by: OstSongTitle, OstHero, OstAudioPlayer (título)
+     Usado por / Used by: OstSongTitle, OstHero, OstAudioPlayer (título) e
+     Footer (nome do autor)
      ========================================================================== */
   --font-display: "Anton", sans-serif;
   --font-weight-poster: 400;
@@ -71,10 +80,10 @@
   --letter-spacing-poster: -0.125rem;
   --font-size-poster: clamp(1rem, 12vw, 2.5rem); /* OstSongTitle */
   --font-size-hero: clamp(3.5rem, 16vw, 10rem); /* OstHero título */
-  --letter-spacing-title: 0.04em; /* OstAudioPlayer título */
+  --letter-spacing-title: 0.04em; /* OstAudioPlayer título, Footer nome do autor */
 
   /* Sombra cromática amarelo/ciano / Yellow-cyan chromatic shadow
-     Usado por / Used by: OstSongTitle, OstHero */
+     Usado por / Used by: OstSongTitle, OstHero, Footer (nome do autor) */
   --opacity-glow-cyan: 0.65;
   --poster-shadow:
     0.125rem 0.125rem 0 var(--color-highlight-yellow),
@@ -85,28 +94,28 @@
 
   /* ==========================================================================
      3. TIPOGRAFIA MONOESPAÇADA — Space Mono / MONO TYPOGRAPHY
-     Usado por / Used by: OstHero, OstSongList, OstSongTitle e
-     OstAudioPlayer (rótulos do painel)
+     Usado por / Used by: OstHero, OstSongList, OstSongTitle, OstAudioPlayer
+     (rótulos do painel) e Footer (títulos, ficha e direitos)
      ========================================================================== */
   --font-mono: "Space Mono", ui-monospace, monospace;
-  --font-size-meta: 0.7rem; /* OstHero kicker/créditos, OstSongTitle (A01), OstAudioPlayer (status/link) */
-  --font-size-side: 0.8rem; /* OstSongList (rótulo "Lado A"/"Lado B") */
+  --font-size-meta: 0.7rem; /* OstHero kicker/créditos, OstSongTitle (A01), OstAudioPlayer (status/link), Footer (rótulos e dicas) */
+  --font-size-side: 0.8rem; /* OstSongList (rótulo "Lado A"/"Lado B"), Footer (títulos de seção e textos) */
   --letter-spacing-meta: 0.3em; /* OstHero, OstSongTitle (A01) */
-  --letter-spacing-label: 0.15em; /* OstAudioPlayer (status/link) */
+  --letter-spacing-label: 0.15em; /* OstAudioPlayer (status/link), Footer (rótulos, ficha e direitos) */
   --letter-spacing-side: 0.45em; /* OstSongList (rótulo de lado) */
 
   /* ==========================================================================
      4. RAIOS DE BORDRA / BORDER RADII
      ========================================================================== */
   --radius-card: 0.5rem; /* OstSongCard */
-  --radius-rack: 0.25rem; /* OstAudioPlayer (painel e botões) */
+  --radius-rack: 0.25rem; /* OstAudioPlayer (painel e botões), Footer (links) */
   --radius-led: 0.125rem; /* OstAudioPlayer (LED) */
 
   /* ==========================================================================
      5. EFEITOS DE HALATION — brilho vermelho de lente /
      RED LENS-HALATION EFFECTS
      ========================================================================== */
-  --halation-text: 0 0 0.75rem rgb(255 30 45 / 0.6); /* OstHero (créditos), OstSongList (divisor), OstSongTitle (A01) */
+  --halation-text: 0 0 0.75rem rgb(255 30 45 / 0.6); /* OstHero (créditos), OstSongList (divisor), OstSongTitle (A01), Footer (títulos de seção) */
   --halation-card:
     0 0 1.5rem rgb(255 30 45 / 0.35), inset 0 0 1rem rgb(255 30 45 / 0.12); /* OstSongCard hover/focus/ativo */
   --halation-led:

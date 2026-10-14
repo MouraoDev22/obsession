@@ -1,0 +1,33 @@
+.footer {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  margin-inline: auto;
+  border-top: 1px solid var(--color-border);
+  border-inline: 1px solid var(--color-border);
+  padding: clamp(2.5rem, 6vw, 4.5rem) clamp(0.5rem, 2vw, 2rem) 7rem;
+  width: 100%;
+  max-width: 92rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: clamp(2rem, 4vw, 3.5rem);
+}
+
+.legal {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem 0.75rem;
+  border-top: 1px solid var(--color-border);
+  padding-top: 1.5rem;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-meta);
+  font-family: var(--font-mono);
+  letter-spacing: var(--letter-spacing-label);
+  text-align: center;
+  text-transform: uppercase;
+}

@@ -6,6 +6,7 @@ import type { OstPlayRequestState } from "./types/OstPlayRequestState";
 
 import { useEffect, useState } from "react";
 
+import { Footer } from "./components/Footer";
 import { Main } from "./components/Main";
 import { OstAudioPlayer } from "./components/OstAudioPlayer";
 import { OstHero } from "./components/OstHero";
@@ -53,21 +54,24 @@ function App(): React.JSX.Element {
   };
 
   return (
-    <Main>
-      <OstHero />
-      <OstSongList
-        activeSongId={activeSongId}
-        songs={songs}
-        onPlay={handlePlay}
-      />
-      {playRequest && (
-        <OstAudioPlayer
-          playRequest={playRequest}
-          onClose={handleClose}
-          onPlaybackChange={handlePlaybackChange}
+    <>
+      <Main>
+        <OstHero />
+        <OstSongList
+          activeSongId={activeSongId}
+          songs={songs}
+          onPlay={handlePlay}
         />
-      )}
-    </Main>
+        {playRequest && (
+          <OstAudioPlayer
+            playRequest={playRequest}
+            onClose={handleClose}
+            onPlaybackChange={handlePlaybackChange}
+          />
+        )}
+      </Main>
+      <Footer />
+    </>
   );
 }
 
