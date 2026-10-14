@@ -30,7 +30,6 @@ import Lenis from "lenis";
  *   Function that destroys the instance and restores native scrolling.
  */
 export function initSmoothScroll(options: LenisOptions = {}): () => void {
-  // Sem DOM (SSR) não há o que suavizar. / No DOM (SSR), nothing to smooth.
   if (typeof document === "undefined") {
     return (): void => undefined;
   }
