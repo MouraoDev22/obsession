@@ -31,3 +31,10 @@
   box-shadow: var(--halation-card);
   border-color: var(--color-primary);
 }
+
+.song_card_active {
+  transform: scale(1.01);
+  filter: grayscale(0%) brightness(1);
+  box-shadow: var(--halation-card);
+  border-color: var(--color-primary);
+}

@@ -4,7 +4,7 @@
      ========================================================================== */
 
   /* Cores principais / Primary colors
-     - OstSongCard: borda do cartão no hover (--color-primary)
+     - OstSongCard: borda do cartão no hover/ativo (--color-primary)
      - OstAudioPlayer: borda/fundo do botão no hover (--color-primary),
        status de erro (--color-accent)
      - --gradient-red deriva de primary+secondary (hover dos botões) */
@@ -108,7 +108,7 @@
      ========================================================================== */
   --halation-text: 0 0 0.75rem rgb(255 30 45 / 0.6); /* OstHero (créditos), OstSongList (divisor), OstSongTitle (A01) */
   --halation-card:
-    0 0 1.5rem rgb(255 30 45 / 0.35), inset 0 0 1rem rgb(255 30 45 / 0.12); /* OstSongCard hover/focus */
+    0 0 1.5rem rgb(255 30 45 / 0.35), inset 0 0 1rem rgb(255 30 45 / 0.12); /* OstSongCard hover/focus/ativo */
   --halation-led:
     0 0 0.5rem var(--color-glow-red), 0 0 1.25rem rgb(255 30 45 / 0.55); /* OstAudioPlayer LED ativo */
   --shadow-player:

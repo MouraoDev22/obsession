@@ -8,6 +8,7 @@ import { getYouTubeVideoId, loadYouTubeIframeApi } from "../../utils/youtube";
 
 import styles from "./OstAudioPlayer.module.css";
 
+const PLAYER_STATE_ENDED: number = 0;
 const PLAYER_STATE_PLAYING: number = 1;
 const PLAYER_STATE_BUFFERING: number = 3;
 
@@ -41,6 +42,7 @@ const CLOSE_ICON: React.JSX.Element = (
  */
 export function OstAudioPlayer({
   onClose,
+  onPlaybackChange,
   playRequest,
 }: OstAudioPlayerProps): React.JSX.Element {
   const embedRef = useRef<HTMLDivElement>(null);
@@ -48,10 +50,20 @@ export function OstAudioPlayer({
   const targetVideoIdRef = useRef<string | null>(null);
   const isReadyRef = useRef<boolean>(false);
   const isPlayingRef = useRef<boolean>(false);
+  const onPlaybackChangeRef = useRef<
+    OstAudioPlayerProps["onPlaybackChange"] | null
+  >(null);
 
   const [isReady, setIsReady] = useState<boolean>(false);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+
+  // Mantém o callback mais recente à mão para os eventos do iframe, que são
+  // registrados uma única vez. / Keeps the latest callback at hand for the
+  // iframe events, which are registered only once.
+  useEffect((): void => {
+    onPlaybackChangeRef.current = onPlaybackChange;
+  }, [onPlaybackChange]);
 
   // 1) Mantém a música-alvo sincronizada: troca a faixa ou alterna tocar/pausar.
   useEffect((): void => {
@@ -61,6 +73,7 @@ export function OstAudioPlayer({
 
     if (!videoId) {
       setError("Link do YouTube inválido.");
+      onPlaybackChangeRef.current?.(false);
       return;
     }
 
@@ -121,6 +134,7 @@ export function OstAudioPlayer({
                 isPlayingRef.current = false;
                 setIsPlaying(false);
                 setError("Não foi possível reproduzir este vídeo.");
+                onPlaybackChangeRef.current?.(false);
               }
               return;
             },
@@ -145,6 +159,17 @@ export function OstAudioPlayer({
                 event.data === PLAYER_STATE_BUFFERING;
               isPlayingRef.current = playing;
               setIsPlaying(playing);
+
+              // O card ativo só desativa no fim da faixa; pausar não avisa.
+              // / The active card only deactivates when the track ends;
+              // pausing does not notify.
+              if (event.data === PLAYER_STATE_ENDED) {
+                onPlaybackChangeRef.current?.(false);
+                return;
+              }
+              if (playing) {
+                onPlaybackChangeRef.current?.(true);
+              }
               return;
             },
           },
@@ -156,6 +181,7 @@ export function OstAudioPlayer({
       .catch((): void => {
         if (!cancelled) {
           setError("Não foi possível carregar o player do YouTube.");
+          onPlaybackChangeRef.current?.(false);
         }
         return;
       });

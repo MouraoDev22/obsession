@@ -18,25 +18,44 @@ import "./App.css";
 function App(): React.JSX.Element {
   const [playRequest, setPlayRequest]: OstPlayRequestState =
     useState<OstPlayRequest | null>(null);
+  const [activeSongId, setActiveSongId] = useState<string | null>(null);
 
   useEffect((): (() => void) => initParallax(), []);
 
   const handlePlay = (song: OstSong): void => {
     setPlayRequest({ song });
+    setActiveSongId(song.id);
     return;
   };
 
   const handleClose = (): void => {
     setPlayRequest(null);
+    setActiveSongId(null);
+    return;
+  };
+
+  const handlePlaybackChange = (isPlaying: boolean): void => {
+    if (!playRequest) {
+      return;
+    }
+    setActiveSongId(isPlaying ? playRequest.song.id : null);
     return;
   };
 
   return (
     <Main>
       <OstHero />
-      <OstSongList songs={songs} onPlay={handlePlay} />
+      <OstSongList
+        activeSongId={activeSongId}
+        songs={songs}
+        onPlay={handlePlay}
+      />
       {playRequest && (
-        <OstAudioPlayer playRequest={playRequest} onClose={handleClose} />
+        <OstAudioPlayer
+          playRequest={playRequest}
+          onClose={handleClose}
+          onPlaybackChange={handlePlaybackChange}
+        />
       )}
     </Main>
   );

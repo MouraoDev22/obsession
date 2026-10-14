@@ -8,8 +8,9 @@ import { OstSongTitle } from "../OstSongTitle";
 import styles from "./OstSongList.module.css";
 
 export function OstSongList({
-  songs,
+  activeSongId,
   onPlay,
+  songs,
 }: OstSongListProps): React.JSX.Element {
   const midpoint: number = Math.ceil(songs.length / 2);
   const sides: { label: string; tracks: OstSongs }[] = [
@@ -31,7 +32,11 @@ export function OstSongList({
           <ol className={styles.song_list}>
             {tracks.map((song, index): React.JSX.Element => (
               <li key={song.id}>
-                <OstSongCard song={song} onPlay={onPlay}>
+                <OstSongCard
+                  isActive={song.id === activeSongId}
+                  onPlay={onPlay}
+                  song={song}
+                >
                   <OstSongCover cover={song.cover} />
                   <OstSongTitle
                     title={song.title}
