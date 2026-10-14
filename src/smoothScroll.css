@@ -1,0 +1,31 @@
+/* ==========================================================================
+   SCROLL SUAVE — LENIS / SMOOTH SCROLL — LENIS
+   ==========================================================================
+   Regras oficiais exigidas pelo Lenis (só têm efeito quando o Lenis está
+   ativo — a tag <html> recebe a classe .lenis). Referência:
+   https://github.com/darkroomengineering/lenis
+
+   Official rules required by Lenis (only effective while Lenis is active —
+   the <html> tag gets the .lenis class).
+   ========================================================================== */
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}

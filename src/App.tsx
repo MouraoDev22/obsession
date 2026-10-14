@@ -12,6 +12,7 @@ import { OstHero } from "./components/OstHero";
 import { OstSongList } from "./components/OstSongList";
 
 import { initParallax } from "./utils/parallax";
+import { initSmoothScroll } from "./utils/smoothScroll";
 
 import "./App.css";
 
@@ -21,6 +22,15 @@ function App(): React.JSX.Element {
   const [activeSongId, setActiveSongId] = useState<string | null>(null);
 
   useEffect((): (() => void) => initParallax(), []);
+  useEffect(
+    (): (() => void) =>
+      initSmoothScroll({
+        duration: 1.2,
+        wheelMultiplier: 0.8,
+        touchMultiplier: 0.8,
+      }),
+    [],
+  );
 
   const handlePlay = (song: OstSong): void => {
     setPlayRequest({ song });

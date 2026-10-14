@@ -29,7 +29,7 @@ export function initParallax(options: ParallaxOptions = {}): () => void {
   // "animations/visual effects" is turned off (common on Windows).
   if (
     typeof document === "undefined" ||
-    window.matchMedia("(prefers-reduced-motion: false)").matches
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches
   ) {
     return (): void => undefined;
   }
