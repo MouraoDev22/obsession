@@ -179,7 +179,7 @@ Por favor, execute `npm run lint` e `npm run format` antes de enviar.
 
 ## 📄 Licença
 
-Este repositório ainda não possui um arquivo de licença. Todos os direitos da trilha sonora pertencem aos seus respectivos donos; este projeto é uma homenagem de fã sem fins comerciais.
+Licença MIT.
 
 ---
 

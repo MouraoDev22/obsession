@@ -179,7 +179,7 @@ Please run `npm run lint` and `npm run format` before submitting.
 
 ## 📄 License
 
-This repository does not currently include a license file. All rights reserved to the soundtrack and its respective owners; this project is a non-commercial fan tribute.
+MIT License.
 
 ---
 
