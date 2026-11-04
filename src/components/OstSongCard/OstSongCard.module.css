@@ -1,40 +1,68 @@
 .song_card {
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+  position: relative;
   align-items: center;
-  gap: 1.5rem;
-  filter: grayscale(0.9) brightness(0.95);
+  gap: clamp(0.875rem, 2vw, 1.5rem);
   transition:
-    transform 0.6s ease,
-    filter 0.6s ease,
-    border-color 0.6s ease,
-    box-shadow 0.6s ease;
+    background-color 180ms ease,
+    border-color 180ms ease;
   cursor: pointer;
-  border: 0.15rem solid var(--color-text-poster);
+  border: 1px solid transparent;
   border-radius: var(--radius-card);
-  background-color: black;
-  width: 20rem;
-  height: 30.5rem;
+  background: rgb(11 9 11 / 78%);
+  padding: 0.75rem;
+  width: 100%;
+  min-height: 7rem;
+  color: var(--color-text-primary);
+  text-align: left;
 }
-
-.song_card:hover {
-  transform: scale(1.01);
-  filter: grayscale(0%) brightness(1);
-  box-shadow: var(--halation-card);
-  border-color: var(--color-primary);
-}
-
-.song_card:focus {
-  transform: scale(1.01);
-  filter: grayscale(0%) brightness(1);
-  box-shadow: var(--halation-card);
-  border-color: var(--color-primary);
-}
-
 .song_card_active {
-  transform: scale(1.01);
-  filter: grayscale(0%) brightness(1);
-  box-shadow: var(--halation-card);
-  border-color: var(--color-primary);
+  border-color: var(--color-border-light);
+  background: var(--color-surface-alt);
+}
+.song_card:focus-visible {
+  outline-offset: 1px;
+  background: var(--color-surface-alt);
+}
+.song_action {
+  display: grid;
+  flex: 0 0 2rem;
+  place-items: center;
+  margin-left: auto;
+  color: var(--color-text-muted);
+}
+.song_action svg {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+.song_card_active .song_action {
+  color: var(--color-highlight-red);
+}
+@media (hover: hover) {
+  .song_card:hover {
+    border-color: var(--color-border-light);
+    background: var(--color-surface-alt);
+  }
+  .song_card:hover .song_action {
+    color: var(--color-text-poster);
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .song_card:active {
+    transform: scale(0.99);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .song_card {
+    transition: none;
+  }
+}
+@media (max-width: 25rem) {
+  .song_card {
+    gap: 0.75rem;
+    padding: 0.5rem;
+  }
+  .song_action {
+    flex-basis: 1.25rem;
+  }
 }

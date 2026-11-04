@@ -26,26 +26,38 @@ export function OstSongList({
           className={styles.side}
           aria-label={`Lado ${label}`}
         >
-          <h2 className={styles.side_label}>
-            <span>Lado {label}</span>
-          </h2>
-          <ol className={styles.song_list}>
-            {tracks.map((song, index): React.JSX.Element => (
-              <li key={song.id}>
-                <OstSongCard
-                  isActive={song.id === activeSongId}
-                  onPlay={onPlay}
-                  song={song}
-                >
-                  <OstSongCover cover={song.cover} />
-                  <OstSongTitle
-                    title={song.title}
-                    trackLabel={`${label}${String(index + 1).padStart(2, "0")}`}
-                  />
-                </OstSongCard>
-              </li>
-            ))}
-          </ol>
+          <header className={styles.side_header}>
+            <h2 className={styles.side_label} id={`side-${label}`}>
+              <span className={styles.side_letter}>{label}</span>
+              <span>Lado {label}</span>
+            </h2>
+            <span className={styles.side_count}>{tracks.length} faixas</span>
+          </header>
+          <div
+            className={styles.side_scroll}
+            data-track-scroll
+            role="region"
+            aria-labelledby={`side-${label}`}
+            tabIndex={0}
+          >
+            <ol className={styles.song_list}>
+              {tracks.map((song, index): React.JSX.Element => (
+                <li key={song.id}>
+                  <OstSongCard
+                    isActive={song.id === activeSongId}
+                    onPlay={onPlay}
+                    song={song}
+                  >
+                    <OstSongCover cover={song.cover} />
+                    <OstSongTitle
+                      title={song.title}
+                      trackLabel={`${label}${String(index + 1).padStart(2, "0")}`}
+                    />
+                  </OstSongCard>
+                </li>
+              ))}
+            </ol>
+          </div>
         </section>
       ))}
     </div>
