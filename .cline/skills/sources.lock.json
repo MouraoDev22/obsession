@@ -1,0 +1,456 @@
+{
+  "skills": [
+    {
+      "name": "design-taste-frontend",
+      "repository": "Leonxlnx/taste-skill",
+      "commit": "12af471f627f866411b4bd785b19646d3672784c",
+      "sourceDirectory": "skills/taste-skill/",
+      "files": [
+        {
+          "path": "LICENSE",
+          "gitBlobSha1": "48a2f6640b81ff8eca9ce7f6a96337692713ef5b"
+        },
+        {
+          "path": "README.md",
+          "gitBlobSha1": "a98ba126ce373ba5e639560d8628834d5fa43347"
+        },
+        {
+          "path": "SKILL.md",
+          "gitBlobSha1": "d8444f13b76be100b3b088dfdae738e85288d6b6"
+        },
+        {
+          "path": "assets/app.css",
+          "gitBlobSha1": "865e4ed4804556aaff51897d22bf0c1bcbee9549"
+        },
+        {
+          "path": "assets/base.css",
+          "gitBlobSha1": "75915d3b1ea8780090a365eabfb5c4b697cc6e86"
+        },
+        {
+          "path": "assets/base.js",
+          "gitBlobSha1": "86ec0afacba394f64db238c44b8e7b980f2383b3"
+        },
+        {
+          "path": "assets/charts.js",
+          "gitBlobSha1": "8060404d133089930638804830e192218436eaa7"
+        },
+        {
+          "path": "assets/scenes/stage.css",
+          "gitBlobSha1": "190763d3c1661e7a602bec21fce952dece67bf15"
+        },
+        {
+          "path": "assets/scenes/stage.js",
+          "gitBlobSha1": "315b1d9d2ec4b160979a904b13488ea7179b48e9"
+        },
+        {
+          "path": "evals/evals.json",
+          "gitBlobSha1": "f6d598008f22d980d135a863a7a151609822bb3f"
+        },
+        {
+          "path": "library/app.json",
+          "gitBlobSha1": "c06fb45f8bb6b09398f19ba35b2f71ae2363a310"
+        },
+        {
+          "path": "library/directions.json",
+          "gitBlobSha1": "f7f82e1a921e7009da7ce6f88410d2c8a94cf214"
+        },
+        {
+          "path": "library/heroes.json",
+          "gitBlobSha1": "74227d956a049f548d99f7b420ccc6218ae3c40e"
+        },
+        {
+          "path": "library/motions.json",
+          "gitBlobSha1": "ff3818f561f338b15dbe1ff45620729ef0ff8d3b"
+        },
+        {
+          "path": "library/palettes.json",
+          "gitBlobSha1": "9de29b16db9c9f57b977dd38648a47f866572e54"
+        },
+        {
+          "path": "library/photos.json",
+          "gitBlobSha1": "f403b772d3d6ae11ef07cfe44514fb019d918820"
+        },
+        {
+          "path": "library/sections.json",
+          "gitBlobSha1": "042b8ab18ef1aa6e67a6f0f2c171fa9357528623"
+        },
+        {
+          "path": "library/sites.json",
+          "gitBlobSha1": "ef070e3ccdf5cb9c388bab1fd0aacb0371cba413"
+        },
+        {
+          "path": "library/type.json",
+          "gitBlobSha1": "f2a9e6ee47774029dd50fa2856cf963d4e69352f"
+        },
+        {
+          "path": "references/app-screens.md",
+          "gitBlobSha1": "784439ed799484a98958764a5bf3ede2a1d25296"
+        },
+        {
+          "path": "references/colour.md",
+          "gitBlobSha1": "a20a810fa1f080414035a5e0fdc5002977e56ab2"
+        },
+        {
+          "path": "references/copy.md",
+          "gitBlobSha1": "69f20af2bff6d40cc07d4dcadaa45440ced550bf"
+        },
+        {
+          "path": "references/critique.md",
+          "gitBlobSha1": "1989a85c83232e86aec66baf733a843947392b37"
+        },
+        {
+          "path": "references/imagery.md",
+          "gitBlobSha1": "ddd88d7a31dd3a5d7f4675ead4524f34d037f665"
+        },
+        {
+          "path": "references/layout.md",
+          "gitBlobSha1": "dae26af173b4b60f96291f816700f390ffd8e37e"
+        },
+        {
+          "path": "references/motion.md",
+          "gitBlobSha1": "c8f649d4fa45c369c53ce375a00d2f125182f181"
+        },
+        {
+          "path": "references/research.md",
+          "gitBlobSha1": "c38364af48f9e95dc90a2e6b47ae75ffdc24731e"
+        },
+        {
+          "path": "references/scenes.md",
+          "gitBlobSha1": "c2c568b5f1d18128658b28a273e90028fc22bb30"
+        },
+        {
+          "path": "references/tells.md",
+          "gitBlobSha1": "9cfa4a89e466eb6df81b7a1b776421c378aad840"
+        },
+        {
+          "path": "references/type.md",
+          "gitBlobSha1": "c1552b700e9bebb2fedf79f82c875615d0f876ac"
+        },
+        {
+          "path": "scripts/assets.mjs",
+          "gitBlobSha1": "4f9c5b1c1fcc5a821685c5cea35f326bcf15d75b"
+        },
+        {
+          "path": "scripts/draw.mjs",
+          "gitBlobSha1": "6db3d89422057902457c97643c13f4b351d1459b"
+        },
+        {
+          "path": "scripts/inspect.mjs",
+          "gitBlobSha1": "f1790ca0f1a7c26221455c4e1e91e69e16363dff"
+        },
+        {
+          "path": "scripts/lib/app-draw.mjs",
+          "gitBlobSha1": "e246a38f15d4f3b163a3d3aa5378c71462a4c24f"
+        },
+        {
+          "path": "scripts/lib/cdp.mjs",
+          "gitBlobSha1": "03ef99c144923d0905ffc6222189bc8901836f4a"
+        },
+        {
+          "path": "scripts/lib/inspection-files.mjs",
+          "gitBlobSha1": "d375fcb6b1db149eb11b9ccde3d2f485060b51ca"
+        },
+        {
+          "path": "scripts/lib/probe.mjs",
+          "gitBlobSha1": "d45372bc2f594e2ab674889646ca6fc846cec6b8"
+        },
+        {
+          "path": "scripts/lib/rules.mjs",
+          "gitBlobSha1": "daf22a9cd2fe19339796f406aca6aa9a24872a96"
+        },
+        {
+          "path": "scripts/lint.mjs",
+          "gitBlobSha1": "9277761d18222e5fc75c85ed79aa032f3d086598"
+        },
+        {
+          "path": "scripts/scenes.mjs",
+          "gitBlobSha1": "7bbde8e6bdf27859af0d54db1e1b2756de3a7d56"
+        }
+      ]
+    },
+    {
+      "name": "impeccable",
+      "repository": "pbakaus/impeccable",
+      "commit": "695cea5c6d1cbd420fc331375c7ef126a774e5f7",
+      "sourceDirectory": ".agents/skills/impeccable/",
+      "files": [
+        {
+          "path": "SKILL.md",
+          "gitBlobSha1": "c0dd2530c9968963b1f63bf50b227c4a33996e3b"
+        },
+        {
+          "path": "agents/impeccable_asset_producer.toml",
+          "gitBlobSha1": "91eeca4cce0e62881149b094e758f814510649c3"
+        },
+        {
+          "path": "agents/impeccable_documenter.toml",
+          "gitBlobSha1": "a39f92774a4eb7ff2349de664d4c0123e38d2f08"
+        },
+        {
+          "path": "agents/impeccable_finish_reviewer.toml",
+          "gitBlobSha1": "53a4aeb0cc7781c4f780f5e6b36f04032f2d0cd5"
+        },
+        {
+          "path": "agents/impeccable_manual_edit_applier.toml",
+          "gitBlobSha1": "ae18e0742b1d0a2ca0d950407e53c36294ce2af2"
+        },
+        {
+          "path": "agents/openai.yaml",
+          "gitBlobSha1": "e86d8a955ee9527dc9acfa70ded41f8c54aea435"
+        },
+        {
+          "path": "reference/adapt.md",
+          "gitBlobSha1": "de4631d7e8f14b3c193175b87302b6ccc814e34c"
+        },
+        {
+          "path": "reference/adapt.native.md",
+          "gitBlobSha1": "435c40a6f416809d88cef92c09f0331c65fddec8"
+        },
+        {
+          "path": "reference/android.md",
+          "gitBlobSha1": "32a5cf7ccfd78afe659f10f80cca6bbb3ef7de69"
+        },
+        {
+          "path": "reference/animate.md",
+          "gitBlobSha1": "c8fb9e038bb74a125646b64c49bc39711f63e8f4"
+        },
+        {
+          "path": "reference/audit.md",
+          "gitBlobSha1": "13bf0d7c71802a48af4863c08ee3ed898f72c4b2"
+        },
+        {
+          "path": "reference/audit.native.md",
+          "gitBlobSha1": "af725765fb65a02375815060fe825da390f2d051"
+        },
+        {
+          "path": "reference/bolder.md",
+          "gitBlobSha1": "c11a146b502cb46f6d5ad3f11ba0f6ff75c0e4d7"
+        },
+        {
+          "path": "reference/clarify.md",
+          "gitBlobSha1": "4506a31c95e02b2ad918367a0ef4461643d51532"
+        },
+        {
+          "path": "reference/colorize.md",
+          "gitBlobSha1": "02fa661efac9229d6e869a20ef8ee928d4b986a0"
+        },
+        {
+          "path": "reference/component-review.md",
+          "gitBlobSha1": "a3c35c92999ecde66f53c96fb287d8adaa0e17f3"
+        },
+        {
+          "path": "reference/craft-floor.md",
+          "gitBlobSha1": "fd7280103f7ef4b009b38ce58f594c44c0f04caa"
+        },
+        {
+          "path": "reference/craft.md",
+          "gitBlobSha1": "dbbc9402c07cdab21f2b6eb69279b8435fecfd7f"
+        },
+        {
+          "path": "reference/critique.md",
+          "gitBlobSha1": "07ae4a854ede894de3320f42e50743c1ab4681fb"
+        },
+        {
+          "path": "reference/degraded/asset-producer.md",
+          "gitBlobSha1": "a7c26afe2ceba0cbcfb7c7092e183b26f0b6af81"
+        },
+        {
+          "path": "reference/degraded/documenter.md",
+          "gitBlobSha1": "d1640cc06f909cd6bda8c44ad70f85351bab7387"
+        },
+        {
+          "path": "reference/degraded/finish-reviewer.md",
+          "gitBlobSha1": "73a85a0ce87be98e0107b4c9c63c29ea4dd37165"
+        },
+        {
+          "path": "reference/degraded/manual-edit-applier.md",
+          "gitBlobSha1": "7f2bdb65d1c708e32c56b6dd3c2695208692a901"
+        },
+        {
+          "path": "reference/delight.md",
+          "gitBlobSha1": "60a8e83ee48d50901acfa886d3ec4bc72b40ec6f"
+        },
+        {
+          "path": "reference/distill.md",
+          "gitBlobSha1": "2537473ced43e94d5081b61fdced2a4ff602c885"
+        },
+        {
+          "path": "reference/doctor.md",
+          "gitBlobSha1": "6d680a49f238e891fb0af054d0d1899104b3528f"
+        },
+        {
+          "path": "reference/document.md",
+          "gitBlobSha1": "45721a6f0aabedaa48a7b05a29c2025e6b52dbc2"
+        },
+        {
+          "path": "reference/extract.md",
+          "gitBlobSha1": "7c9d009c5a573dd15332b4431f6f0044374d25b7"
+        },
+        {
+          "path": "reference/generate.md",
+          "gitBlobSha1": "7fe7a49886003677fdecad79a528f368b13d7f0f"
+        },
+        {
+          "path": "reference/harden.md",
+          "gitBlobSha1": "894f06127525ae2d802e4d73c345031e6076a68f"
+        },
+        {
+          "path": "reference/hooks.md",
+          "gitBlobSha1": "6d6679153689ab3c7d08b2a9cac23c9b1a4c2917"
+        },
+        {
+          "path": "reference/init.md",
+          "gitBlobSha1": "fe5422cc811fb8c93989dc9a4ec7b24afbc91a69"
+        },
+        {
+          "path": "reference/ios.md",
+          "gitBlobSha1": "c6244dfe32176e5718d86211b7d1eb5601eb0860"
+        },
+        {
+          "path": "reference/layout.md",
+          "gitBlobSha1": "aa547c742fc373bc459bdbb7977683441aa48ec0"
+        },
+        {
+          "path": "reference/live-setup.md",
+          "gitBlobSha1": "6e10f00f7f2a789da582f38cdaef89de39ead266"
+        },
+        {
+          "path": "reference/live.md",
+          "gitBlobSha1": "045a3fb385552c55805fec252ae73ddeba9fc15b"
+        },
+        {
+          "path": "reference/mode-operate.md",
+          "gitBlobSha1": "833775ba85f03bf65a4c1b23e39192f7653414e6"
+        },
+        {
+          "path": "reference/mode-persuade.md",
+          "gitBlobSha1": "9c152d67064fb8453a7eaa89de20c35fc115b085"
+        },
+        {
+          "path": "reference/mode-read.md",
+          "gitBlobSha1": "b30c4c9139e3094bd35c60738decb6109326153f"
+        },
+        {
+          "path": "reference/new-work.md",
+          "gitBlobSha1": "54619a178ab4c80131f277f8a8525a52f7b318bb"
+        },
+        {
+          "path": "reference/onboard.md",
+          "gitBlobSha1": "f2e1c15af24976fbddb6770719fae66172268ff4"
+        },
+        {
+          "path": "reference/operate.md",
+          "gitBlobSha1": "524f2c3ae9fa497284e9699f3ca5320cce5d05cf"
+        },
+        {
+          "path": "reference/optimize.md",
+          "gitBlobSha1": "a4e55099ff738571c1fc46c66f27b015dc05339e"
+        },
+        {
+          "path": "reference/overdrive.md",
+          "gitBlobSha1": "9f8fc8eec3b07156b670a2561d1f74c17ccdd9f2"
+        },
+        {
+          "path": "reference/polish.md",
+          "gitBlobSha1": "f93170f773cac058f51e289603aed7575d62a6a2"
+        },
+        {
+          "path": "reference/quieter.md",
+          "gitBlobSha1": "61ea5c7027b54ef7354f55d591b6df8e1fc11dd8"
+        },
+        {
+          "path": "reference/region-map.md",
+          "gitBlobSha1": "7b7685cf59a7ee8fa9361d4f0b986ec0ba5b48ad"
+        },
+        {
+          "path": "reference/routing.md",
+          "gitBlobSha1": "21c12a626e7ef084fa6ed5d03b93b91e3eb122ce"
+        },
+        {
+          "path": "reference/shape.md",
+          "gitBlobSha1": "90a74ae813331cbce8fff6beb498ced77970fadf"
+        },
+        {
+          "path": "reference/typeset.md",
+          "gitBlobSha1": "683175632928ab5566e517ad6128a07166e095e8"
+        },
+        {
+          "path": "reference/visualize.md",
+          "gitBlobSha1": "afb44acced4f2a39de7cbeb200b47d4dcf89486f"
+        },
+        {
+          "path": "scripts/VERSION",
+          "gitBlobSha1": "f8bc4c6256ab7d4bb54c2ab7af94c4fa5e58ac56"
+        },
+        {
+          "path": "scripts/command-metadata.json",
+          "gitBlobSha1": "4686bb6deea643493198bff1369bc2958b3909a7"
+        },
+        {
+          "path": "scripts/data/font-index-failures.json",
+          "gitBlobSha1": "1aca67220413ef163570c75405b444d7a27a32be"
+        },
+        {
+          "path": "scripts/data/font-index.json",
+          "gitBlobSha1": "9d2029971df232a72ff6584d264c104490521742"
+        },
+        {
+          "path": "scripts/engine-checksums.txt",
+          "gitBlobSha1": "2e948006a8ac3cb811b775f88b131def849f2237"
+        },
+        {
+          "path": "scripts/impeccable",
+          "gitBlobSha1": "0b31c9e1b9921cdb443aa735a06ac2707259e475"
+        },
+        {
+          "path": "scripts/impeccable.cmd",
+          "gitBlobSha1": "6157693b75c837249060089f2240b363d38e8023"
+        },
+        {
+          "path": "scripts/live-browser-dom.js",
+          "gitBlobSha1": "ef1ca8928111080ddb923da14c7827b7396a9e62"
+        },
+        {
+          "path": "scripts/live-browser-ignores.js",
+          "gitBlobSha1": "1a2912e57a3b2b10a0d961b5dfe568253133fe53"
+        },
+        {
+          "path": "scripts/live-browser-session.js",
+          "gitBlobSha1": "6871770720d3dd7a284c545e20b97b613635f36f"
+        },
+        {
+          "path": "scripts/live-browser.js",
+          "gitBlobSha1": "255fdc4c2feeb1b61e77780ff25dc7b29683339f"
+        },
+        {
+          "path": "scripts/modern-screenshot.umd.js",
+          "gitBlobSha1": "a9c5208f6b141d3bafdb8eb843d6fcbdcf23e370"
+        },
+        {
+          "path": "LICENSE",
+          "gitBlobSha1": "bb3f6d23b1f8025514a62a12b51b47d73e3c9aa9"
+        },
+        {
+          "path": "NOTICE.md",
+          "gitBlobSha1": "0468271c904ae334cfaf27da6f8df3d5f419a1f0"
+        }
+      ]
+    },
+    {
+      "name": "emil-design-eng",
+      "repository": "emilkowalski/skills",
+      "commit": "f1090bec277140d02ed202440185ad9d02ac1490",
+      "sourceDirectory": "skills/emil-design-eng/",
+      "files": [
+        {
+          "path": "LICENSE",
+          "gitBlobSha1": "57b46f1fd11dc62351ea548104a88aa3f659c11b"
+        },
+        {
+          "path": "SKILL.md",
+          "gitBlobSha1": "dc063c2a861922c1c9f2412b824b0862746304f5"
+        }
+      ]
+    }
+  ]
+}
