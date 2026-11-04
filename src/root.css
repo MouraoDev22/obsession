@@ -18,8 +18,8 @@
        fundo dos botões (--color-surface-alt)
      - Footer: fundo dos links oficiais (--color-surface-alt) */
   --color-background: #0b090b;
-  --color-surface: #1a0b0f;
-  --color-surface-alt: #2a0c12;
+  --color-surface: #160f12;
+  --color-surface-alt: #25171c;
 
   /* Cores de texto / Text colors
      - OstAudioPlayer: título (--color-text-primary); status e LED apagado
@@ -29,7 +29,7 @@
        direitos (--color-text-muted) */
   --color-text-primary: #f7f5f1;
   --color-text-secondary: #c9c1c1;
-  --color-text-muted: #8c7d80;
+  --color-text-muted: #b09da3;
 
   /* Texto do pôster / Poster text colors
      - OstSongCard: moldura branca do cartão
@@ -77,20 +77,18 @@
   --font-weight-poster: 400;
   --text-transform-poster: uppercase;
   --line-height-poster: 0.9;
-  --letter-spacing-poster: -0.125rem;
-  --font-size-poster: clamp(1rem, 12vw, 2.5rem); /* OstSongTitle */
-  --font-size-hero: clamp(3.5rem, 16vw, 10rem); /* OstHero título */
+  --letter-spacing-poster: -0.02em;
+  --font-size-poster: clamp(1.125rem, 1.8vw, 1.625rem); /* OstSongTitle */
+  --font-size-hero: clamp(3.5rem, 13vw, 8.5rem); /* OstHero título */
   --letter-spacing-title: 0.04em; /* OstAudioPlayer título, Footer nome do autor */
 
   /* Sombra cromática amarelo/ciano / Yellow-cyan chromatic shadow
      Usado por / Used by: OstSongTitle, OstHero, Footer (nome do autor) */
-  --opacity-glow-cyan: 0.65;
+  --opacity-glow-cyan: 0.16;
   --poster-shadow:
-    0.125rem 0.125rem 0 var(--color-highlight-yellow),
-    0 0 0.3125rem var(--color-highlight-yellow),
-    0 0 0.125rem var(--color-highlight-cyan),
-    0 0 0.625rem var(--color-highlight-cyan),
-    0 0 1.375rem rgba(0, 207, 255, var(--opacity-glow-cyan));
+    0.035rem 0.035rem 0 var(--color-highlight-yellow),
+    -0.035rem 0 0 var(--color-highlight-cyan),
+    0 0.25rem 1.5rem rgba(0, 207, 255, var(--opacity-glow-cyan));
 
   /* ==========================================================================
      3. TIPOGRAFIA MONOESPAÇADA — Space Mono / MONO TYPOGRAPHY
@@ -100,9 +98,9 @@
   --font-mono: "Space Mono", ui-monospace, monospace;
   --font-size-meta: 0.7rem; /* OstHero kicker/créditos, OstSongTitle (A01), OstAudioPlayer (status/link), Footer (rótulos e dicas) */
   --font-size-side: 0.8rem; /* OstSongList (rótulo "Lado A"/"Lado B"), Footer (títulos de seção e textos) */
-  --letter-spacing-meta: 0.3em; /* OstHero, OstSongTitle (A01) */
-  --letter-spacing-label: 0.15em; /* OstAudioPlayer (status/link), Footer (rótulos, ficha e direitos) */
-  --letter-spacing-side: 0.45em; /* OstSongList (rótulo de lado) */
+  --letter-spacing-meta: 0.16em; /* OstHero, OstSongTitle (A01) */
+  --letter-spacing-label: 0.08em; /* OstAudioPlayer (status/link), Footer (rótulos, ficha e direitos) */
+  --letter-spacing-side: 0.2em; /* OstSongList (rótulo de lado) */
 
   /* ==========================================================================
      4. RAIOS DE BORDRA / BORDER RADII
@@ -115,12 +113,24 @@
      5. EFEITOS DE HALATION — brilho vermelho de lente /
      RED LENS-HALATION EFFECTS
      ========================================================================== */
-  --halation-text: 0 0 0.75rem rgb(255 30 45 / 0.6); /* OstHero (créditos), OstSongList (divisor), OstSongTitle (A01), Footer (títulos de seção) */
+  --halation-text: none; /* OstHero (créditos), OstSongList (divisor), OstSongTitle (A01), Footer (títulos de seção) */
   --halation-card:
     0 0 1.5rem rgb(255 30 45 / 0.35), inset 0 0 1rem rgb(255 30 45 / 0.12); /* OstSongCard hover/focus/ativo */
   --halation-led:
     0 0 0.5rem var(--color-glow-red), 0 0 1.25rem rgb(255 30 45 / 0.55); /* OstAudioPlayer LED ativo */
-  --shadow-player:
-    0 0 0 1px var(--color-border), inset 0 1px 0 rgb(255 255 255 / 0.07),
-    0 0.5rem 2rem rgb(0 0 0 / 45%), 0 0 1.5rem rgb(255 30 45 / 0.12); /* OstAudioPlayer */
+  --shadow-player: 0 0.75rem 3rem rgb(0 0 0 / 50%); /* OstAudioPlayer */
+  --layout-max-width: 80rem;
+  --layout-gutter: clamp(1rem, 4vw, 3rem);
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  color-scheme: dark;
+}
+
+::selection {
+  background: var(--color-secondary);
+  color: var(--color-text-poster);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-text-poster);
+  outline-offset: 4px;
 }
