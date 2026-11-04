@@ -22,7 +22,6 @@
   line-height: var(--line-height-poster);
   font-family: var(--font-display);
   letter-spacing: var(--letter-spacing-title);
-  text-shadow: var(--poster-shadow);
   text-transform: var(--text-transform-poster);
 }
 
@@ -41,7 +40,7 @@
 }
 
 .link {
-  color: var(--color-highlight-cyan);
+  color: var(--color-text-primary);
   font-size: var(--font-size-meta);
   font-family: var(--font-mono);
   letter-spacing: var(--letter-spacing-label);
