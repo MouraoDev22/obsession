@@ -41,7 +41,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  padding: 0;
+  padding: 0.5rem 0 0;
   list-style: none;
 }
 .song_list > li {
@@ -52,11 +52,18 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
   .side_scroll {
-    height: clamp(24rem, 58svh, 40rem);
+    height: clamp(24rem, 64svh, 42rem);
     overflow-y: auto;
     overscroll-behavior-y: contain;
     scrollbar-color: var(--color-border-light) transparent;
     scrollbar-gutter: stable;
     scrollbar-width: thin;
+  }
+  .side_header {
+    position: sticky;
+    top: -0.5rem;
+    z-index: 1;
+    background: var(--color-background);
+    padding-top: 0.5rem;
   }
 }
