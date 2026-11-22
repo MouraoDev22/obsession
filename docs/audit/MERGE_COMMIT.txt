@@ -1,4 +1,4 @@
-Merge branch 'feat/premium-dual-side-layout' into main
+Merge pull request #2 from MouraoDev22/feat/premium-dual-side-layout
 
 Refine cinematic dual-side soundtrack layout and interface accessibility
 
@@ -7,3 +7,5 @@ Refine cinematic dual-side soundtrack layout and interface accessibility
 - Protect responsive layouts, sticky focus and enlarged footer text
 - Respect live motion preferences and synchronize track metadata
 - Record Playwright development/production evidence and limitations
+- Synchronize English and Portuguese project documentation
+- Provide the PR description and merge message in English

@@ -1,8 +1,8 @@
 ## Summary
 
-Refina o layout cinematográfico em dois lados e corrige problemas de interface e acessibilidade sem substituir a identidade visual: Anton, Space Mono, preto/vermelho, capas, textura e parallax foram preservados.
+Refine the cinematic dual-side layout and address interface and accessibility issues while preserving the original Anton/Space Mono typography, black/red palette, artwork, texture and parallax.
 
-Este PR inclui os commits de layout que já estavam na branch e a auditoria posterior. As alterações locais preexistentes em README.md e README.pt-BR.md não foram incluídas.
+This PR includes the earlier layout commits, the subsequent interface audit, and synchronized English and Portuguese project READMEs. Existing README edits were retained and incorporated at the author's request.
 
 ## Related issue
 
@@ -13,90 +13,96 @@ N/A.
 - [x] Bug fix
 - [x] UI, styling, or responsiveness
 - [x] Accessibility or performance
-- [x] Documentation, tooling, dependencies, or local skills — documentação/evidências; nenhuma dependência adicionada.
+- [x] Documentation, tooling, dependencies, or local skills — documentation and evidence only; no dependencies added.
 
 ## Changes made
 
-- Cards horizontais e painéis A/B com cabeçalhos sticky e rolagem independente no desktop; fluxo vertical no mobile (commits anteriores da branch).
-- Fallback de capas e refinamento de tokens, player e rodapé (commits anteriores da branch).
-- Mensagens do player em região de status, iframe oculto inerte e controle indisponível durante a inicialização.
-- Recuperação de erro ao selecionar outra faixa e distinção de buffering.
-- Restauração do foco à faixa ao fechar o player; marcação válida dentro dos botões.
-- Reserva de espaço baseada na altura real do player e margem de rolagem nos painéis.
-- Títulos do player podem quebrar linha; link de recuperação tem sublinhado persistente.
-- Ficha técnica se reorganiza em contêineres estreitos, inclusive com texto ampliado.
-- Parallax responde à mudança de movimento reduzido sem recarregar. Animações decorativas terminam após 4,5 segundos e mantêm a aparência estática.
-- Contagem do hero derivada do catálogo. Lenis 1.3.26 já respeita movimento reduzido; sua implementação não foi duplicada.
+- Horizontal track cards and A/B panels with sticky headings and independent desktop scrolling; normal document flow on smaller screens.
+- Artwork fallback and refined layout tokens, player and footer from the earlier branch commits.
+- Player status announcements, an inert hidden iframe and unavailable playback controls during initialization.
+- Video-error recovery when switching tracks and a distinct buffering status.
+- Focus restoration when closing the player and valid markup inside track buttons.
+- Document space based on the player's measured height and scroll spacing below sticky panel headings.
+- Wrapping player titles and a persistently underlined recovery link.
+- Footer credits that stack in narrow containers, including with enlarged text.
+- Live reduced-motion handling for parallax. Decorative animations finish after 4.5 seconds and retain their static appearance.
+- Hero track count derived from the catalog. Existing Lenis 1.3.26 reduced-motion support is reused.
+- Updated English and Portuguese READMEs covering layout, player recovery, accessibility, validation limitations and the build script's repository-wide formatting side effect.
+- English-only PR description and merge commit message, with audit evidence retained.
 
 ## How to validate
 
-**Environment:** Windows, Node 24.19.0, Playwright com Microsoft Edge headless. Vite em 5173; preview de produção em 4173.
+**Environment:** Windows, Node 24.19.0, Playwright with headless Microsoft Edge. Vite development server on port 5173 and production preview on port 4173.
 
 **Steps and expected result:**
 
-1. Executar `npm run dev`. Conferir 320, 390, 768, 1023, 1024 e 1440 px, com altura de 900 px: sem overflow horizontal.
-2. Selecionar Obsession pelo teclado: player abre; controle fica indisponível até a API estar pronta; mensagens aparecem em uma região de status.
-3. Pausar, selecionar a mesma faixa para retomar, trocar para Sandy, fechar e reabrir: estado e destaque acompanham a seleção; fechar devolve o foco à faixa e remove o iframe.
-4. Bloquear a requisição `iframe_api`: mostrar mensagem de recuperação e link para YouTube, sem quebrar o layout mobile.
-5. Em desktop, focar a sexta faixa: não fica sob o cabeçalho sticky. Rolar o lado A com wheel não move o lado B nem a página.
-6. Alterar `prefers-reduced-motion` durante a sessão: parallax zera, transição do fundo fica em 0s e textura deixa de animar. Reativar permite parallax novamente.
-7. Em 320 px, definir tamanho de fonte raiz em 200%: ficha técnica empilha campos e não cria overflow. Isto é teste de ampliação de texto, não zoom físico do navegador.
-8. Executar `npm run lint`, `npx tsc -b` e `npx vite build`; iniciar `npm run preview` e repetir os cenários.
+1. Run `npm run dev`. Check widths of 320, 390, 768, 1023, 1024 and 1440 CSS pixels at a height of 900 pixels: no horizontal overflow.
+2. Select Obsession using the keyboard: the player opens, playback controls remain unavailable until the API is ready, and messages appear in a status region.
+3. Pause, select the same track to resume, switch to Sandy, close and reopen: status and active styling follow the selection; closing restores focus and removes the iframe.
+4. Block the `iframe_api` request: the recovery message and YouTube link remain usable without breaking the mobile layout.
+5. On desktop, focus the sixth track: it remains below the sticky heading. Wheel scrolling over Side A does not scroll Side B or the page.
+6. Change `prefers-reduced-motion` during the session: parallax resets, the background transition becomes 0s, and grain animation stops. Disabling the preference enables parallax again.
+7. At 320 pixels, set the root font size to 200%: footer credits stack without horizontal overflow. This checks enlarged text, not physical browser zoom.
+8. Run `npm run lint`, `npx tsc -b` and `npx vite build`; start `npm run preview` and repeat the scenarios.
+9. Check the updated Markdown with `npx prettier --check README.md README.pt-BR.md docs/audit/README.md docs/audit/PR.md` and review `docs/audit/MERGE_COMMIT.txt`.
 
 ## Technical checks
 
-| Check                             | Result / notes                                                                                                                                                                           |
-| --------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `npm run lint`                    | Passou.                                                                                                                                                                                  |
-| Prettier nos arquivos alterados   | Passou; formatação limitada aos arquivos desta auditoria.                                                                                                                                |
-| `npm run build`                   | Não executado literalmente: inclui escrita global do Prettier. ESLint, `npx tsc -b` e `npx vite build` foram executados separadamente com sucesso, preservando mudanças locais e skills. |
-| Development server: `npm run dev` | Servidor Vite existente em 5173 validado com Playwright.                                                                                                                                 |
-| Production preview                | `vite preview` iniciado em 4173 após build; matriz de layout/movimento repetida com sucesso.                                                                                             |
+| Check                             | Result / notes                                                                                                                                                              |
+| --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `npm run lint`                    | Passed during the implementation audit.                                                                                                                                     |
+| Prettier on changed files         | Passed during the audit; documentation formatting checked separately for the follow-up.                                                                                     |
+| `npm run build`                   | Not run literally because it writes repository-wide Prettier changes. ESLint, `npx tsc -b` and `npx vite build` passed separately, preserving unrelated changes and skills. |
+| Development server: `npm run dev` | Existing Vite server on port 5173 validated with Playwright.                                                                                                                |
+| Production preview                | `vite preview` started on port 4173 after building; layout and motion checks passed again.                                                                                  |
+
+The documentation follow-up does not change runtime code. Browser and playback results below refer to the implementation audit, not a new browser run for the text-only update.
 
 ### Playback and YouTube integration
 
-- [x] API real reportou reprodução, pausa, retomada pela mesma faixa, troca, fechamento e reabertura; não houve escuta humana.
-- [x] Pausa preservou o card ativo; fechamento removeu o iframe; reabertura manteve apenas um iframe.
-- [x] Estados de carregamento, reprodução, pausa, buffering, erro e recuperação foram exercitados com API simulada.
-- [x] Falha de carregamento da API foi exercitada bloqueando a requisição, inclusive no preview.
-- [ ] Final natural de faixa e regressão completa de URLs: não executados; parser não alterado.
+- [x] The real API reported playing, pausing, resuming through the same track, switching, closing and reopening; no human audio listening was performed.
+- [x] Pausing preserved the active card; closing removed the iframe; reopening retained only one iframe.
+- [x] Loading, playing, paused, buffering, error and recovery states were exercised with a simulated API.
+- [x] API loading failure was exercised by blocking the request, including in production preview.
+- [ ] Natural track completion and complete URL parsing regression were not tested; the parser was not changed.
 
 ### UI, accessibility, and motion
 
-- [x] Layout mobile/desktop e ausência de overflow nos tamanhos documentados.
-- [x] Reserva dinâmica para player e sua limpeza ao fechar.
-- [x] Foco de teclado, retorno do foco, nomes dos controles e foco abaixo de cabeçalho sticky.
-- [x] Estados acompanhados de texto/ícone; semântica revisada.
-- [x] Parallax e preferência reduzida alterada em tempo real; rolagem A/B isolada.
-- [x] Cleanup revisado no código e iframe/inset verificados em execução, com StrictMode do projeto.
-- [ ] Auditoria completa de contraste e leitor de tela: não executada. Não se declara conformidade WCAG integral.
-- [x] Sem exceções JavaScript nos cenários executados; nenhuma resposta HTTP 4xx/5xx na matriz de layout. A requisição bloqueada intencionalmente não representa falha de recurso da aplicação.
+- [x] Mobile and desktop layout checked without horizontal overflow at the documented sizes.
+- [x] Dynamic player space and cleanup verified on close.
+- [x] Keyboard focus, focus restoration, control names and focus below sticky headings checked.
+- [x] States include text or icons; semantics reviewed.
+- [x] Live parallax/reduced-motion behavior and isolated A/B scrolling checked.
+- [x] Effect cleanup reviewed in code; iframe and inset cleanup verified at runtime with the project's StrictMode enabled.
+- [ ] Complete contrast and screen-reader audits were not performed. Full WCAG conformance is not claimed.
+- [x] No JavaScript exceptions in the exercised scenarios and no HTTP 4xx/5xx responses in the layout matrix. The intentionally blocked request is not an application resource regression.
 
 ### Data, assets, and maintenance
 
-- [x] CSS Modules, custom properties e estrutura existentes preservados.
-- [x] Contagem do hero sincronizada; catálogo não alterado nesta auditoria.
-- [x] Sem novas dependências, alterações de lockfile ou skills.
-- [x] Notas de auditoria em português e inglês em `docs/audit/README.md`.
-- [x] READMEs preexistentes excluídos dos commits. Evidências visuais incluídas intencionalmente; sem bundles de build.
-- N/A: revisão externa de créditos/licenças/URLs; esses conteúdos não foram alterados na auditoria.
+- [x] Existing CSS Modules, custom properties and project structure preserved.
+- [x] Hero count synchronized; the catalog was not changed during the audit.
+- [x] No new dependencies, lockfile changes or skill modifications.
+- [x] English and Portuguese project READMEs updated, preserving the earlier local documentation additions.
+- [x] Bilingual audit notes retained in `docs/audit/README.md`; PR description and merge message are in English.
+- [x] Visual evidence intentionally included; no production bundles committed.
+- N/A: external verification of credits, licenses and URLs; those contents were not changed during the audit.
 
 ## Evidence
 
-Capturas em `docs/audit/evidence/`:
+Screenshots and measurements are available in `docs/audit/evidence/`:
 
-- `obsession-before-390.png` e `obsession-before-1440.png`: referência inicial.
-- `obsession-after-390.png` e `obsession-after-1440.png`: revisão posterior.
-- `obsession-player-error.png`: erro de reprodução simulado em mobile.
-- `obsession-validation.json`: medidas da matriz no preview.
+- `obsession-before-390.png` and `obsession-before-1440.png`: initial audit reference.
+- `obsession-after-390.png` and `obsession-after-1440.png`: subsequent review.
+- `obsession-player-error.png`: simulated playback error on mobile.
+- `obsession-validation.json`: production-preview layout measurements.
 
-As capturas iniciais completas contêm capas ainda não carregadas por lazy loading. As posteriores aguardam a decodificação das imagens; não interpretar essa diferença como correção nova das capas. A captura de erro foi feita durante a auditoria, antes dos últimos ajustes de espaçamento.
+The initial full-page screenshots include artwork that had not yet lazy-loaded. Later screenshots wait for image decoding; this difference should not be interpreted as a new artwork fix. The error screenshot was taken during the audit, before the final spacing adjustments.
 
 ## Risks, limitations, and review notes
 
-- Validação automatizada via Edge/Chromium; Safari, Firefox, leitor de tela e dispositivo físico não testados.
-- Scripts Playwright foram executados como ferramentas temporárias externas ao repositório; não foi criada uma suíte npm test nem adicionada dependência.
-- API real reportou estados esperados, mas áudio não foi ouvido; disponibilidade/autoplay continuam dependentes de YouTube e navegador.
-- Testes de layout em erro usaram falha deliberada de rede; recuperação de erro de vídeo usou API simulada.
-- Imagem de fundo original de aproximadamente 1,34 MB preservada; otimização de assets fora deste escopo.
-- O PR inclui trabalho anterior da branch; a referência visual inicial da auditoria é c8c211e, não main.
+- Automated checks used Edge/Chromium. Safari, Firefox, screen readers and physical devices were not tested.
+- Playwright scripts ran as temporary tools outside the repository; no committed test suite or `npm test` script was added.
+- The real API reported expected states, but audio was not heard by a human. Availability and autoplay remain dependent on YouTube and browser behavior.
+- Error-layout tests deliberately blocked network requests; video-error recovery used a simulated API.
+- The original background image, approximately 1.34 MB, was preserved; asset optimization is outside this scope.
+- This PR includes earlier branch work. The audit's initial visual reference is c8c211e, not main.
