@@ -46,6 +46,7 @@ export function OstAudioPlayer({
   playRequest,
 }: OstAudioPlayerProps): React.JSX.Element {
   const embedRef = useRef<HTMLDivElement>(null);
+  const panelRef = useRef<HTMLElement>(null);
   const playerRef = useRef<YouTubePlayer | null>(null);
   const targetVideoIdRef = useRef<string | null>(null);
   const isReadyRef = useRef<boolean>(false);
@@ -56,13 +57,41 @@ export function OstAudioPlayer({
 
   const [isReady, setIsReady] = useState<boolean>(false);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
-  const [loadError, setLoadError] = useState<string | null>(null);
+  const [isBuffering, setIsBuffering] = useState<boolean>(false);
+  const [loadError, setLoadError] = useState<{
+    videoId: string | null;
+    message: string;
+  } | null>(null);
 
   // Erro de URL derivado na renderização (sem setState dentro de efeito) /
   // URL error derived during render (no setState inside an effect).
   const videoId: string | null = getYouTubeVideoId(playRequest.song.youtubeUrl);
   const error: string | null =
-    videoId === null ? "Link do YouTube inválido." : loadError;
+    videoId === null
+      ? "Link do YouTube inválido. Selecione outra faixa."
+      : loadError &&
+          (loadError.videoId === null || loadError.videoId === videoId)
+        ? loadError.message
+        : null;
+
+  useEffect((): (() => void) | void => {
+    const panel = panelRef.current;
+    if (!panel) return;
+    const updateInset = (): void => {
+      const bottom = Number.parseFloat(getComputedStyle(panel).bottom) || 0;
+      document.documentElement.style.setProperty(
+        "--player-inset",
+        `${panel.getBoundingClientRect().height + bottom + 16}px`,
+      );
+    };
+    const observer = new ResizeObserver(updateInset);
+    observer.observe(panel);
+    updateInset();
+    return (): void => {
+      observer.disconnect();
+      document.documentElement.style.removeProperty("--player-inset");
+    };
+  }, []);
 
   // Mantém o callback mais recente à mão para os eventos do iframe, que são
   // registrados uma única vez. / Keeps the latest callback at hand for the
@@ -136,7 +165,12 @@ export function OstAudioPlayer({
               if (!cancelled) {
                 isPlayingRef.current = false;
                 setIsPlaying(false);
-                setLoadError("Não foi possível reproduzir este vídeo.");
+                setIsBuffering(false);
+                setLoadError({
+                  videoId: targetVideoIdRef.current,
+                  message:
+                    "Não foi possível reproduzir. Selecione outra faixa ou abra no YouTube.",
+                });
                 onPlaybackChangeRef.current?.(false);
               }
               return;
@@ -157,11 +191,14 @@ export function OstAudioPlayer({
               data: number;
               target: YouTubePlayer;
             }): void => {
+              if (cancelled) return;
               const playing: boolean =
                 event.data === PLAYER_STATE_PLAYING ||
                 event.data === PLAYER_STATE_BUFFERING;
               isPlayingRef.current = playing;
               setIsPlaying(playing);
+              setIsBuffering(event.data === PLAYER_STATE_BUFFERING);
+              if (event.data === PLAYER_STATE_PLAYING) setLoadError(null);
 
               // O card ativo só desativa no fim da faixa; pausar não avisa.
               // / The active card only deactivates when the track ends;
@@ -183,7 +220,11 @@ export function OstAudioPlayer({
       })
       .catch((): void => {
         if (!cancelled) {
-          setLoadError("Não foi possível carregar o player do YouTube.");
+          setLoadError({
+            videoId: null,
+            message:
+              "Não foi possível carregar. Feche e reabra o player ou abra no YouTube.",
+          });
           onPlaybackChangeRef.current?.(false);
         }
         return;
@@ -203,7 +244,7 @@ export function OstAudioPlayer({
 
   const handleToggle = (): void => {
     const player: YouTubePlayer | null = playerRef.current;
-    if (!player || error) {
+    if (!player || !isReady || error) {
       return;
     }
 
@@ -217,15 +258,24 @@ export function OstAudioPlayer({
 
   const status: string = error
     ? error
-    : !isReady
+    : !isReady || isBuffering
       ? "Carregando…"
       : isPlaying
         ? "Tocando agora"
         : "Pausado";
 
   return (
-    <aside className={styles.player} aria-label="Player de áudio">
-      <div ref={embedRef} className={styles.player_embed} aria-hidden="true" />
+    <aside
+      ref={panelRef}
+      className={styles.player}
+      aria-label="Player de áudio"
+    >
+      <div
+        ref={embedRef}
+        className={styles.player_embed}
+        aria-hidden="true"
+        inert
+      />
 
       <div className={styles.player_meta}>
         <span
@@ -237,6 +287,8 @@ export function OstAudioPlayer({
         <div className={styles.player_text}>
           <p className={styles.player_title}>{playRequest.song.title}</p>
           <p
+            role="status"
+            aria-atomic="true"
             className={
               error ? styles.player_status_error : styles.player_status
             }
@@ -262,7 +314,7 @@ export function OstAudioPlayer({
           type="button"
           className={styles.player_btn}
           onClick={handleToggle}
-          disabled={error !== null}
+          disabled={!isReady || error !== null}
           aria-label={isPlaying ? "Pausar" : "Tocar"}
         >
           {isPlaying ? PAUSE_ICON : PLAY_ICON}

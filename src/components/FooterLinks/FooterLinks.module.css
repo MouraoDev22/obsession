@@ -29,7 +29,7 @@
   transition:
     background 0.2s ease,
     border-color 0.2s ease,
-    transform 0.2s ease;
+    color 0.2s ease;
   border: 1px solid var(--color-border-light);
   border-radius: var(--radius-rack);
   background: var(--color-surface-alt);
@@ -39,13 +39,12 @@
 
 .link:hover,
 .link:focus-visible {
-  transform: translateY(-2px);
   border-color: var(--color-primary);
-  background: var(--gradient-red);
+  background: var(--color-surface-alt);
 }
 
 .link_label {
-  color: var(--color-highlight-cyan);
+  color: var(--color-text-primary);
   font-size: var(--font-size-meta);
   font-family: var(--font-mono);
   letter-spacing: var(--letter-spacing-label);

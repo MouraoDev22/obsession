@@ -1,49 +1,71 @@
 .sides {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 3rem;
+  width: 100%;
 }
-
 .side {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
+  min-width: 0;
 }
-
-.side_label {
+.side_header {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   gap: 1rem;
-  color: var(--color-highlight-red);
-  font-size: var(--font-size-side);
-  font-family: var(--font-mono);
+  border-bottom: 1px solid var(--color-border-light);
+  padding: 0 0.25rem 1rem;
+}
+.side_label {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: var(--color-text-primary);
+  font: 400 var(--font-size-side) var(--font-mono);
   letter-spacing: var(--letter-spacing-side);
-  text-shadow: var(--halation-text);
   text-transform: uppercase;
 }
-
-.side_label span {
-  margin-right: calc(-1 * var(--letter-spacing-side));
+.side_letter {
+  color: var(--color-highlight-red);
+  font: 400 3rem/1 var(--font-display);
+  letter-spacing: 0;
 }
-
-.side_label::before,
-.side_label::after {
-  background: linear-gradient(90deg, transparent, var(--color-border-light));
-  width: min(14rem, 30vw);
-  height: 1px;
-  content: "";
+.side_count {
+  color: var(--color-text-muted);
+  font: 400 var(--font-size-meta) var(--font-mono);
+  letter-spacing: var(--letter-spacing-label);
 }
-
-.side_label::after {
-  background: linear-gradient(90deg, var(--color-border-light), transparent);
+.side_scroll {
+  padding: 0.5rem;
 }
-
 .song_list {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 5rem;
-  padding: 2.5rem 2.5rem 5rem;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.5rem 0 0;
   list-style: none;
+}
+.song_list > li {
+  min-width: 0;
+}
+@media (min-width: 64rem) {
+  .sides {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .side_scroll {
+    height: clamp(24rem, 64svh, 42rem);
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+    scroll-padding-bottom: 0.5rem;
+    scroll-padding-top: 5rem;
+    scrollbar-color: var(--color-border-light) transparent;
+    scrollbar-gutter: stable;
+    scrollbar-width: thin;
+  }
+  .side_header {
+    position: sticky;
+    top: -0.5rem;
+    z-index: 1;
+    background: var(--color-background);
+    padding-top: 0.5rem;
+  }
 }

@@ -2,28 +2,22 @@
   display: flex;
   flex: 1 1 auto;
   flex-direction: column;
-  justify-content: center;
-  min-height: 0;
-  overflow: hidden;
+  gap: 0.5rem;
+  min-width: 0;
   color: var(--color-text-poster);
   font-weight: var(--font-weight-poster);
   font-size: var(--font-size-poster);
-  line-height: var(--line-height-poster);
+  line-height: 1.2;
   font-family: var(--font-display);
-  letter-spacing: var(--letter-spacing-poster);
-  text-shadow: var(--poster-shadow);
+  letter-spacing: 0;
   text-transform: var(--text-transform-poster);
+  overflow-wrap: anywhere;
 }
-
 .song_track {
-  display: block;
-  flex: none;
-  margin-bottom: 0.4rem;
-  padding-left: var(--letter-spacing-meta);
-  color: var(--color-highlight-red);
+  color: var(--color-text-muted);
   font-size: var(--font-size-meta);
+  line-height: 1.4;
   font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
   letter-spacing: var(--letter-spacing-meta);
-  text-align: center;
-  text-shadow: var(--halation-text);
 }

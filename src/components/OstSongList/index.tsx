@@ -23,12 +23,18 @@ export function OstSongList({
       {sides.map(({ label, tracks }): React.JSX.Element => (
         <section
           key={label}
-          className={styles.side}
-          aria-label={`Lado ${label}`}
+          className={`${styles.side} ${styles.side_scroll}`}
+          data-track-scroll
+          aria-labelledby={`side-${label}`}
+          tabIndex={0}
         >
-          <h2 className={styles.side_label}>
-            <span>Lado {label}</span>
-          </h2>
+          <header className={styles.side_header}>
+            <h2 className={styles.side_label} id={`side-${label}`}>
+              <span className={styles.side_letter}>{label}</span>
+              <span>Lado {label}</span>
+            </h2>
+            <span className={styles.side_count}>{tracks.length} faixas</span>
+          </header>
           <ol className={styles.song_list}>
             {tracks.map((song, index): React.JSX.Element => (
               <li key={song.id}>
