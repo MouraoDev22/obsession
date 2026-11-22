@@ -1,6 +1,10 @@
 import styles from "./OstHero.module.css";
 
-export function OstHero(): React.JSX.Element {
+export function OstHero({
+  trackCount,
+}: {
+  trackCount: number;
+}): React.JSX.Element {
   return (
     <header className={styles.hero}>
       <h1 className={styles.hero_title}>Obsession</h1>
@@ -8,7 +12,7 @@ export function OstHero(): React.JSX.Element {
       <p className={styles.hero_meta}>
         <span>Rock Burwell</span>
         <span aria-hidden="true">·</span>
-        <span>26 Faixas</span>
+        <span>{trackCount} Faixas</span>
       </p>
     </header>
   );

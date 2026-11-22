@@ -65,7 +65,7 @@ function App(): React.JSX.Element {
   return (
     <>
       <Main>
-        <OstHero />
+        <OstHero trackCount={songs.length} />
         <OstSongList
           activeSongId={activeSongId}
           songs={songs}

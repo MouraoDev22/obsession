@@ -23,7 +23,13 @@ body::after {
 
 @media (prefers-reduced-motion: no-preference) {
   body::after {
-    animation: film-grain 0.45s steps(5) infinite;
+    animation: film-grain 0.45s steps(5) 10;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body::before {
+    transition: none;
   }
 }
 

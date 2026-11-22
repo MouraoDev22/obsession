@@ -42,7 +42,7 @@
 }
 
 .player_indicator_active {
-  animation: player-pulse 1.5s ease-in-out infinite;
+  animation: player-pulse 1.5s ease-in-out 3;
   box-shadow: var(--halation-led);
   background: var(--color-highlight-red);
 }
