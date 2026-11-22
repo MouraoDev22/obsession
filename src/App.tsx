@@ -7,7 +7,7 @@ import type { OstSong } from "./interfaces/OstSong";
 import type { OstPlayRequest } from "./types/OstPlayRequest";
 import type { OstPlayRequestState } from "./types/OstPlayRequestState";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { Footer } from "./components/Footer";
 import { Main } from "./components/Main";
@@ -24,6 +24,7 @@ function App(): React.JSX.Element {
   const [playRequest, setPlayRequest]: OstPlayRequestState =
     useState<OstPlayRequest | null>(null);
   const [activeSongId, setActiveSongId] = useState<string | null>(null);
+  const returnFocusRef = useRef<HTMLElement | null>(null);
 
   useEffect((): (() => void) => initParallax(), []);
   useEffect(
@@ -37,12 +38,17 @@ function App(): React.JSX.Element {
   );
 
   const handlePlay = (song: OstSong): void => {
+    returnFocusRef.current =
+      document.activeElement instanceof HTMLElement
+        ? document.activeElement
+        : null;
     setPlayRequest({ song });
     setActiveSongId(song.id);
     return;
   };
 
   const handleClose = (): void => {
+    returnFocusRef.current?.focus();
     setPlayRequest(null);
     setActiveSongId(null);
     return;
