@@ -58,14 +58,12 @@
 }
 
 .player_title {
-  overflow: hidden;
   color: var(--color-text-primary);
   font-weight: var(--font-weight-poster);
   font-family: var(--font-display);
   letter-spacing: var(--letter-spacing-title);
-  text-overflow: ellipsis;
   text-transform: uppercase;
-  white-space: nowrap;
+  overflow-wrap: anywhere;
 }
 
 .player_status {
@@ -82,6 +80,7 @@
   font-family: var(--font-mono);
   letter-spacing: var(--letter-spacing-label);
   text-transform: uppercase;
+  overflow-wrap: anywhere;
 }
 
 .player_link {
@@ -90,7 +89,7 @@
   font-size: var(--font-size-meta);
   font-family: var(--font-mono);
   letter-spacing: var(--letter-spacing-label);
-  text-decoration: none;
+  text-decoration: underline;
   text-transform: uppercase;
 }
 

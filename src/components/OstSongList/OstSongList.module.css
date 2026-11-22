@@ -55,6 +55,8 @@
     height: clamp(24rem, 64svh, 42rem);
     overflow-y: auto;
     overscroll-behavior-y: contain;
+    scroll-padding-bottom: 0.5rem;
+    scroll-padding-top: 5rem;
     scrollbar-color: var(--color-border-light) transparent;
     scrollbar-gutter: stable;
     scrollbar-width: thin;

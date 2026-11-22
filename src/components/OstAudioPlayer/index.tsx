@@ -46,6 +46,7 @@ export function OstAudioPlayer({
   playRequest,
 }: OstAudioPlayerProps): React.JSX.Element {
   const embedRef = useRef<HTMLDivElement>(null);
+  const panelRef = useRef<HTMLElement>(null);
   const playerRef = useRef<YouTubePlayer | null>(null);
   const targetVideoIdRef = useRef<string | null>(null);
   const isReadyRef = useRef<boolean>(false);
@@ -72,6 +73,25 @@ export function OstAudioPlayer({
           (loadError.videoId === null || loadError.videoId === videoId)
         ? loadError.message
         : null;
+
+  useEffect((): (() => void) | void => {
+    const panel = panelRef.current;
+    if (!panel) return;
+    const updateInset = (): void => {
+      const bottom = Number.parseFloat(getComputedStyle(panel).bottom) || 0;
+      document.documentElement.style.setProperty(
+        "--player-inset",
+        `${panel.getBoundingClientRect().height + bottom + 16}px`,
+      );
+    };
+    const observer = new ResizeObserver(updateInset);
+    observer.observe(panel);
+    updateInset();
+    return (): void => {
+      observer.disconnect();
+      document.documentElement.style.removeProperty("--player-inset");
+    };
+  }, []);
 
   // Mantém o callback mais recente à mão para os eventos do iframe, que são
   // registrados uma única vez. / Keeps the latest callback at hand for the
@@ -245,7 +265,11 @@ export function OstAudioPlayer({
         : "Pausado";
 
   return (
-    <aside className={styles.player} aria-label="Player de áudio">
+    <aside
+      ref={panelRef}
+      className={styles.player}
+      aria-label="Player de áudio"
+    >
       <div
         ref={embedRef}
         className={styles.player_embed}

@@ -1,6 +1,11 @@
+html {
+  scroll-padding-bottom: var(--player-inset, 1rem);
+}
+
 body {
   position: relative;
   background-color: var(--color-background);
+  padding-bottom: var(--player-inset, 0px);
   width: 100%;
   min-height: 100svh;
 }
