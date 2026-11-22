@@ -27,12 +27,6 @@ body::after {
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  body::before {
-    transition: none;
-  }
-}
-
 @keyframes film-grain {
   0% {
     transform: translate(0, 0);
@@ -74,4 +68,10 @@ body::before {
   background-size: cover;
   background-repeat: no-repeat;
   content: "";
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body::before {
+    transition: none;
+  }
 }
