@@ -1,0 +1,9 @@
+Merge branch 'feat/premium-dual-side-layout' into main
+
+Refine cinematic dual-side soundtrack layout and interface accessibility
+
+- Preserve original typography, artwork, palette and visual identity
+- Improve player status announcements, error recovery and keyboard focus
+- Protect responsive layouts, sticky focus and enlarged footer text
+- Respect live motion preferences and synchronize track metadata
+- Record Playwright development/production evidence and limitations
