@@ -27,13 +27,31 @@ The project is a showcase of modern frontend development: **React 19**, the **Re
 
 - 🎵 **Full 26-track soundtrack** — organized in Side A / Side B with cassette-style track labels (`A01`, `B13`…).
 - ▶️ **Fixed audio player** — plays tracks through a hidden YouTube IFrame API embed, with play/pause toggle, live status ("Loading… / Playing / Paused") and close button.
-- 🖼️ **Custom cover art** — every track has its own cover image served from `public/`.
+- 🖼️ **Track artwork** — cover images are served from `public/`, with lazy loading and the album cover as a fallback when an image is unavailable.
 - 🌀 **Parallax background** — the page background moves opposite to the cursor, driven by CSS variables and throttled with `requestAnimationFrame`.
 - 📎 **Data-driven footer** — project purpose, author, movie credits and official Spotify/purchase links live in JSON files under `src/data/`.
-- ♿ **Accessible** — semantic markup, `aria-label`s on controls, and full respect for the `prefers-reduced-motion` media query (the parallax effect is disabled when the OS asks for reduced motion).
+- ♿ **Accessibility features** — named controls, status announcements, keyboard focus restoration, and live support for `prefers-reduced-motion`.
 - 🧼 **Strict typing** — dedicated `interfaces/` and `types/` folders, explicit return types everywhere, and typed props for every component.
 - ⚡ **React Compiler** — automatic memoization enabled via Babel preset for optimal render performance.
 - 🌐 **Robust YouTube URL parsing** — supports `youtu.be/<id>`, `/watch?v=`, `/embed/`, `/shorts/` and `/live/` formats.
+
+### Track layout and scrolling
+
+- **Desktop (64rem and wider):** horizontal track cards appear in two columns, Side A on the left and Side B on the right, with sticky side headers.
+- **Independent scrolling:** wheel input over either panel, including its header, scrolls only that side. Reaching either boundary does not transfer scrolling to the page. Move the pointer outside the panels to scroll the page.
+- **Mobile and narrower screens:** Side A is followed by Side B in normal document flow, without nested scroll areas.
+- **Keyboard:** focus a panel to scroll with arrow keys, or tab through its track buttons. Focus indicators remain visible.
+- **Visual identity:** Anton, Space Mono, the black/red palette, film grain, and parallax are retained with more restrained chromatic glow. Reduced-motion preferences disable the hero entrance and film-grain animations.
+
+The panel breakpoint in CSS and the Lenis exclusion in the smooth-scroll utility must remain aligned. Native panel scrolling is kept separate from Lenis page inertia.
+
+### Player states and recovery
+
+- The play/pause control is unavailable until the YouTube player is ready. Buffering displays the loading status rather than claiming playback has started.
+- Pausing preserves the active track. Closing removes the player and returns keyboard focus to the invoking track.
+- A video error offers an underlined **Open on YouTube** link; selecting another track allows recovery. If the API itself fails to load, close and reopen the player to retry.
+- The player's measured height reserves document space. Long titles wrap, and footer credits stack in narrow containers, including with enlarged text.
+- The hero track count comes from the catalog. Decorative grain and indicator animations finish after 4.5 seconds, retaining their static appearance.
 
 ## 🛠️ Tech Stack
 
@@ -73,18 +91,21 @@ The app will be available at the local URL printed in the terminal (usually `htt
 
 ## 📜 Scripts
 
-| Script            | Description                                                      |
-| ----------------- | ---------------------------------------------------------------- |
-| `npm run dev`     | Starts the Vite development server with HMR                      |
-| `npm run build`   | Type-checks with `tsc -b` and builds for production into `dist/` |
-| `npm run preview` | Serves the production build locally                              |
-| `npm run lint`    | Runs ESLint across the project                                   |
-| `npm run format`  | Formats the codebase with Prettier                               |
+| Script            | Description                                                                                            |
+| ----------------- | ------------------------------------------------------------------------------------------------------ |
+| `npm run dev`     | Starts the Vite development server with HMR                                                            |
+| `npm run build`   | Runs ESLint, formats the repository with Prettier, checks types with `tsc -b`, and builds into `dist/` |
+| `npm run preview` | Serves the production build locally                                                                    |
+| `npm run lint`    | Runs ESLint across the project                                                                         |
+| `npm run format`  | Formats the codebase with Prettier                                                                     |
+
+`npm run build` and `npm run format` write formatting changes across the repository. Review the diff afterward. For validation without global formatting, run `npm run lint`, `npx prettier --check <changed-files>`, `npx tsc -b`, and `npx vite build` separately, replacing `<changed-files>` with actual paths. There is no `npm test` script configured.
 
 ## 📂 Project Structure
 
 ```
 obsession/
+├── docs/audit/              # Audit report, PR description, merge message and evidence
 ├── public/                  # Static assets (song covers, favicon, icons)
 ├── src/
 │   ├── assets/              # Images bundled by Vite (background, etc.)
@@ -110,6 +131,7 @@ obsession/
 │   ├── types/               # Type aliases (OstPlayRequest, OstSongs, …)
 │   └── utils/
 │       ├── parallax/        # Cursor-following background effect
+│       ├── smoothScroll/    # Lenis page inertia and desktop panel exclusion
 │       └── youtube/         # IFrame API loader + video ID parser
 ├── index.html               # Entry HTML (fonts, lang, meta)
 ├── vite.config.ts           # Vite + React + React Compiler presets
@@ -162,9 +184,17 @@ The data is imported in [`src/App.tsx`](src/App.tsx) and passed down to the `Foo
 ## ♿ Accessibility
 
 - All interactive elements are real `<button>`s (controls) or `<a>`s (external links) with descriptive accessible names.
-- The parallax effect honors the `prefers-reduced-motion` media query.
+- Parallax responds to `prefers-reduced-motion` changes without a reload. Lenis respects the preference; hero, grain and indicator animations have reduced-motion alternatives.
+- Player messages use `role="status"`; the hidden embed is inert and excluded from assistive technology.
+- Closing the player restores focus to the invoking track. Scroll spacing protects focused tracks from sticky panel headers.
 - Decorative elements are marked with `aria-hidden="true"`.
 - Color/status is always paired with text (e.g. player status), never conveyed by color alone.
+
+### Validation and limitations
+
+The interface audit used Playwright with Microsoft Edge against development and production preview at 320, 390, 768, 1023, 1024 and 1440 CSS pixels. Checks covered overflow, text enlarged to 200%, player states, focus restoration, isolated panel scrolling and live motion preferences. Real YouTube API states and simulated error recovery were exercised separately.
+
+These checks do not establish complete WCAG conformance. Screen readers, Safari, Firefox, physical devices and human audio listening were not tested. The temporary Playwright scripts are not a committed test suite. See the [audit notes](docs/audit/README.md) and [detailed validation report](docs/audit/PR.md) for evidence and limitations.
 
 ## 🤝 Contributing
 
@@ -175,7 +205,7 @@ Contributions are welcome! Feel free to open an issue or submit a pull request:
 3. Push to the branch: `git push origin feature/my-feature`
 4. Open a Pull Request.
 
-Please run `npm run lint` and `npm run format` before submitting.
+Please run lint, check formatting on changed files, and validate types and the production build before submitting. Use the [PR template](.github/pull_request_template.md), record only checks actually performed, and avoid committing unrelated formatting changes.
 
 ## 📄 License
 
