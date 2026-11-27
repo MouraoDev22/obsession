@@ -12,12 +12,20 @@ import Lenis from "lenis";
  * O loop de `requestAnimationFrame` é gerenciado internamente pelo Lenis
  * (`autoRaf: true`).
  *
+ * Os containers das faixas de música (Lado A / Lado B) possuem instâncias
+ * dedicadas do Lenis (veja `utils/smoothScrollPanel`) e são excluídos dessa
+ * instância global via `data-track-scroll` + `prevent()`.
+ *
  * EN: creates a Lenis instance that smooths the window's native scroll
  * (mouse wheel, trackpad and touch) without hijacking the scrollbar — Lenis
  * wraps the native scroll, so `position: fixed` (film grain, parallax,
  * OstAudioPlayer), anchors and accessibility keep working. The
  * `requestAnimationFrame` loop is managed internally by Lenis
  * (`autoRaf: true`).
+ *
+ * Music track containers (Side A / Side B) have dedicated Lenis instances
+ * (see `utils/smoothScrollPanel`) and are excluded from this global instance
+ * via `data-track-scroll` + `prevent()`.
  *
  * Respeita `prefers-reduced-motion: reduce` automaticamente: a suavização é
  * desativada e o scroll acompanha o input 1:1, sem recarregar a página. /

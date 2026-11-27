@@ -38,12 +38,12 @@ The project is a showcase of modern frontend development: **React 19**, the **Re
 ### Track layout and scrolling
 
 - **Desktop (64rem and wider):** horizontal track cards appear in two columns, Side A on the left and Side B on the right, with sticky side headers.
-- **Independent scrolling:** wheel input over either panel, including its header, scrolls only that side. Reaching either boundary does not transfer scrolling to the page. Move the pointer outside the panels to scroll the page.
+- **Independent scrolling:** wheel input over either panel, including its header, scrolls only that side with Lenis-powered inertia. Reaching either boundary does not transfer scrolling to the page. Move the pointer outside the panels to scroll the page.
 - **Mobile and narrower screens:** Side A is followed by Side B in normal document flow, without nested scroll areas.
 - **Keyboard:** focus a panel to scroll with arrow keys, or tab through its track buttons. Focus indicators remain visible.
 - **Visual identity:** Anton, Space Mono, the black/red palette, film grain, and parallax are retained with more restrained chromatic glow. Reduced-motion preferences disable the hero entrance and film-grain animations.
 
-The panel breakpoint in CSS and the Lenis exclusion in the smooth-scroll utility must remain aligned. Native panel scrolling is kept separate from Lenis page inertia.
+The panel breakpoint in CSS and the Lenis exclusion in the smooth-scroll utility must remain aligned. Each music track panel (Side A / Side B) has its own dedicated Lenis instance (`utils/smoothScrollPanel`), while the global Lenis (`utils/smoothScroll`) keeps handling the main document scroll.
 
 ### Player states and recovery
 
@@ -131,7 +131,8 @@ obsession/
 │   ├── types/               # Type aliases (OstPlayRequest, OstSongs, …)
 │   └── utils/
 │       ├── parallax/        # Cursor-following background effect
-│       ├── smoothScroll/    # Lenis page inertia and desktop panel exclusion
+│       ├── smoothScroll/    # Lenis page inertia (document scroll)
+│       ├── smoothScrollPanel/  # Dedicated Lenis per music track panel
 │       └── youtube/         # IFrame API loader + video ID parser
 ├── index.html               # Entry HTML (fonts, lang, meta)
 ├── vite.config.ts           # Vite + React + React Compiler presets

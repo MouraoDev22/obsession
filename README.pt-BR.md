@@ -38,12 +38,12 @@ O projeto é uma demonstração de desenvolvimento frontend moderno: **React 19*
 ### Layout das faixas e rolagem
 
 - **Desktop (64rem ou mais):** cards horizontais em duas colunas, Lado A à esquerda e Lado B à direita, com cabeçalhos fixos dentro de cada painel.
-- **Rolagem independente:** usar a roda do mouse sobre um painel, inclusive seu cabeçalho, rola somente aquele lado. Chegar ao início ou fim não transfere a rolagem para a página. Mova o ponteiro para fora dos painéis para rolar a página.
+- **Rolagem independente:** usar a roda do mouse sobre um painel, inclusive seu cabeçalho, rola somente aquele lado com inércia do Lenis. Chegar ao início ou fim não transfere a rolagem para a página. Mova o ponteiro para fora dos painéis para rolar a página.
 - **Celular e telas menores:** o Lado A é seguido pelo Lado B no fluxo normal da página, sem áreas de rolagem aninhadas.
 - **Teclado:** coloque o foco no painel para rolar com as setas ou use Tab para percorrer os botões das faixas. O foco permanece visível.
 - **Identidade visual:** Anton, Space Mono, preto/vermelho, grão de filme e parallax foram mantidos com brilho cromático mais contido. A preferência por movimento reduzido desativa a entrada do título e a animação do grão.
 
-O breakpoint dos painéis no CSS deve permanecer alinhado à exclusão do Lenis no utilitário de rolagem. A rolagem nativa dos painéis fica separada da inércia da página.
+O breakpoint dos painéis no CSS deve permanecer alinhado à exclusão do Lenis no utilitário de rolagem. Cada painel de faixa (Lado A / Lado B) tem sua própria instância dedicada do Lenis (`utils/smoothScrollPanel`), enquanto o Lenis global (`utils/smoothScroll`) mantém a rolagem do documento principal.
 
 ### Estados do player e recuperação
 
@@ -131,7 +131,8 @@ obsession/
 │   ├── types/               # Aliases de tipo (OstPlayRequest, OstSongs, …)
 │   └── utils/
 │       ├── parallax/        # Efeito de fundo que segue o cursor
-│       ├── smoothScroll/    # Inércia Lenis e exclusão dos painéis no desktop
+│       ├── smoothScroll/    # Inércia Lenis (rolagem do documento)
+│       ├── smoothScrollPanel/  # Lenis dedicado por painel de faixa
 │       └── youtube/         # Loader da IFrame API + parser de ID de vídeo
 ├── index.html               # HTML de entrada (fontes, lang, meta)
 ├── vite.config.ts           # Presets do Vite + React + React Compiler
