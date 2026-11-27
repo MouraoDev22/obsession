@@ -65,7 +65,10 @@ export function OstAudioPlayer({
 
   // Erro de URL derivado na renderização (sem setState dentro de efeito) /
   // URL error derived during render (no setState inside an effect).
-  const videoId: string | null = getYouTubeVideoId(playRequest.song.youtubeUrl);
+  const youtubeUrl: string | null =
+    playRequest?.song?.youtubeUrl ?? null;
+  const songTitle: string = playRequest?.song?.title ?? "";
+  const videoId: string | null = getYouTubeVideoId(youtubeUrl);
   const error: string | null =
     videoId === null
       ? "Link do YouTube inválido. Selecione outra faixa."
@@ -102,9 +105,9 @@ export function OstAudioPlayer({
 
   // 1) Mantém a música-alvo sincronizada: troca a faixa ou alterna tocar/pausar.
   useEffect((): void => {
-    const videoId: string | null = getYouTubeVideoId(
-      playRequest.song.youtubeUrl,
-    );
+    const youtubeUrl: string | null =
+      playRequest?.song?.youtubeUrl ?? null;
+    const videoId: string | null = getYouTubeVideoId(youtubeUrl);
 
     if (!videoId) {
       onPlaybackChangeRef.current?.(false);
@@ -190,8 +193,8 @@ export function OstAudioPlayer({
             onStateChange: (event: {
               data: number;
               target: YouTubePlayer;
-            }): void => {
-              if (cancelled) return;
+            } | undefined): void => {
+              if (cancelled || !event) return;
               const playing: boolean =
                 event.data === PLAYER_STATE_PLAYING ||
                 event.data === PLAYER_STATE_BUFFERING;
@@ -285,7 +288,7 @@ export function OstAudioPlayer({
           aria-hidden="true"
         />
         <div className={styles.player_text}>
-          <p className={styles.player_title}>{playRequest.song.title}</p>
+          <p className={styles.player_title}>{songTitle}</p>
           <p
             role="status"
             aria-atomic="true"
@@ -301,7 +304,7 @@ export function OstAudioPlayer({
       {error && (
         <a
           className={styles.player_link}
-          href={playRequest.song.youtubeUrl}
+          href={youtubeUrl}
           target="_blank"
           rel="noreferrer"
         >
