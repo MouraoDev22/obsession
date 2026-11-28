@@ -1,5 +1,7 @@
 <div align="center">
 
+<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/913ad131-450e-4301-b22e-4c01e4ba462a" />
+
 # 🎧 Obsession — Original Soundtrack Player
 
 **A cinematic web player for the _Obsession_ original motion picture soundtrack.**
