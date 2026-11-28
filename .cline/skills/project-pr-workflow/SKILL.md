@@ -24,6 +24,7 @@ This skill is local to the Obsession repository. Use `.github/pull_request_templ
 
 ## Title
 
+- Write the PR title in English only.
 - Use a concise Conventional Commit-style title: `type(scope): imperative summary`.
 - Use a stable lowercase scope such as `audio-player`, `ost-song-list`, `deps`, or `project-skills`.
 - If multiple scopes make the title awkward, choose a higher-level accurate scope rather than a comma-separated scope list.
@@ -31,6 +32,7 @@ This skill is local to the Obsession repository. Use `.github/pull_request_templ
 
 ## Body
 
+- Write the entire PR body in English only, including summaries, checklist notes, validation results, limitations, and review comments. Keep the repository template headings and section order; translate any explanatory notes you add rather than mixing languages.
 Return the complete template body, retaining its section order and headings:
 
 1. Summary
@@ -56,6 +58,6 @@ Fill only applicable sections. Mark non-applicable sections `N/A` with a short r
 
 ## Merge commit
 
-Provide a Conventional Commit merge message matching the PR title. Add a short body describing the meaningful changes and only validations that actually passed. Do not add fabricated issue-closing references or unrelated commit bullets. Clearly label title, full PR body, and merge commit message in the final response.
+Write the Conventional Commit merge message in English only and match it to the PR title. Add a short English body describing the meaningful changes and only validations that actually passed. Do not add fabricated issue-closing references or unrelated commit bullets. Clearly label title, full PR body, and merge commit message in the final response. The surrounding assistant explanation may use the user's preferred language; the PR deliverables themselves must remain entirely in English.
 
 This skill drafts PR content only. Do not push branches, create PRs, or merge unless the user explicitly requests those actions and the relevant integration is available.
