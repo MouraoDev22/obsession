@@ -43,7 +43,7 @@ O projeto é uma demonstração de desenvolvimento frontend moderno: **React 19*
 - **Teclado:** coloque o foco no painel para rolar com as setas ou use Tab para percorrer os botões das faixas. O foco permanece visível.
 - **Identidade visual:** Anton, Space Mono, preto/vermelho, grão de filme e parallax foram mantidos com brilho cromático mais contido. A preferência por movimento reduzido desativa a entrada do título e a animação do grão.
 
-O breakpoint dos painéis no CSS deve permanecer alinhado à exclusão do Lenis no utilitário de rolagem. Cada painel de faixa (Lado A / Lado B) tem sua própria instância dedicada do Lenis (`utils/smoothScrollPanel`), enquanto o Lenis global (`utils/smoothScroll`) mantém a rolagem do documento principal.
+O breakpoint dos painéis no CSS deve permanecer alinhado à exclusão do Lenis no utilitário de rolagem. A classe estática `SmoothScroll` oferece métodos separados para o documento e para containers; cada painel de faixa (Lado A / Lado B) continua com sua própria instância dedicada do Lenis, enquanto o Lenis global mantém a rolagem do documento principal.
 
 ### Estados do player e recuperação
 
@@ -130,10 +130,9 @@ obsession/
 │   ├── interfaces/          # Interfaces compartilhadas de props/estado
 │   ├── types/               # Aliases de tipo (OstPlayRequest, OstSongs, …)
 │   └── utils/
-│       ├── parallax/        # Efeito de fundo que segue o cursor
-│       ├── smoothScroll/    # Inércia Lenis (rolagem do documento)
-│       ├── smoothScrollPanel/  # Lenis dedicado por painel de faixa
-│       └── youtube/         # Loader da IFrame API + parser de ID de vídeo
+│       ├── parallax/        # Utilitário estático de fundo que segue o cursor
+│       ├── smoothScroll/    # Métodos estáticos Lenis para página e containers
+│       └── youtube/         # Loader estático da IFrame API + parser de ID
 ├── index.html               # HTML de entrada (fontes, lang, meta)
 ├── vite.config.ts           # Presets do Vite + React + React Compiler
 └── tsconfig*.json           # Project references do TypeScript estrito

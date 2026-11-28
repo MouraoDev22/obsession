@@ -43,7 +43,7 @@ The project is a showcase of modern frontend development: **React 19**, the **Re
 - **Keyboard:** focus a panel to scroll with arrow keys, or tab through its track buttons. Focus indicators remain visible.
 - **Visual identity:** Anton, Space Mono, the black/red palette, film grain, and parallax are retained with more restrained chromatic glow. Reduced-motion preferences disable the hero entrance and film-grain animations.
 
-The panel breakpoint in CSS and the Lenis exclusion in the smooth-scroll utility must remain aligned. Each music track panel (Side A / Side B) has its own dedicated Lenis instance (`utils/smoothScrollPanel`), while the global Lenis (`utils/smoothScroll`) keeps handling the main document scroll.
+The panel breakpoint in CSS and the Lenis exclusion in the smooth-scroll utility must remain aligned. The `SmoothScroll` utility provides separate static methods for the document and individual containers; each track panel (Side A / Side B) still owns a dedicated Lenis instance, while the global Lenis handles the main document scroll.
 
 ### Player states and recovery
 
@@ -130,10 +130,9 @@ obsession/
 │   ├── interfaces/          # Shared prop/state interfaces
 │   ├── types/               # Type aliases (OstPlayRequest, OstSongs, …)
 │   └── utils/
-│       ├── parallax/        # Cursor-following background effect
-│       ├── smoothScroll/    # Lenis page inertia (document scroll)
-│       ├── smoothScrollPanel/  # Dedicated Lenis per music track panel
-│       └── youtube/         # IFrame API loader + video ID parser
+│       ├── parallax/        # Static cursor-following background utility
+│       ├── smoothScroll/    # Static Lenis methods for page and container scroll
+│       └── youtube/         # Static IFrame API loader + video ID parser
 ├── index.html               # Entry HTML (fonts, lang, meta)
 ├── vite.config.ts           # Vite + React + React Compiler presets
 └── tsconfig*.json           # Strict TypeScript project references
