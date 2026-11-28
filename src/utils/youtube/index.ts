@@ -11,7 +11,8 @@ export class YouTube {
    * `/live/<id>` / Supports `youtu.be/<id>`, `/watch?v=<id>`, `/embed/<id>`,
    * `/shorts/<id>` and `/live/<id>`.
    *
-   * @param link URL completa do vídeo / Full URL of the video.
+   * @param link URL completa do vídeo do YouTube /
+   *   Full URL of the YouTube video.
    * @returns O ID do vídeo ou `null` quando o link é inválido /
    *   The video id, or `null` when the link is invalid.
    */

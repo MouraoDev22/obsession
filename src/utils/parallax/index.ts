@@ -16,11 +16,19 @@ import type { ParallaxOptions } from "./interfaces/ParallaxOptions";
  * Respeita `prefers-reduced-motion: reduce` /
  * Honors `prefers-reduced-motion: reduce`.
  *
- * @param options Configurações opcionais do efeito / Optional settings for the effect.
- * @returns Função que remove os listeners e restaura o estado inicial /
- *   Function that removes the listeners and restores the initial state.
+ * Classe utilitária sem instância para configurar o efeito parallax /
+ * Static utility class for configuring the parallax effect.
  */
 export class Parallax {
+  /**
+   * Inicializa o efeito parallax no fundo da página /
+   * Initializes the parallax effect on the page background.
+   *
+   * @param options Configurações opcionais do efeito /
+   *   Optional effect settings.
+   * @returns Função que remove os listeners e restaura o estado inicial /
+   *   Function that removes the listeners and restores the initial state.
+   */
   public static init(options: ParallaxOptions = {}): () => void {
     const { maxOffset = 0.5 }: ParallaxOptions = options;
 

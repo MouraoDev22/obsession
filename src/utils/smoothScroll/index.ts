@@ -13,8 +13,8 @@ import Lenis from "lenis";
  * (`autoRaf: true`).
  *
  * Os containers das faixas de música (Lado A / Lado B) possuem instâncias
- * (veja `initContainer`) e são excluídos dessa
- * instância global via `data-track-scroll` + `prevent()`.
+ * dedicadas do Lenis (veja `initContainer`) e são excluídos dessa instância
+ * global via `data-track-scroll` + `prevent()`.
  *
  * EN: creates a Lenis instance that smooths the window's native scroll
  * (mouse wheel, trackpad and touch) without hijacking the scrollbar — Lenis
@@ -32,12 +32,19 @@ import Lenis from "lenis";
  * Honors `prefers-reduced-motion: reduce` automatically: smoothing is
  * disabled and scroll tracks the input 1:1, without a page reload.
  *
- * @param options Opções opcionais do Lenis (duração, multiplicadores…) /
- *   Optional Lenis options (duration, multipliers…).
- * @returns Função que destrói a instância e restaura o scroll nativo /
- *   Function that destroys the instance and restores native scrolling.
+ * Utilitário estático para a rolagem da página e de containers /
+ * Static utility for page and container scrolling.
  */
 export class SmoothScroll {
+  /**
+   * Inicializa a rolagem suave do documento /
+   * Initializes smooth scrolling for the document.
+   *
+   * @param options Opções do Lenis, como duração e multiplicadores /
+   *   Lenis options, such as duration and multipliers.
+   * @returns Função que destrói a instância e restaura o scroll nativo /
+   *   Function that destroys the instance and restores native scrolling.
+   */
   public static initPage(options: LenisOptions = {}): () => void {
     if (typeof document === "undefined") {
       return (): void => {
@@ -86,7 +93,17 @@ export class SmoothScroll {
     };
   }
 
-  /** Creates a Lenis instance scoped to one scrollable container. */
+  /**
+   * Cria uma rolagem suave vinculada a um container específico /
+   * Creates smooth scrolling scoped to a specific container.
+   *
+   * @param container Elemento que será usado como container de rolagem /
+   *   Element that will be used as the scroll container.
+   * @param options Opções do Lenis, como duração e multiplicadores /
+   *   Lenis options, such as duration and multipliers.
+   * @returns Função que destrói a instância do Lenis do container /
+   *   Function that destroys the container's Lenis instance.
+   */
   public static initContainer(
     container: HTMLElement,
     options: LenisOptions = {},
