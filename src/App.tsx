@@ -14,7 +14,6 @@ import { Main } from "./components/Main";
 import { OstAudioPlayer } from "./components/OstAudioPlayer";
 import { OstHero } from "./components/OstHero";
 import { OstSongList } from "./components/OstSongList";
-import { ErrorBoundary } from "./components/ErrorBoundary";
 
 import { initParallax } from "./utils/parallax";
 import { initSmoothScroll } from "./utils/smoothScroll";
@@ -22,23 +21,6 @@ import { initSmoothScroll } from "./utils/smoothScroll";
 import "./App.css";
 
 function App(): React.JSX.Element {
-  const errorFallbackStyle: React.CSSProperties = {
-    position: "fixed",
-    inset: "0",
-    zIndex: 10000,
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: "1rem",
-    padding: "2rem",
-    background: "var(--color-surface)",
-    border: "1px solid var(--color-border)",
-    color: "var(--color-text-primary)",
-    font: "400 var(--font-size-meta) var(--font-mono)",
-    textAlign: "center",
-  };
-
   const [playRequest, setPlayRequest]: OstPlayRequestState =
     useState<OstPlayRequest | null>(null);
   const [activeSongId, setActiveSongId] = useState<string | null>(null);
@@ -90,22 +72,11 @@ function App(): React.JSX.Element {
           onPlay={handlePlay}
         />
         {playRequest && (
-          <ErrorBoundary
-            fallback={
-              <div style={errorFallbackStyle}>
-                <p>Error loading the player. Close and try again.</p>
-                <button type="button" onClick={handleClose}>
-                  Close
-                </button>
-              </div>
-            }
-          >
-            <OstAudioPlayer
-              playRequest={playRequest}
-              onClose={handleClose}
-              onPlaybackChange={handlePlaybackChange}
-            />
-          </ErrorBoundary>
+          <OstAudioPlayer
+            playRequest={playRequest}
+            onClose={handleClose}
+            onPlaybackChange={handlePlaybackChange}
+          />
         )}
       </Main>
       <Footer

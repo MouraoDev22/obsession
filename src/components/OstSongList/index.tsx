@@ -22,7 +22,8 @@ export function OstSongList({
     { label: "B", tracks: songs.slice(midpoint) },
   ].filter((side): boolean => side.tracks.length > 0);
 
-  const panelRefs = [useRef<HTMLElement>(null), useRef<HTMLElement>(null)];
+  const panelRefA = useRef<HTMLElement>(null);
+  const panelRefB = useRef<HTMLElement>(null);
 
   useEffect((): (() => void) => {
     const desktop: MediaQueryList = window.matchMedia("(min-width: 64rem)");
@@ -32,7 +33,7 @@ export function OstSongList({
       if (!desktop.matches) {
         return;
       }
-      panelRefs.forEach((ref): void => {
+      [panelRefA, panelRefB].forEach((ref): void => {
         const container: HTMLElement | null = ref.current;
         if (!container) {
           return;
@@ -57,16 +58,17 @@ export function OstSongList({
       desktop.removeEventListener("change", handleChange);
       destroyFns.forEach((destroy): void => destroy());
     };
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className={styles.sides}>
       {sides.map((_, sideIndex): React.JSX.Element => {
         const { label, tracks } = sides[sideIndex];
+        const panelRef = sideIndex === 0 ? panelRefA : panelRefB;
         return (
           <section
             key={label}
-            ref={panelRefs[sideIndex]}
+            ref={panelRef}
             className={`${styles.side} ${styles.side_scroll}`}
             data-track-scroll
             aria-labelledby={`side-${label}`}
