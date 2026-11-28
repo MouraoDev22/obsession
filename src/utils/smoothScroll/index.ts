@@ -13,7 +13,7 @@ import Lenis from "lenis";
  * (`autoRaf: true`).
  *
  * Os containers das faixas de música (Lado A / Lado B) possuem instâncias
- * dedicadas do Lenis (veja `utils/smoothScrollPanel`) e são excluídos dessa
+ * (veja `initContainer`) e são excluídos dessa
  * instância global via `data-track-scroll` + `prevent()`.
  *
  * EN: creates a Lenis instance that smooths the window's native scroll
@@ -24,7 +24,7 @@ import Lenis from "lenis";
  * (`autoRaf: true`).
  *
  * Music track containers (Side A / Side B) have dedicated Lenis instances
- * (see `utils/smoothScrollPanel`) and are excluded from this global instance
+ * (see `initContainer`) and are excluded from this global instance
  * via `data-track-scroll` + `prevent()`.
  *
  * Respeita `prefers-reduced-motion: reduce` automaticamente: a suavização é
@@ -37,50 +37,74 @@ import Lenis from "lenis";
  * @returns Função que destrói a instância e restaura o scroll nativo /
  *   Function that destroys the instance and restores native scrolling.
  */
-export function initSmoothScroll(options: LenisOptions = {}): () => void {
-  if (typeof document === "undefined") {
+export class SmoothScroll {
+  public static initPage(options: LenisOptions = {}): () => void {
+    if (typeof document === "undefined") {
+      return (): void => {
+        return undefined;
+      };
+    }
+
+    // Keep this breakpoint aligned with OstSongList.module.css.
+    // Mantém o breakpoint alinhado com OstSongList.module.css.
+    const desktop: MediaQueryList = window.matchMedia("(min-width: 64rem)");
+    const lenis: Lenis = new Lenis({
+      autoRaf: true,
+      ...options,
+      prevent: (node: HTMLElement): boolean => {
+        return (
+          (desktop.matches && node.hasAttribute("data-track-scroll")) ||
+          (options.prevent?.(node) ?? false)
+        );
+      },
+    });
+
+    // Stop residual page inertia before native scrolling takes over a panel.
+    // Interrompe a inércia da página antes de rolar um painel nativamente.
+    function handlePanelWheel(event: WheelEvent): void {
+      if (
+        event.ctrlKey ||
+        !desktop.matches ||
+        !(event.target instanceof Element) ||
+        !event.target.closest("[data-track-scroll]")
+      ) {
+        return;
+      }
+      lenis.scrollTo(window.scrollY, { immediate: true });
+      return;
+    }
+
+    window.addEventListener("wheel", handlePanelWheel, {
+      capture: true,
+      passive: true,
+    });
+
     return (): void => {
-      return undefined;
+      window.removeEventListener("wheel", handlePanelWheel, true);
+      lenis.destroy();
+      return;
     };
   }
 
-  // Keep this breakpoint aligned with OstSongList.module.css.
-  // Mantém o breakpoint alinhado com OstSongList.module.css.
-  const desktop: MediaQueryList = window.matchMedia("(min-width: 64rem)");
-  const lenis: Lenis = new Lenis({
-    autoRaf: true,
-    ...options,
-    prevent: (node: HTMLElement): boolean => {
-      return (
-        (desktop.matches && node.hasAttribute("data-track-scroll")) ||
-        (options.prevent?.(node) ?? false)
-      );
-    },
-  });
+  /** Creates a Lenis instance scoped to one scrollable container. */
+  public static initContainer(
+    container: HTMLElement,
+    options: LenisOptions = {},
+  ): () => void {
+    const lenis: Lenis = new Lenis({
+      autoRaf: true,
+      wrapper: container,
+      ...options,
+    });
 
-  // Stop residual page inertia before native scrolling takes over a panel.
-  // Interrompe a inércia da página antes de rolar um painel nativamente.
-  function handlePanelWheel(event: WheelEvent): void {
-    if (
-      event.ctrlKey ||
-      !desktop.matches ||
-      !(event.target instanceof Element) ||
-      !event.target.closest("[data-track-scroll]")
-    ) {
+    return (): void => {
+      lenis.destroy();
       return;
-    }
-    lenis.scrollTo(window.scrollY, { immediate: true });
-    return;
+    };
   }
+}
 
-  window.addEventListener("wheel", handlePanelWheel, {
-    capture: true,
-    passive: true,
-  });
-
-  return (): void => {
-    window.removeEventListener("wheel", handlePanelWheel, true);
-    lenis.destroy();
-    return;
-  };
+/** @deprecated Use `SmoothScroll.initPage` instead. */
+export function initSmoothScroll(options: LenisOptions = {}): () => void {
+  return SmoothScroll.initPage(options);
 }
