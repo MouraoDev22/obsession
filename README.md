@@ -35,27 +35,9 @@ The project is a showcase of modern frontend development: **React 19**, the **Re
 - ⚡ **React Compiler** — automatic memoization enabled via Babel preset for optimal render performance.
 - 🌐 **Robust YouTube URL parsing** — supports `youtu.be/<id>`, `/watch?v=`, `/embed/`, `/shorts/` and `/live/` formats.
 
-## 🖼️ Creating Consistent Track Covers
+## 🖼️ Creating Track Covers
 
-Use the [Obsession Cover Images prompt](docs/OBSESSION-COVER-IMAGES.md) with an image-capable LLM to transform one source image at a time into a consistent red-and-black square cover. The guide contains the reusable English prompt, including its image-reference, fidelity, palette, and export requirements.
-
-### Track layout and scrolling
-
-- **Desktop (64rem and wider):** horizontal track cards appear in two columns, Side A on the left and Side B on the right, with sticky side headers.
-- **Independent scrolling:** wheel input over either panel, including its header, scrolls only that side with Lenis-powered inertia. Reaching either boundary does not transfer scrolling to the page. Move the pointer outside the panels to scroll the page.
-- **Mobile and narrower screens:** Side A is followed by Side B in normal document flow, without nested scroll areas.
-- **Keyboard:** focus a panel to scroll with arrow keys, or tab through its track buttons. Focus indicators remain visible.
-- **Visual identity:** Anton, Space Mono, the black/red palette, film grain, and parallax are retained with more restrained chromatic glow. Reduced-motion preferences disable the hero entrance and film-grain animations.
-
-The panel breakpoint in CSS and the Lenis exclusion in the smooth-scroll utility must remain aligned. The `SmoothScroll` utility provides separate static methods for the document and individual containers; each track panel (Side A / Side B) still owns a dedicated Lenis instance, while the global Lenis handles the main document scroll.
-
-### Player states and recovery
-
-- The play/pause control is unavailable until the YouTube player is ready. Buffering displays the loading status rather than claiming playback has started.
-- Pausing preserves the active track. Closing removes the player and returns keyboard focus to the invoking track.
-- A video error offers an underlined **Open on YouTube** link; selecting another track allows recovery. If the API itself fails to load, close and reopen the player to retry.
-- The player's measured height reserves document space. Long titles wrap, and footer credits stack in narrow containers, including with enlarged text.
-- The hero track count comes from the catalog. Decorative grain and indicator animations finish after 4.5 seconds, retaining their static appearance.
+Open the [Obsession Cover Images prompt](docs/OBSESSION-COVER-IMAGES.md) in an image-capable LLM. Provide the source image and the style-reference image for each cover; the prompt describes the consistent red-and-black treatment and 1254 × 1254 px output.
 
 ## 🛠️ Tech Stack
 
@@ -103,7 +85,7 @@ The app will be available at the local URL printed in the terminal (usually `htt
 | `npm run lint`    | Runs ESLint across the project                                                                         |
 | `npm run format`  | Formats the codebase with Prettier                                                                     |
 
-`npm run build` and `npm run format` write formatting changes across the repository. Review the diff afterward. For validation without global formatting, run `npm run lint`, `npx prettier --check <changed-files>`, `npx tsc -b`, and `npx vite build` separately, replacing `<changed-files>` with actual paths. There is no `npm test` script configured.
+`npm run build` and `npm run format` format files across the repository. Review the diff afterward. For checks without repository-wide formatting, run `npm run lint`, `npx prettier --check <changed-files>`, `npx tsc -b`, and `npx vite build` separately. There is no `npm test` script configured.
 
 ## 📂 Project Structure
 
@@ -165,42 +147,6 @@ The tracklist is entirely data-driven. To add a new track, append an object to [
 | `youtubeUrl` | Any common YouTube link format — the video ID is extracted automatically. |
 
 > Tracks are split evenly between Side A and Side B at runtime, so no manual grouping is needed.
-
-## 🎞️ Editing the Footer
-
-The footer is data-driven too. Its content lives in three JSON files under [`src/data/`](src/data/):
-
-| File                                    | Content                                                                                          |
-| --------------------------------------- | ------------------------------------------------------------------------------------------------ |
-| [`project.json`](src/data/project.json) | Purpose paragraphs, author (name, role and GitHub links) and the copyright lines                 |
-| [`credits.json`](src/data/credits.json) | Movie credits shown in "Ficha técnica" (director, composer, studios, distribution, release date) |
-| [`links.json`](src/data/links.json)     | Official listening/purchase links (`label` + `hint` + `href`) — Spotify, album and movie         |
-
-The data is imported in [`src/App.tsx`](src/App.tsx) and passed down to the `Footer` sections as typed props, mirroring how `songs.json` feeds the tracklist.
-
-## 🧠 Architecture Notes
-
-- **State flow:** `App` owns the current `OstPlayRequest` state. Selecting a track dispatches a request; requesting the _same_ track again toggles play/pause; the close button clears the request and unmounts the player.
-- **Data-driven content:** songs and footer content (purpose, credits, official links) live in JSON files imported by `App` and passed down as typed props.
-- **YouTube loading:** the IFrame API script is loaded **once** and the resulting promise is cached, so replays never re-fetch the API. On failure, the cache is reset to allow retrying, and the UI falls back to an "Open on YouTube" link.
-- **Parallax via CSS variables:** since `body::before` is unreachable from JavaScript, the offset is written to the `--parallax-x` / `--parallax-y` custom properties and consumed by the `transform` defined in `App.css` — keeping the effect on the compositor.
-- **React Compiler:** enabled through the `reactCompilerPreset` in `vite.config.ts`, removing the need for manual `useMemo`/`useCallback` memoization.
-- **TypeScript 7 side-by-side:** `tsc` runs TypeScript 7 through `@typescript/native`, while `typescript` is aliased to `@typescript/typescript6` so `typescript-eslint` can lint with the TS 6 API (TS 7 ships no programmatic API yet). This is the [official side-by-side setup](https://devblogs.microsoft.com/typescript/announcing-typescript-7-0/#running-side-by-side-with-typescript) — keep it until typescript-eslint ships TS 7 support ([typescript-eslint#10940](https://github.com/typescript-eslint/typescript-eslint/issues/10940)).
-
-## ♿ Accessibility
-
-- All interactive elements are real `<button>`s (controls) or `<a>`s (external links) with descriptive accessible names.
-- Parallax responds to `prefers-reduced-motion` changes without a reload. Lenis respects the preference; hero, grain and indicator animations have reduced-motion alternatives.
-- Player messages use `role="status"`; the hidden embed is inert and excluded from assistive technology.
-- Closing the player restores focus to the invoking track. Scroll spacing protects focused tracks from sticky panel headers.
-- Decorative elements are marked with `aria-hidden="true"`.
-- Color/status is always paired with text (e.g. player status), never conveyed by color alone.
-
-### Validation and limitations
-
-The interface audit used Playwright with Microsoft Edge against development and production preview at 320, 390, 768, 1023, 1024 and 1440 CSS pixels. Checks covered overflow, text enlarged to 200%, player states, focus restoration, isolated panel scrolling and live motion preferences. Real YouTube API states and simulated error recovery were exercised separately.
-
-These checks do not establish complete WCAG conformance. Screen readers, Safari, Firefox, physical devices and human audio listening were not tested. The temporary Playwright scripts are not a committed test suite. See the [audit notes](docs/audit/README.md) and [detailed validation report](docs/audit/PR.md) for evidence and limitations.
 
 ## 🤝 Contributing
 
