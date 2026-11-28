@@ -20,73 +20,80 @@ import type { ParallaxOptions } from "./interfaces/ParallaxOptions";
  * @returns Função que remove os listeners e restaura o estado inicial /
  *   Function that removes the listeners and restores the initial state.
  */
-export function initParallax(options: ParallaxOptions = {}): () => void {
-  const { maxOffset = 0.5 }: ParallaxOptions = options;
+export class Parallax {
+  public static init(options: ParallaxOptions = {}): () => void {
+    const { maxOffset = 0.5 }: ParallaxOptions = options;
 
-  // Respeita prefers-reduced-motion: em sistemas com "animações/efeitos
-  // visuais" desativados (comum no Windows), o efeito não é aplicado.
-  // Honors prefers-reduced-motion: skips the effect when the OS option
-  // "animations/visual effects" is turned off (common on Windows).
-  if (typeof document === "undefined") {
+    // Respeita prefers-reduced-motion: em sistemas com "animações/efeitos
+    // visuais" desativados (comum no Windows), o efeito não é aplicado.
+    // Honors prefers-reduced-motion: skips the effect when the OS option
+    // "animations/visual effects" is turned off (common on Windows).
+    if (typeof document === "undefined") {
+      return (): void => {
+        return undefined;
+      };
+    }
+
+    const target: HTMLElement = document.body;
+    const reducedMotion: MediaQueryList = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    );
+    let frameId: number = 0;
+
+    /** Aplica o deslocamento nas variáveis CSS `--parallax-x`/`--parallax-y` /
+     * Writes the offset into the `--parallax-x`/`--parallax-y` CSS variables. */
+    function applyOffset(x: number, y: number): void {
+      target.style.setProperty("--parallax-x", `${x.toFixed(2)}%`);
+      target.style.setProperty("--parallax-y", `${y.toFixed(2)}%`);
+      return;
+    }
+
+    /** Cancela o quadro pendente e zera o deslocamento /
+     * Cancels the pending frame and resets the offset. */
+    function reset(): void {
+      cancelAnimationFrame(frameId);
+      applyOffset(0, 0);
+      return;
+    }
+
+    /** Recalcula o deslocamento a partir da posição do cursor /
+     * Recomputes the offset from the cursor position. */
+    function handleMouseMove(event: MouseEvent): void {
+      if (reducedMotion.matches) return;
+      cancelAnimationFrame(frameId);
+
+      frameId = requestAnimationFrame((): void => {
+        const width: number = Math.max(window.innerWidth, 1);
+        const height: number = Math.max(window.innerHeight, 1);
+
+        // Normaliza a posição do cursor para o intervalo -1..1.
+        // Normalizes the cursor position to the -1..1 range.
+        const normalizedX: number = (event.clientX / width) * 2 - 1;
+        const normalizedY: number = (event.clientY / height) * 2 - 1;
+
+        // Sinal invertido: a imagem se move na direção oposta ao mouse.
+        // Inverted sign: the image moves opposite to the mouse.
+        applyOffset(-normalizedX * maxOffset, -normalizedY * maxOffset);
+        return;
+      });
+      return;
+    }
+
+    target.addEventListener("mousemove", handleMouseMove);
+    target.addEventListener("mouseleave", reset);
+    reducedMotion.addEventListener("change", reset);
+
     return (): void => {
-      return undefined;
+      target.removeEventListener("mousemove", handleMouseMove);
+      target.removeEventListener("mouseleave", reset);
+      reducedMotion.removeEventListener("change", reset);
+      reset();
+      return;
     };
   }
+}
 
-  const target: HTMLElement = document.body;
-  const reducedMotion: MediaQueryList = window.matchMedia(
-    "(prefers-reduced-motion: reduce)",
-  );
-  let frameId: number = 0;
-
-  /** Aplica o deslocamento nas variáveis CSS `--parallax-x`/`--parallax-y` /
-   * Writes the offset into the `--parallax-x`/`--parallax-y` CSS variables. */
-  function applyOffset(x: number, y: number): void {
-    target.style.setProperty("--parallax-x", `${x.toFixed(2)}%`);
-    target.style.setProperty("--parallax-y", `${y.toFixed(2)}%`);
-    return;
-  }
-
-  /** Cancela o quadro pendente e zera o deslocamento /
-   * Cancels the pending frame and resets the offset. */
-  function reset(): void {
-    cancelAnimationFrame(frameId);
-    applyOffset(0, 0);
-    return;
-  }
-
-  /** Recalcula o deslocamento a partir da posição do cursor /
-   * Recomputes the offset from the cursor position. */
-  function handleMouseMove(event: MouseEvent): void {
-    if (reducedMotion.matches) return;
-    cancelAnimationFrame(frameId);
-
-    frameId = requestAnimationFrame((): void => {
-      const width: number = Math.max(window.innerWidth, 1);
-      const height: number = Math.max(window.innerHeight, 1);
-
-      // Normaliza a posição do cursor para o intervalo -1..1.
-      // Normalizes the cursor position to the -1..1 range.
-      const normalizedX: number = (event.clientX / width) * 2 - 1;
-      const normalizedY: number = (event.clientY / height) * 2 - 1;
-
-      // Sinal invertido: a imagem se move na direção oposta ao mouse.
-      // Inverted sign: the image moves opposite to the mouse.
-      applyOffset(-normalizedX * maxOffset, -normalizedY * maxOffset);
-      return;
-    });
-    return;
-  }
-
-  target.addEventListener("mousemove", handleMouseMove);
-  target.addEventListener("mouseleave", reset);
-  reducedMotion.addEventListener("change", reset);
-
-  return (): void => {
-    target.removeEventListener("mousemove", handleMouseMove);
-    target.removeEventListener("mouseleave", reset);
-    reducedMotion.removeEventListener("change", reset);
-    reset();
-    return;
-  };
+/** @deprecated Use `Parallax.init` instead. */
+export function initParallax(options: ParallaxOptions = {}): () => void {
+  return Parallax.init(options);
 }
