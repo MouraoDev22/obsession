@@ -28,12 +28,14 @@ export function Footer({
       {children}
 
       <p className={styles.legal}>
-        {copyright.map((line: string, index: number): React.JSX.Element => (
-          <span key={line}>
-            {index > 0 && <span aria-hidden="true">{"· "}</span>}
-            {line}
-          </span>
-        ))}
+        {copyright.map((line: string, index: number): React.JSX.Element => {
+          return (
+            <span key={line}>
+              {index > 0 && <span aria-hidden="true">{"· "}</span>}
+              {line}
+            </span>
+          );
+        })}
       </p>
     </footer>
   );

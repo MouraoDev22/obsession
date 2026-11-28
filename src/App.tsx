@@ -23,21 +23,25 @@ import "./App.css";
 function App(): React.JSX.Element {
   const [playRequest, setPlayRequest]: OstPlayRequestState =
     useState<OstPlayRequest | null>(null);
-  const [activeSongId, setActiveSongId] = useState<string | null>(null);
-  const returnFocusRef = useRef<HTMLElement | null>(null);
+  const [activeSongId, setActiveSongId]: [
+    string | null,
+    React.Dispatch<React.SetStateAction<string | null>>,
+  ] = useState<string | null>(null);
+  const returnFocusRef: React.RefObject<HTMLElement | null> =
+    useRef<HTMLElement | null>(null);
 
-  useEffect((): (() => void) => initParallax(), []);
-  useEffect(
-    (): (() => void) =>
-      initSmoothScroll({
-        duration: 1.2,
-        wheelMultiplier: 0.8,
-        touchMultiplier: 0.8,
-      }),
-    [],
-  );
+  useEffect((): (() => void) => {
+    return initParallax();
+  }, []);
+  useEffect((): (() => void) => {
+    return initSmoothScroll({
+      duration: 1.2,
+      wheelMultiplier: 0.8,
+      touchMultiplier: 0.8,
+    });
+  }, []);
 
-  const handlePlay = (song: OstSong): void => {
+  function handlePlay(song: OstSong): void {
     returnFocusRef.current =
       document.activeElement instanceof HTMLElement
         ? document.activeElement
@@ -45,22 +49,22 @@ function App(): React.JSX.Element {
     setPlayRequest({ song });
     setActiveSongId(song.id);
     return;
-  };
+  }
 
-  const handleClose = (): void => {
+  function handleClose(): void {
     returnFocusRef.current?.focus();
     setPlayRequest(null);
     setActiveSongId(null);
     return;
-  };
+  }
 
-  const handlePlaybackChange = (isPlaying: boolean): void => {
+  function handlePlaybackChange(isPlaying: boolean): void {
     if (!playRequest) {
       return;
     }
     setActiveSongId(isPlaying ? playRequest.song.id : null);
     return;
-  };
+  }
 
   return (
     <>

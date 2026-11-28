@@ -39,7 +39,9 @@ import Lenis from "lenis";
  */
 export function initSmoothScroll(options: LenisOptions = {}): () => void {
   if (typeof document === "undefined") {
-    return (): void => undefined;
+    return (): void => {
+      return undefined;
+    };
   }
 
   // Keep this breakpoint aligned with OstSongList.module.css.
@@ -48,14 +50,17 @@ export function initSmoothScroll(options: LenisOptions = {}): () => void {
   const lenis: Lenis = new Lenis({
     autoRaf: true,
     ...options,
-    prevent: (node: HTMLElement): boolean =>
-      (desktop.matches && node.hasAttribute("data-track-scroll")) ||
-      (options.prevent?.(node) ?? false),
+    prevent: (node: HTMLElement): boolean => {
+      return (
+        (desktop.matches && node.hasAttribute("data-track-scroll")) ||
+        (options.prevent?.(node) ?? false)
+      );
+    },
   });
 
   // Stop residual page inertia before native scrolling takes over a panel.
   // Interrompe a inércia da página antes de rolar um painel nativamente.
-  const handlePanelWheel = (event: WheelEvent): void => {
+  function handlePanelWheel(event: WheelEvent): void {
     if (
       event.ctrlKey ||
       !desktop.matches ||
@@ -65,7 +70,8 @@ export function initSmoothScroll(options: LenisOptions = {}): () => void {
       return;
     }
     lenis.scrollTo(window.scrollY, { immediate: true });
-  };
+    return;
+  }
 
   window.addEventListener("wheel", handlePanelWheel, {
     capture: true,
