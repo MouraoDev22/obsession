@@ -1,4 +1,5 @@
 import type { OstSongListProps } from "../../interfaces/OstSongListProps";
+import type { OstSongSide } from "../../interfaces/OstSongSide";
 import type { OstSongs } from "../../types/OstSongs";
 
 import { useEffect, useRef } from "react";
@@ -17,54 +18,75 @@ export function OstSongList({
   songs,
 }: OstSongListProps): React.JSX.Element {
   const midpoint: number = Math.ceil(songs.length / 2);
-  const sides: { label: string; tracks: OstSongs }[] = [
+  const sides: OstSongSide[] = [
     { label: "A", tracks: songs.slice(0, midpoint) },
     { label: "B", tracks: songs.slice(midpoint) },
-  ].filter((side): boolean => side.tracks.length > 0);
+  ].filter((side: OstSongSide): boolean => {
+    return side.tracks.length > 0;
+  });
 
-  const panelRefA = useRef<HTMLElement>(null);
-  const panelRefB = useRef<HTMLElement>(null);
+  const panelRefA: React.RefObject<HTMLElement | null> =
+    useRef<HTMLElement>(null);
+  const panelRefB: React.RefObject<HTMLElement | null> =
+    useRef<HTMLElement>(null);
 
   useEffect((): (() => void) => {
     const desktop: MediaQueryList = window.matchMedia("(min-width: 64rem)");
     const destroyFns: (() => void)[] = [];
 
-    const initPanels = (): void => {
+    function initPanels(): void {
       if (!desktop.matches) {
         return;
       }
-      [panelRefA, panelRefB].forEach((ref): void => {
-        const container: HTMLElement | null = ref.current;
-        if (!container) {
+      [panelRefA, panelRefB].forEach(
+        (ref: React.RefObject<HTMLElement | null>): void => {
+          const container: HTMLElement | null = ref.current;
+          if (!container) {
+            return;
+          }
+          destroyFns.push(initSmoothScrollPanel(container));
           return;
-        }
-        destroyFns.push(initSmoothScrollPanel(container));
-      });
-    };
+        },
+      );
+      return;
+    }
 
     initPanels();
 
-    const handleChange = (event: MediaQueryListEvent): void => {
-      destroyFns.forEach((destroy): void => destroy());
+    function handleChange(event: MediaQueryListEvent): void {
+      destroyFns.forEach((destroy: () => void): void => {
+        destroy();
+        return;
+      });
       destroyFns.length = 0;
       if (event.matches) {
         initPanels();
       }
-    };
+      return;
+    }
 
     desktop.addEventListener("change", handleChange);
 
     return (): void => {
       desktop.removeEventListener("change", handleChange);
-      destroyFns.forEach((destroy): void => destroy());
+      destroyFns.forEach((destroy: () => void): void => {
+        destroy();
+        return;
+      });
+      return;
     };
   }, []);
 
   return (
     <div className={styles.sides}>
-      {sides.map((_, sideIndex): React.JSX.Element => {
-        const { label, tracks } = sides[sideIndex];
-        const panelRef = sideIndex === 0 ? panelRefA : panelRefB;
+      {sides.map((_side: OstSongSide, sideIndex: number): React.JSX.Element => {
+        const side: OstSongSide | undefined = sides[sideIndex];
+        if (!side) {
+          return <></>;
+        }
+        const { label, tracks }: OstSongSide = side;
+        const panelRef: React.RefObject<HTMLElement | null> =
+          sideIndex === 0 ? panelRefA : panelRefB;
         return (
           <section
             key={label}
@@ -82,21 +104,25 @@ export function OstSongList({
               <span className={styles.side_count}>{tracks.length} faixas</span>
             </header>
             <ol className={styles.song_list}>
-              {tracks.map((song, index): React.JSX.Element => (
-                <li key={song.id}>
-                  <OstSongCard
-                    isActive={song.id === activeSongId}
-                    onPlay={onPlay}
-                    song={song}
-                  >
-                    <OstSongCover cover={song.cover} />
-                    <OstSongTitle
-                      title={song.title}
-                      trackLabel={`${label}${String(index + 1).padStart(2, "0")}`}
-                    />
-                  </OstSongCard>
-                </li>
-              ))}
+              {tracks.map(
+                (song: OstSongs[number], index: number): React.JSX.Element => {
+                  return (
+                    <li key={song.id}>
+                      <OstSongCard
+                        isActive={song.id === activeSongId}
+                        onPlay={onPlay}
+                        song={song}
+                      >
+                        <OstSongCover cover={song.cover} />
+                        <OstSongTitle
+                          title={song.title}
+                          trackLabel={`${label}${String(index + 1).padStart(2, "0")}`}
+                        />
+                      </OstSongCard>
+                    </li>
+                  );
+                },
+              )}
             </ol>
           </section>
         );

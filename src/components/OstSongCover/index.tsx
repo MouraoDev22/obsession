@@ -12,7 +12,7 @@ export function OstSongCover({ cover }: OstSongCoverProps): React.JSX.Element {
       height={88}
       loading="lazy"
       decoding="async"
-      onError={(event): void => {
+      onError={(event: React.SyntheticEvent<HTMLImageElement>): void => {
         const image: HTMLImageElement = event.currentTarget;
         if (image.dataset.fallback) {
           image.style.visibility = "hidden";
@@ -20,6 +20,7 @@ export function OstSongCover({ cover }: OstSongCoverProps): React.JSX.Element {
         }
         image.dataset.fallback = "true";
         image.src = "/obsession.png";
+        return;
       }}
     />
   );

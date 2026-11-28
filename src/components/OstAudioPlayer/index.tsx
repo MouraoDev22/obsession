@@ -1,4 +1,6 @@
+import type { OstAudioPlayerLoadError } from "../../interfaces/OstAudioPlayerLoadError";
 import type { OstAudioPlayerProps } from "../../interfaces/OstAudioPlayerProps";
+import type { YouTubePlayerStateEvent } from "../../interfaces/YouTubePlayerStateEvent";
 import type { YouTubePlayer } from "../../utils/youtube/interfaces/YouTubePlayer";
 import type { YouTubePlayerConstructor } from "../../utils/youtube/types/YouTubePlayerConstructor";
 
@@ -45,28 +47,32 @@ export function OstAudioPlayer({
   onPlaybackChange,
   playRequest,
 }: OstAudioPlayerProps): React.JSX.Element {
-  const embedRef = useRef<HTMLDivElement>(null);
-  const panelRef = useRef<HTMLElement>(null);
-  const playerRef = useRef<YouTubePlayer | null>(null);
-  const targetVideoIdRef = useRef<string | null>(null);
-  const isReadyRef = useRef<boolean>(false);
-  const isPlayingRef = useRef<boolean>(false);
-  const onPlaybackChangeRef = useRef<
-    OstAudioPlayerProps["onPlaybackChange"] | null
+  const embedRef: React.RefObject<HTMLDivElement | null> =
+    useRef<HTMLDivElement>(null);
+  const panelRef: React.RefObject<HTMLElement | null> =
+    useRef<HTMLElement>(null);
+  const playerRef: React.RefObject<YouTubePlayer | null> =
+    useRef<YouTubePlayer | null>(null);
+  const targetVideoIdRef: React.RefObject<string | null> = useRef<
+    string | null
   >(null);
+  const isReadyRef: React.RefObject<boolean> = useRef<boolean>(false);
+  const isPlayingRef: React.RefObject<boolean> = useRef<boolean>(false);
+  const onPlaybackChangeRef: React.RefObject<
+    OstAudioPlayerProps["onPlaybackChange"] | null
+  > = useRef<OstAudioPlayerProps["onPlaybackChange"] | null>(null);
 
   const [isReady, setIsReady] = useState<boolean>(false);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [isBuffering, setIsBuffering] = useState<boolean>(false);
-  const [loadError, setLoadError] = useState<{
-    videoId: string | null;
-    message: string;
-  } | null>(null);
+  const [loadError, setLoadError]: [
+    OstAudioPlayerLoadError | null,
+    React.Dispatch<React.SetStateAction<OstAudioPlayerLoadError | null>>,
+  ] = useState<OstAudioPlayerLoadError | null>(null);
 
   // Erro de URL derivado na renderização (sem setState dentro de efeito) /
   // URL error derived during render (no setState inside an effect).
-  const youtubeUrl: string | null =
-    playRequest?.song?.youtubeUrl ?? null;
+  const youtubeUrl: string | null = playRequest?.song?.youtubeUrl ?? null;
   const songTitle: string = playRequest?.song?.title ?? "";
   const videoId: string | null = getYouTubeVideoId(youtubeUrl);
   const error: string | null =
@@ -78,21 +84,27 @@ export function OstAudioPlayer({
         : null;
 
   useEffect((): (() => void) | void => {
-    const panel = panelRef.current;
-    if (!panel) return;
-    const updateInset = (): void => {
-      const bottom = Number.parseFloat(getComputedStyle(panel).bottom) || 0;
+    const panelElement: HTMLElement | null = panelRef.current;
+    if (!panelElement) {
+      return;
+    }
+    const panel: HTMLElement = panelElement;
+    function updateInset(): void {
+      const bottom: number =
+        Number.parseFloat(getComputedStyle(panel).bottom) || 0;
       document.documentElement.style.setProperty(
         "--player-inset",
         `${panel.getBoundingClientRect().height + bottom + 16}px`,
       );
-    };
-    const observer = new ResizeObserver(updateInset);
+      return;
+    }
+    const observer: ResizeObserver = new ResizeObserver(updateInset);
     observer.observe(panel);
     updateInset();
     return (): void => {
       observer.disconnect();
       document.documentElement.style.removeProperty("--player-inset");
+      return;
     };
   }, []);
 
@@ -101,12 +113,12 @@ export function OstAudioPlayer({
   // iframe events, which are registered only once.
   useEffect((): void => {
     onPlaybackChangeRef.current = onPlaybackChange;
+    return;
   }, [onPlaybackChange]);
 
   // 1) Mantém a música-alvo sincronizada: troca a faixa ou alterna tocar/pausar.
   useEffect((): void => {
-    const youtubeUrl: string | null =
-      playRequest?.song?.youtubeUrl ?? null;
+    const youtubeUrl: string | null = playRequest?.song?.youtubeUrl ?? null;
     const videoId: string | null = getYouTubeVideoId(youtubeUrl);
 
     if (!videoId) {
@@ -190,10 +202,9 @@ export function OstAudioPlayer({
               }
               return;
             },
-            onStateChange: (event: {
-              data: number;
-              target: YouTubePlayer;
-            } | undefined): void => {
+            onStateChange: (
+              event: YouTubePlayerStateEvent | undefined,
+            ): void => {
               if (cancelled || !event) return;
               const playing: boolean =
                 event.data === PLAYER_STATE_PLAYING ||
@@ -245,7 +256,7 @@ export function OstAudioPlayer({
     };
   }, []);
 
-  const handleToggle = (): void => {
+  function handleToggle(): void {
     const player: YouTubePlayer | null = playerRef.current;
     if (!player || !isReady || error) {
       return;
@@ -257,7 +268,7 @@ export function OstAudioPlayer({
       player.playVideo();
     }
     return;
-  };
+  }
 
   const status: string = error
     ? error

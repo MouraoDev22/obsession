@@ -31,7 +31,9 @@ export function initSmoothScrollPanel(
   options: LenisOptions = {},
 ): () => void {
   if (typeof document === "undefined") {
-    return (): void => undefined;
+    return (): void => {
+      return undefined;
+    };
   }
 
   const lenis: Lenis = new Lenis({

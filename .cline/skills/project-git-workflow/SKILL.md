@@ -20,10 +20,13 @@ Use this skill only in the Obsession repository. Do not install or copy it to a 
 - Use Conventional Commits: `type(optional-scope): imperative description`.
 - Common types: `feat`, `fix`, `docs`, `style`, `refactor`, `test`, `chore`, `perf`.
 - Use lowercase scopes and descriptions; keep descriptions concise and truthful.
+- Commit incrementally throughout implementation whenever a coherent, independently understandable unit is complete and validated; do not wait until the end to create one oversized commit.
 - Split commits only when changes represent independently understandable units. Do not create artificial commits just to increase commit count.
 - Stage explicit paths, inspect `git diff --cached`, and ensure every staged file belongs to the task before committing.
-- Do not amend, rewrite, push, merge, or open a remote PR unless explicitly requested.
+- Do not amend or rewrite commits. Push, merge, and remote PR creation require explicit user authorization.
 
 ## Completion checks
+
+At implementation completion, make and verify the final coherent commit(s), then prepare a complete PR proposal using `project-pr-workflow`: title, full repository-template body, validation evidence, and merge commit message. Leave the branch ready for publication. Do not claim the remote PR exists unless it was actually opened with explicit authorization.
 
 After committing, report branch name, commit hashes/messages, and the final working-tree status. Verify the committed diff and confirm no unrelated or generated files were included. If a commit fails, inspect the failure and repository state; do not delete lock files or alter Git internals without diagnosing why they exist.

@@ -28,32 +28,36 @@ export function initParallax(options: ParallaxOptions = {}): () => void {
   // Honors prefers-reduced-motion: skips the effect when the OS option
   // "animations/visual effects" is turned off (common on Windows).
   if (typeof document === "undefined") {
-    return (): void => undefined;
+    return (): void => {
+      return undefined;
+    };
   }
 
   const target: HTMLElement = document.body;
-  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  const reducedMotion: MediaQueryList = window.matchMedia(
+    "(prefers-reduced-motion: reduce)",
+  );
   let frameId: number = 0;
 
   /** Aplica o deslocamento nas variáveis CSS `--parallax-x`/`--parallax-y` /
    * Writes the offset into the `--parallax-x`/`--parallax-y` CSS variables. */
-  const applyOffset = (x: number, y: number): void => {
+  function applyOffset(x: number, y: number): void {
     target.style.setProperty("--parallax-x", `${x.toFixed(2)}%`);
     target.style.setProperty("--parallax-y", `${y.toFixed(2)}%`);
     return;
-  };
+  }
 
   /** Cancela o quadro pendente e zera o deslocamento /
    * Cancels the pending frame and resets the offset. */
-  const reset = (): void => {
+  function reset(): void {
     cancelAnimationFrame(frameId);
     applyOffset(0, 0);
     return;
-  };
+  }
 
   /** Recalcula o deslocamento a partir da posição do cursor /
    * Recomputes the offset from the cursor position. */
-  const handleMouseMove = (event: MouseEvent): void => {
+  function handleMouseMove(event: MouseEvent): void {
     if (reducedMotion.matches) return;
     cancelAnimationFrame(frameId);
 
@@ -72,7 +76,7 @@ export function initParallax(options: ParallaxOptions = {}): () => void {
       return;
     });
     return;
-  };
+  }
 
   target.addEventListener("mousemove", handleMouseMove);
   target.addEventListener("mouseleave", reset);

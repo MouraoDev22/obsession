@@ -11,17 +11,19 @@ export function FooterAuthor({ author }: FooterAuthorProps): React.JSX.Element {
       <p className={styles.role}>{author.role}</p>
       <nav className={styles.links} aria-label="Perfis do autor">
         {author.links.map(
-          ({ href, label }: FooterAuthorLink): React.JSX.Element => (
-            <a
-              key={href}
-              className={styles.link}
-              href={href}
-              target="_blank"
-              rel="noreferrer"
-            >
-              {label}
-            </a>
-          ),
+          ({ href, label }: FooterAuthorLink): React.JSX.Element => {
+            return (
+              <a
+                key={href}
+                className={styles.link}
+                href={href}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {label}
+              </a>
+            );
+          },
         )}
       </nav>
     </section>

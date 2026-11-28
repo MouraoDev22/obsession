@@ -8,11 +8,13 @@ export function FooterAbout({
   return (
     <section className={styles.section} aria-label="Sobre o projeto">
       <h2 className={styles.title}>Sobre o projeto</h2>
-      {paragraphs.map((paragraph: string): React.JSX.Element => (
-        <p key={paragraph} className={styles.text}>
-          {paragraph}
-        </p>
-      ))}
+      {paragraphs.map((paragraph: string): React.JSX.Element => {
+        return (
+          <p key={paragraph} className={styles.text}>
+            {paragraph}
+          </p>
+        );
+      })}
     </section>
   );
 }

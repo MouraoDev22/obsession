@@ -8,19 +8,21 @@ export function FooterLinks({ links }: FooterLinksProps): React.JSX.Element {
     <section className={styles.section} aria-label="Links oficiais">
       <h2 className={styles.title}>Links oficiais</h2>
       <ul className={styles.list}>
-        {links.map(({ hint, href, label }: FooterLink): React.JSX.Element => (
-          <li key={href}>
-            <a
-              className={styles.link}
-              href={href}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <span className={styles.link_label}>{label}</span>
-              <span className={styles.link_hint}>{hint}</span>
-            </a>
-          </li>
-        ))}
+        {links.map(({ hint, href, label }: FooterLink): React.JSX.Element => {
+          return (
+            <li key={href}>
+              <a
+                className={styles.link}
+                href={href}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <span className={styles.link_label}>{label}</span>
+                <span className={styles.link_hint}>{hint}</span>
+              </a>
+            </li>
+          );
+        })}
       </ul>
     </section>
   );

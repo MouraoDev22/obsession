@@ -1,10 +1,8 @@
+import type { OstHeroProps } from "../../interfaces/OstHeroProps";
+
 import styles from "./OstHero.module.css";
 
-export function OstHero({
-  trackCount,
-}: {
-  trackCount: number;
-}): React.JSX.Element {
+export function OstHero({ trackCount }: OstHeroProps): React.JSX.Element {
   return (
     <header className={styles.hero}>
       <h1 className={styles.hero_title}>Obsession</h1>
