@@ -35,6 +35,10 @@ O projeto é uma demonstração de desenvolvimento frontend moderno: **React 19*
 - ⚡ **React Compiler** — memoização automática ativada via preset Babel para desempenho ótimo de renderização.
 - 🌐 **Análise robusta de URLs do YouTube** — suporta os formatos `youtu.be/<id>`, `/watch?v=`, `/embed/`, `/shorts/` e `/live/`.
 
+## 🖼️ Criando Capas Consistentes para as Faixas
+
+Use o [prompt Obsession Cover Images](docs/OBSESSION-COVER-IMAGES.md) em uma LLM com capacidade de edição ou geração de imagens para transformar uma imagem de origem por vez em uma capa quadrada consistente em vermelho e preto. O guia contém o prompt reutilizável em inglês, incluindo os requisitos de referência visual, fidelidade, paleta e exportação.
+
 ### Layout das faixas e rolagem
 
 - **Desktop (64rem ou mais):** cards horizontais em duas colunas, Lado A à esquerda e Lado B à direita, com cabeçalhos fixos dentro de cada painel.
@@ -105,7 +109,9 @@ A aplicação estará disponível na URL local exibida no terminal (normalmente 
 
 ```
 obsession/
-├── docs/audit/              # Relatório, descrição do PR, mensagem de merge e evidências
+├── docs/
+│   ├── AI-TOOLS.md           # Documentação e procedência do agente, skills locais e MCPs
+│   └── OBSESSION-COVER-IMAGES.md # Prompt reutilizável em inglês para capas consistentes
 ├── public/                  # Assets estáticos (capas, favicon, ícones)
 ├── src/
 │   ├── assets/              # Imagens empacotadas pelo Vite (fundo etc.)
@@ -206,6 +212,10 @@ Contribuições são bem-vindas! Sinta-se à vontade para abrir uma issue ou env
 4. Abra um Pull Request.
 
 Execute o lint, confira a formatação dos arquivos alterados e valide os tipos e o build de produção antes de enviar. Use o [template de PR](.github/pull_request_template.md), registre somente verificações realmente executadas e evite incluir alterações de formatação não relacionadas.
+
+## 🤖 Documentação do Agente de IA
+
+As skills locais de agente e seus papéis documentados, observações de uso e limites de procedência estão descritos em [Documentação de ferramentas de IA e agente](docs/AI-TOOLS.md). A presença de uma skill no repositório não significa que ela foi usada em toda alteração; o documento diferencia as skills disponíveis das utilizadas nesta atualização documental.
 
 ## 📄 Licença
 

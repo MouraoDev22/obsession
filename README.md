@@ -35,6 +35,10 @@ The project is a showcase of modern frontend development: **React 19**, the **Re
 - ⚡ **React Compiler** — automatic memoization enabled via Babel preset for optimal render performance.
 - 🌐 **Robust YouTube URL parsing** — supports `youtu.be/<id>`, `/watch?v=`, `/embed/`, `/shorts/` and `/live/` formats.
 
+## 🖼️ Creating Consistent Track Covers
+
+Use the [Obsession Cover Images prompt](docs/OBSESSION-COVER-IMAGES.md) with an image-capable LLM to transform one source image at a time into a consistent red-and-black square cover. The guide contains the reusable English prompt, including its image-reference, fidelity, palette, and export requirements.
+
 ### Track layout and scrolling
 
 - **Desktop (64rem and wider):** horizontal track cards appear in two columns, Side A on the left and Side B on the right, with sticky side headers.
@@ -105,7 +109,9 @@ The app will be available at the local URL printed in the terminal (usually `htt
 
 ```
 obsession/
-├── docs/audit/              # Audit report, PR description, merge message and evidence
+├── docs/
+│   ├── AI-TOOLS.md           # Agent, repository skills, and MCP documentation and provenance
+│   └── OBSESSION-COVER-IMAGES.md # Reusable English prompt for consistent cover artwork
 ├── public/                  # Static assets (song covers, favicon, icons)
 ├── src/
 │   ├── assets/              # Images bundled by Vite (background, etc.)
@@ -206,6 +212,10 @@ Contributions are welcome! Feel free to open an issue or submit a pull request:
 4. Open a Pull Request.
 
 Please run lint, check formatting on changed files, and validate types and the production build before submitting. Use the [PR template](.github/pull_request_template.md), record only checks actually performed, and avoid committing unrelated formatting changes.
+
+## 🤖 AI Agent Documentation
+
+Repository-local agent skills and their documented roles, usage notes, and provenance limitations are described in [AI tools and agent documentation](docs/AI-TOOLS.md). Skills present in the repository are not necessarily used for every change; the document distinguishes available skills from skills used for this documentation update.
 
 ## 📄 License
 
