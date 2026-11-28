@@ -14,6 +14,12 @@ This skill is local to the Obsession repository. Use `.github/pull_request_templ
 - Do not leave the PR proposal for the user to assemble from a summary. Include the entire copy-ready body in the final response.
 - Preparing a PR proposal does not authorize push or remote PR creation. Ask for/require explicit authorization before publishing or opening it, and never describe a draft proposal as an opened PR.
 
+## Plan and replacement PRs
+
+- At the beginning of each implementation, coordinate with `project-git-workflow` to present the change plan and intended commit sequence before editing. Keep the eventual PR summary aligned with that plan while describing the complete final branch diff.
+- If the user asks to redo work already represented by a PR, inspect its state and branch first. Preserve its history; do not reset, amend, or force-push. When the request explicitly says to redo and open a PR again, close the superseded open PR, create a new branch from the intended base, and open a replacement PR after the new commits are pushed and validated.
+- Clearly distinguish the superseded PR from the replacement PR in the final status. Never claim that a PR was replaced until the new PR has actually been created.
+
 ## Gather evidence first
 
 1. Inspect the current branch, its diff against the intended base, commit history, and status.
