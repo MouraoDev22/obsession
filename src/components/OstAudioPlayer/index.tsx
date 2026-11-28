@@ -6,7 +6,7 @@ import type { YouTubePlayerConstructor } from "../../utils/youtube/types/YouTube
 
 import { useEffect, useRef, useState } from "react";
 
-import { getYouTubeVideoId, loadYouTubeIframeApi } from "../../utils/youtube";
+import { YouTube } from "../../utils/youtube";
 
 import styles from "./OstAudioPlayer.module.css";
 
@@ -74,7 +74,7 @@ export function OstAudioPlayer({
   // URL error derived during render (no setState inside an effect).
   const youtubeUrl: string | null = playRequest?.song?.youtubeUrl ?? null;
   const songTitle: string = playRequest?.song?.title ?? "";
-  const videoId: string | null = getYouTubeVideoId(youtubeUrl);
+  const videoId: string | null = YouTube.getVideoId(youtubeUrl);
   const error: string | null =
     videoId === null
       ? "Link do YouTube inválido. Selecione outra faixa."
@@ -119,7 +119,7 @@ export function OstAudioPlayer({
   // 1) Mantém a música-alvo sincronizada: troca a faixa ou alterna tocar/pausar.
   useEffect((): void => {
     const youtubeUrl: string | null = playRequest?.song?.youtubeUrl ?? null;
-    const videoId: string | null = getYouTubeVideoId(youtubeUrl);
+    const videoId: string | null = YouTube.getVideoId(youtubeUrl);
 
     if (!videoId) {
       onPlaybackChangeRef.current?.(false);
@@ -156,7 +156,7 @@ export function OstAudioPlayer({
     const host: HTMLDivElement = document.createElement("div");
     embed.append(host);
 
-    loadYouTubeIframeApi()
+    YouTube.loadIframeApi()
       .then((PlayerConstructor: YouTubePlayerConstructor): void => {
         if (cancelled) {
           return;

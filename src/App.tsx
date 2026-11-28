@@ -15,8 +15,8 @@ import { OstAudioPlayer } from "./components/OstAudioPlayer";
 import { OstHero } from "./components/OstHero";
 import { OstSongList } from "./components/OstSongList";
 
-import { initParallax } from "./utils/parallax";
-import { initSmoothScroll } from "./utils/smoothScroll";
+import { Parallax } from "./utils/parallax";
+import { SmoothScroll } from "./utils/smoothScroll";
 
 import "./App.css";
 
@@ -31,10 +31,10 @@ function App(): React.JSX.Element {
     useRef<HTMLElement | null>(null);
 
   useEffect((): (() => void) => {
-    return initParallax();
+    return Parallax.init();
   }, []);
   useEffect((): (() => void) => {
-    return initSmoothScroll({
+    return SmoothScroll.initPage({
       duration: 1.2,
       wheelMultiplier: 0.8,
       touchMultiplier: 0.8,

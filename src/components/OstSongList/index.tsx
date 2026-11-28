@@ -4,7 +4,7 @@ import type { OstSongs } from "../../types/OstSongs";
 
 import { useEffect, useRef } from "react";
 
-import { initSmoothScrollPanel } from "../../utils/smoothScrollPanel";
+import { SmoothScroll } from "../../utils/smoothScroll";
 
 import { OstSongCard } from "../OstSongCard";
 import { OstSongCover } from "../OstSongCover";
@@ -44,7 +44,7 @@ export function OstSongList({
           if (!container) {
             return;
           }
-          destroyFns.push(initSmoothScrollPanel(container));
+          destroyFns.push(SmoothScroll.initContainer(container));
           return;
         },
       );
