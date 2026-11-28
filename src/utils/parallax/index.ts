@@ -92,8 +92,3 @@ export class Parallax {
     };
   }
 }
-
-/** @deprecated Use `Parallax.init` instead. */
-export function initParallax(options: ParallaxOptions = {}): () => void {
-  return Parallax.init(options);
-}

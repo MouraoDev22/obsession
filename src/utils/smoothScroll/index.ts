@@ -103,8 +103,3 @@ export class SmoothScroll {
     };
   }
 }
-
-/** @deprecated Use `SmoothScroll.initPage` instead. */
-export function initSmoothScroll(options: LenisOptions = {}): () => void {
-  return SmoothScroll.initPage(options);
-}

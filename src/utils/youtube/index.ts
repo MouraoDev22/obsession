@@ -104,13 +104,3 @@ export class YouTube {
     return YouTube.apiPromise;
   }
 }
-
-/** @deprecated Use `YouTube.getVideoId` instead. */
-export function getYouTubeVideoId(link: string): string | null {
-  return YouTube.getVideoId(link);
-}
-
-/** @deprecated Use `YouTube.loadIframeApi` instead. */
-export function loadYouTubeIframeApi(): Promise<YouTubePlayerConstructor> {
-  return YouTube.loadIframeApi();
-}
