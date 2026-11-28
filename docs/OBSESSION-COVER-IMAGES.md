@@ -22,7 +22,7 @@ Restyle the submitted image to match the **visual style below**, always using th
 4. **Lighting:** high, dramatic contrast; deep shadows on the sides and in facial cavities; reddish rim lighting on the contours; and a soft glow on the forehead, nose, and cheekbones.
 5. **Texture and detail:** retain visible skin texture (pores, sweat, sheen), individual hair strands, and fine film grain. Preserve and emphasize blood, dirt, moisture, and clothing folds as dark marks. Avoid plastic-looking skin and excessive smoothing.
 6. **Framing:** centered close-up portrait showing the head and part of the shoulders. The face should occupy about 60–70% of the image height, with the top of the head near the top edge and clothing cropped at the bottom edge. Preserve the original expression and head angle.
-7. **Fidelity:** the result must remain recognizable as the same person and the same scene as the source image.
+7. **Fidelity:** the result must remain recognizable as the same subject and depicted moment. Preserve the original pose, expression, clothing, and visible details; the original background is intentionally replaced as specified above.
 
 ## Instructional Guidance and Constraints
 

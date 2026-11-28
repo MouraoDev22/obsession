@@ -50,15 +50,17 @@ and any automated tests added by this PR without assuming existing coverage.
 | --------------------------------------------------------- | -------------- |
 | `npm run lint`                                            |                |
 | Prettier on changed files: `npx prettier --check <files>` |                |
-| `npm run build`                                           |                |
+| TypeScript: `npx tsc -b`                                  |                |
+| Vite production build: `npx vite build`                   |                |
 | Development server: `npm run dev`                         |                |
 | Production preview: `npm run preview` after building      |                |
 
-<!-- WARNING: npm run build runs ESLint, Prettier with --write, tsc -b, and
-Vite. npm run format also formats the entire repository. Review the diff after
-running these commands and exclude unrelated formatting changes, including
-changes to third-party skills. To format only the intended files, use
-npx prettier --write <files>. Replace <files> with actual file paths. -->
+<!-- For documentation-only changes, run the relevant Markdown formatting and
+link checks; mark code, browser, and runtime checks N/A with a reason. Avoid
+npm run build as a validation shortcut: it runs ESLint, formats the whole
+repository with Prettier --write, then runs TypeScript and Vite. npm run format
+also formats the whole repository. To format only intended files, use
+npx prettier --write <files> with explicit paths and review the diff. -->
 
 ### Playback and YouTube integration
 

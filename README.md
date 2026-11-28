@@ -19,13 +19,13 @@
 
 ## 📖 About
 
-**Obsession** is a single-page web application that presents the complete _Obsession_ original motion picture soundtrack — **26 tracks by Rock Burwell** — as a beautifully crafted virtual record sleeve. Browse the tracklist split into **Side A** and **Side B**, click any track, and listen through an embedded YouTube player fixed at the bottom of the page, complete with a mouse-following parallax background.
+**Obsession** is a single-page web application that presents the _Obsession_ original motion picture soundtrack as a virtual record sleeve. Browse the tracklist split into **Side A** and **Side B**, select a track to play it through the YouTube IFrame Player API, and explore the page with its cursor-responsive parallax background.
 
 The project is a showcase of modern frontend development: **React 19**, the **React Compiler**, strict **TypeScript**, **Vite 8**, and zero UI frameworks — just handcrafted CSS Modules.
 
 ## ✨ Features
 
-- 🎵 **Full 26-track soundtrack** — organized in Side A / Side B with cassette-style track labels (`A01`, `B13`…).
+- 🎵 **26 soundtrack tracks** — split evenly into Side A and Side B, with side-relative labels (`A01`–`A13` and `B01`–`B13`).
 - ▶️ **Fixed audio player** — plays tracks through a hidden YouTube IFrame API embed, with play/pause toggle, live status ("Loading… / Playing / Paused") and close button.
 - 🖼️ **Track artwork** — cover images are served from `public/`, with lazy loading and the album cover as a fallback when an image is unavailable.
 - 🌀 **Parallax background** — the page background moves opposite to the cursor, driven by CSS variables and throttled with `requestAnimationFrame`.
@@ -92,8 +92,8 @@ The app will be available at the local URL printed in the terminal (usually `htt
 ```
 obsession/
 ├── docs/
-│   ├── AI-TOOLS.md           # Agent, repository skills, and MCP documentation and provenance
-│   └── OBSESSION-COVER-IMAGES.md # Reusable English prompt for consistent cover artwork
+│   ├── AI-TOOLS.md                    # Repository-local AI-agent and skill guidance
+│   └── OBSESSION-COVER-IMAGES.md      # Reusable English prompt for cover artwork
 ├── public/                  # Static assets (song covers, favicon, icons)
 ├── src/
 │   ├── assets/              # Images bundled by Vite (background, etc.)
@@ -115,7 +115,7 @@ obsession/
 │   │   ├── links.json        # Official Spotify / purchase links
 │   │   ├── project.json      # Purpose, author and copyright lines
 │   │   └── songs.json        # The soundtrack data (single source of truth)
-│   ├── interfaces/          # Shared prop/state interfaces
+│   ├── interfaces/          # Shared prop and state interfaces
 │   ├── types/               # Type aliases (OstPlayRequest, OstSongs, …)
 │   └── utils/
 │       ├── parallax/        # Static cursor-following background utility
@@ -128,7 +128,7 @@ obsession/
 
 ## 🎼 Adding or Editing Songs
 
-The tracklist is entirely data-driven. To add a new track, append an object to [`src/data/songs.json`](src/data/songs.json):
+The catalog is defined in [`src/data/songs.json`](src/data/songs.json). To edit a track, update its existing object. Each `id` must be unique; keep IDs as strings and preserve the existing catalog order. For a new track, use the next unused numeric ID (currently `27`), add its cover image to `public/`, then add the entry:
 
 ```json
 {
@@ -139,25 +139,25 @@ The tracklist is entirely data-driven. To add a new track, append an object to [
 }
 ```
 
-| Field        | Description                                                               |
-| ------------ | ------------------------------------------------------------------------- |
-| `id`         | Unique, stable key used in React lists.                                   |
-| `cover`      | Path to the cover image inside `public/`.                                 |
-| `title`      | Track title shown in the list and the player.                             |
-| `youtubeUrl` | Any common YouTube link format — the video ID is extracted automatically. |
+| Field        | Description                                                                                                         |
+| ------------ | ------------------------------------------------------------------------------------------------------------------- |
+| `id`         | Unique string key used in React lists. Keep the existing IDs and order; use the next unused number for a new track. |
+| `cover`      | Root-relative path to an image in `public/` (for example, `/my-new-track.png`). The file must exist.                |
+| `title`      | Track title shown in the list and the player.                                                                       |
+| `youtubeUrl` | Any common YouTube link format — the video ID is extracted automatically.                                           |
 
-> Tracks are split evenly between Side A and Side B at runtime, so no manual grouping is needed.
+> The list is split at the midpoint at runtime: Side A gets the extra track when the total is odd. Track labels restart at `01` on each side. After changing the catalog, verify the count and split shown in the app; YouTube availability and rights must be checked separately.
 
 ## 🤝 Contributing
 
-Contributions are welcome! Feel free to open an issue or submit a pull request:
+Contributions are welcome! Feel free to open an issue or submit a pull request. For a pull request:
 
-1. Fork the repository and create your branch: `git checkout -b feature/my-feature`
-2. Commit your changes: `git commit -m "feat: add my feature"`
-3. Push to the branch: `git push origin feature/my-feature`
-4. Open a Pull Request.
+1. Fork the repository or create a feature branch from `main`.
+2. Make focused commits using clear messages (Conventional Commits are welcome).
+3. Run the applicable checks below and record their actual results.
+4. Push your branch and open a pull request using the [PR template](.github/pull_request_template.md).
 
-Please run lint, check formatting on changed files, and validate types and the production build before submitting. Use the [PR template](.github/pull_request_template.md), record only checks actually performed, and avoid committing unrelated formatting changes.
+For documentation-only changes, check Markdown formatting and links. For code changes, run `npm run lint`, `npx prettier --check <changed-files>`, `npx tsc -b`, and `npx vite build` as applicable. Do not use `npm run build` as a validation shortcut: it also runs Prettier with `--write` across the repository. Record only checks actually performed and avoid unrelated formatting changes.
 
 ## 🤖 AI Agent Documentation
 

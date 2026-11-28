@@ -12,7 +12,7 @@ Use this skill only in the Obsession repository. Do not install or copy it to a 
 1. Confirm the repository root, current branch, working-tree status, and recent history.
 2. Inspect the base branch and existing remotes when relevant. Do not assume the target branch is `main` if repository context says otherwise.
 3. Preserve pre-existing user changes. Never use destructive reset, checkout, clean, or restore commands on changes that are not part of the requested task.
-4. For an unrelated or already occupied branch, create a dedicated branch using `<type>/<short-kebab-case-scope>` (for example `fix/player-focus` or `chore/project-skills`).
+4. Unless the user explicitly requests another target, create a dedicated branch for implementation work using `<type>/<short-kebab-case-scope>` (for example `fix/player-focus` or `chore/project-skills`). An explicit user request to commit directly on a named branch takes precedence; verify that branch and working tree first, then follow the requested target without pushing unless separately authorized.
 5. If the requested base is ambiguous or the working tree contains changes that cannot safely be separated, stop and ask one focused question.
 
 ## Plan before implementation
@@ -21,7 +21,7 @@ Use this skill only in the Obsession repository. Do not install or copy it to a 
 - Inspect the repository and identify the base branch, existing work, and relevant validation commands before finalizing that plan.
 - Make the proposed commit sequence concrete: each commit must describe one independently understandable, coherent unit, with its Conventional Commit message and the files or behavior it is expected to contain.
 - Adjust the plan when inspection reveals different dependencies or validation needs; tell the user before deviating materially. Do not make artificial commits just to increase commit count.
-- Create a fresh dedicated branch from the intended base for new implementation work. Do not reuse or rewrite a branch/commit series that the user asked to replace; preserve prior history and close or supersede its PR when explicitly requested.
+- Prefer a fresh dedicated branch from the intended base for new implementation work unless the user explicitly names a different target branch. Do not reuse or rewrite a branch/commit series that the user asked to replace; preserve prior history and close or supersede its PR when explicitly requested.
 - Include skill/workflow updates in the plan and give them their own commit when independently reviewable from application changes.
 
 ## Branch and commit conventions

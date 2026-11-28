@@ -19,13 +19,13 @@
 
 ## 📖 Sobre
 
-**Obsession** é uma aplicação web de página única que apresenta a trilha sonora original completa do filme _Obsession_ — **26 faixas de Rock Burwell** — como uma capa de disco virtual cuidadosamente construída. Navegue pela lista de faixas dividida em **Lado A** e **Lado B**, clique em qualquer música e ouça através de um player do YouTube fixo no rodapé da página, acompanhado de um fundo com efeito parallax que segue o cursor.
+**Obsession** é uma aplicação web de página única que apresenta a trilha sonora original do filme _Obsession_ como uma capa de disco virtual. Navegue pela lista dividida em **Lado A** e **Lado B**, selecione uma faixa para reproduzi-la pela YouTube IFrame Player API e explore a página com o efeito parallax que acompanha o cursor.
 
 O projeto é uma demonstração de desenvolvimento frontend moderno: **React 19**, **React Compiler**, **TypeScript** em modo estrito, **Vite 8** e zero frameworks de UI — apenas CSS Modules feitos à mão.
 
 ## ✨ Funcionalidades
 
-- 🎵 **Trilha completa com 26 faixas** — organizadas em Lado A / Lado B com identificadores de faixa estilo cassete (`A01`, `B13`…).
+- 🎵 **26 faixas da trilha** — divididas igualmente entre Lado A e Lado B, com numeração reiniciada em cada lado (`A01`–`A13` e `B01`–`B13`).
 - ▶️ **Player fixo de áudio** — reproduz as faixas através de um embed oculto da YouTube IFrame API, com botão de tocar/pausar, status em tempo real ("Carregando… / Tocando / Pausado") e botão de fechar.
 - 🖼️ **Capas das faixas** — imagens servidas de `public/`, com carregamento sob demanda e a capa do álbum como alternativa quando uma imagem não está disponível.
 - 🌀 **Fundo parallax** — o fundo da página se move na direção oposta ao cursor, movido por variáveis CSS e controlado com `requestAnimationFrame`.
@@ -92,8 +92,8 @@ A aplicação estará disponível na URL local exibida no terminal (normalmente 
 ```
 obsession/
 ├── docs/
-│   ├── AI-TOOLS.md           # Documentação e procedência do agente, skills locais e MCPs
-│   └── OBSESSION-COVER-IMAGES.md # Prompt reutilizável em inglês para capas consistentes
+│   ├── AI-TOOLS.md                    # Orientações do agente de IA e skills locais
+│   └── OBSESSION-COVER-IMAGES.md      # Prompt reutilizável em inglês para capas
 ├── public/                  # Assets estáticos (capas, favicon, ícones)
 ├── src/
 │   ├── assets/              # Imagens empacotadas pelo Vite (fundo etc.)
@@ -115,7 +115,7 @@ obsession/
 │   │   ├── links.json        # Links oficiais do Spotify/compra
 │   │   ├── project.json      # Finalidade, autor e linhas de direitos
 │   │   └── songs.json        # Dados da trilha (fonte única de verdade)
-│   ├── interfaces/          # Interfaces compartilhadas de props/estado
+│   ├── interfaces/          # Interfaces compartilhadas de props e estado
 │   ├── types/               # Aliases de tipo (OstPlayRequest, OstSongs, …)
 │   └── utils/
 │       ├── parallax/        # Utilitário estático de fundo que segue o cursor
@@ -128,7 +128,7 @@ obsession/
 
 ## 🎼 Adicionando ou Editando Faixas
 
-A lista de faixas é totalmente orientada a dados. Para adicionar uma nova faixa, acrescente um objeto em [`src/data/songs.json`](src/data/songs.json):
+A lista do catálogo está em [`src/data/songs.json`](src/data/songs.json). Para editar uma faixa, altere o objeto existente. Cada `id` deve ser único; mantenha os IDs como strings e preserve a ordem atual do catálogo. Para uma nova faixa, use o próximo ID numérico disponível (atualmente `27`), adicione a capa em `public/` e então inclua o objeto:
 
 ```json
 {
@@ -139,25 +139,25 @@ A lista de faixas é totalmente orientada a dados. Para adicionar uma nova faixa
 }
 ```
 
-| Campo        | Descrição                                                                             |
-| ------------ | ------------------------------------------------------------------------------------- |
-| `id`         | Chave única e estável, usada nas listas do React.                                     |
-| `cover`      | Caminho da imagem de capa dentro de `public/`.                                        |
-| `title`      | Título da faixa, exibido na lista e no player.                                        |
-| `youtubeUrl` | Qualquer formato comum de link do YouTube — o ID do vídeo é extraído automaticamente. |
+| Campo        | Descrição                                                                                                                |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------ |
+| `id`         | Chave de texto única, usada nas listas do React. Preserve IDs e ordem; para nova faixa, use o próximo número disponível. |
+| `cover`      | Caminho a partir da raiz para uma imagem em `public/` (por exemplo, `/minha-nova-faixa.png`). O arquivo precisa existir. |
+| `title`      | Título da faixa, exibido na lista e no player.                                                                           |
+| `youtubeUrl` | Qualquer formato comum de link do YouTube — o ID do vídeo é extraído automaticamente.                                    |
 
-> As faixas são divididas igualmente entre o Lado A e o Lado B em tempo de execução, então não é preciso agrupar manualmente.
+> A lista é dividida pelo ponto médio em tempo de execução: se a quantidade for ímpar, o Lado A recebe uma faixa a mais. A numeração reinicia em `01` em cada lado. Após alterar o catálogo, confira a contagem e a divisão exibidas na aplicação; disponibilidade e direitos dos vídeos do YouTube devem ser verificados separadamente.
 
 ## 🤝 Contribuindo
 
-Contribuições são bem-vindas! Sinta-se à vontade para abrir uma issue ou enviar um pull request:
+Contribuições são bem-vindas! Sinta-se à vontade para abrir uma issue ou enviar um pull request. Para enviar um pull request:
 
-1. Faça um fork do repositório e crie sua branch: `git checkout -b feature/minha-feature`
-2. Faça commit das suas alterações: `git commit -m "feat: adiciona minha feature"`
-3. Envie para a branch: `git push origin feature/minha-feature`
-4. Abra um Pull Request.
+1. Faça um fork do repositório ou crie uma branch de funcionalidade a partir de `main`.
+2. Faça commits focados, com mensagens claras (Conventional Commits é recomendado).
+3. Execute as verificações aplicáveis e registre os resultados reais.
+4. Envie sua branch e abra um pull request usando o [template de PR](.github/pull_request_template.md).
 
-Execute o lint, confira a formatação dos arquivos alterados e valide os tipos e o build de produção antes de enviar. Use o [template de PR](.github/pull_request_template.md), registre somente verificações realmente executadas e evite incluir alterações de formatação não relacionadas.
+Para alterações somente de documentação, confira a formatação e os links Markdown. Para alterações de código, execute conforme aplicável `npm run lint`, `npx prettier --check <arquivos-alterados>`, `npx tsc -b` e `npx vite build`. Não use `npm run build` como atalho de validação: ele também executa o Prettier com `--write` em todo o repositório. Registre somente verificações realmente executadas e evite alterações de formatação não relacionadas.
 
 ## 🤖 Documentação do Agente de IA
 

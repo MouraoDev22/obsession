@@ -1,14 +1,17 @@
-# Complete minimal convention examples
+# Minimal TypeScript and React convention examples
 
-These independent examples illustrate project syntax; they are not application
-features. Existing rules and installed configuration remain authoritative. No
-Zod installation or invented application API is required.
+These independent examples illustrate this repository's TypeScript and React
+syntax; they are not application features. Existing rules and installed
+configuration remain authoritative. The project does not currently configure
+Vitest or Zod, so no examples below assume either dependency.
 
-<feature> stands for a real feature folder; src/shared is only for interfaces, types and enums.
+Use the existing `src/interfaces/`, `src/types/`, and `src/components/` folders.
+Do not copy generic `src/shared/`, `src/features/`, or `@/` alias patterns into
+this repository; those paths and aliases are not configured here.
 
 ## Declaration and domain function (two files)
 
-`src/shared/interfaces/counter-state.interface.ts`:
+`src/interfaces/CounterState.ts`:
 
 ```ts
 export interface CounterState {
@@ -16,10 +19,10 @@ export interface CounterState {
 }
 ```
 
-`src/features/<feature>/domain/increment-counter.ts`:
+`src/utils/incrementCounter.ts`:
 
 ```ts
-import type { CounterState } from "@/shared/interfaces/counter-state.interface";
+import type { CounterState } from "../interfaces/CounterState";
 
 export function incrementCounter(state: CounterState): CounterState {
   return { value: state.value + 1 };
@@ -43,7 +46,7 @@ export function firstDoubled(values: number[]): number | undefined {
 
 ## Named React handler without hard-coded UI labels
 
-`src/shared/interfaces/counter-props.interface.ts`:
+`src/interfaces/CounterProps.ts`:
 
 ```ts
 export interface CounterProps {
@@ -51,12 +54,10 @@ export interface CounterProps {
 }
 ```
 
-`src/features/<feature>/components/counter.tsx`:
+`src/components/Counter/index.tsx`:
 
 ```tsx
-"use client";
-
-import type { CounterProps } from "@/shared/interfaces/counter-props.interface";
+import type { CounterProps } from "../../interfaces/CounterProps";
 import type { Dispatch, SetStateAction } from "react";
 
 import { useState } from "react";
@@ -80,8 +81,8 @@ export function Counter({ label }: CounterProps): React.JSX.Element {
 }
 ```
 
-The caller supplies a translated catalog label. This syntax illustration does
-not implement a production design-system component or locale formatting policy.
+The caller supplies the label. This syntax illustration does not add a
+production component or a localization policy.
 
 ## Unknown errors without swallowing them
 
@@ -96,21 +97,9 @@ This deliberately allows parsing failure to reach the caller. A real boundary
 maps it to the existing safe error contract; do not catch/log/continue merely to
 hide it. No fictional Result or logger API is assumed here.
 
-## Standalone Vitest example
+## Tests
 
-```ts
-import { expect, it } from "vitest";
-
-function double(value: number): number {
-  return value * 2;
-}
-
-it("doubles a number", (): void => {
-  expect(double(3)).toBe(6);
-  return;
-});
-```
-
-For Playwright reuse the repository's PageFixture interface pattern. For Zod
-read the installed version when that dependency is introduced; use z.ZodType
-with an extracted model, not an inline inferred declaration outside types/.
+There is no test framework or `npm test` script configured in this repository.
+Do not copy a standalone Vitest, Playwright, or schema-validation example and
+assume it can run here. If a test framework is introduced, add and document its
+dependency, configuration, and scripts as a separate project change.
