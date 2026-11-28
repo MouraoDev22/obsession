@@ -2,6 +2,11 @@
   "scope": "This repository only; do not install these skills globally.",
   "skills": [
     {
+      "name": "project-code-style",
+      "path": ".cline/skills/project-code-style/SKILL.md",
+      "source": "Created specifically for the Obsession repository; based on the user-provided ESLint configuration and typing examples."
+    },
+    {
       "name": "project-git-workflow",
       "path": ".cline/skills/project-git-workflow/SKILL.md",
       "source": "Created specifically for the Obsession repository; not third-party content."

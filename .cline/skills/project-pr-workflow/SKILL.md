@@ -1,11 +1,18 @@
 ---
 name: project-pr-workflow
-description: Use at the end of an Obsession implementation when preparing a complete pull request proposal, including the exact title, repository-template body, and merge commit message. Do not claim to create a remote PR unless that action was actually performed.
+description: Use at the end of every Obsession implementation to prepare a complete, ready-to-submit pull request, including the exact title, repository-template body, and merge commit message. Do not claim to create a remote PR unless that action was actually performed.
 ---
 
 # Project Pull Request Workflow
 
 This skill is local to the Obsession repository. Use `.github/pull_request_template.md` as the source of truth; do not substitute a generic PR outline.
+
+## Required end-of-implementation deliverable
+
+- Every completed implementation must end with a PR ready for submission: exact title, complete template body, accurate validation evidence, and merge commit message.
+- Coordinate with `project-git-workflow`: implementation work should be committed incrementally in coherent, validated units, and the final PR must describe the full branch diff rather than only the last commit.
+- Do not leave the PR proposal for the user to assemble from a summary. Include the entire copy-ready body in the final response.
+- Preparing a PR proposal does not authorize push or remote PR creation. Ask for/require explicit authorization before publishing or opening it, and never describe a draft proposal as an opened PR.
 
 ## Gather evidence first
 
